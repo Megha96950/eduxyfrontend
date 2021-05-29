@@ -4,6 +4,7 @@ import { UserLandingPageComponent } from './user-landing-page/user-landing-page.
 import { RegisterComponent } from './user-landing-page/register/register.component';
 import { LoginComponent } from './user-landing-page/login/login.component';
 import { HomeComponent } from './home/home.component';
+import { UserRoutingModule } from './user-routing.module';
 
 
 
@@ -15,7 +16,8 @@ import { HomeComponent } from './home/home.component';
     HomeComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    UserRoutingModule
   ]
 })
 export class UserModule { }

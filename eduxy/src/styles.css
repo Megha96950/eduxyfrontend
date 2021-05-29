@@ -6,7 +6,7 @@
 body {
     /* background-color: #0f5740; */
     /* background-color: #f2f9ff; */
-    background-color: #f8f8f8;
+    background-color: #5383ec;
     /* background-color: #e6f9ff; */
 }
 
@@ -207,8 +207,8 @@ Check
 }
 
 .navbar-dark .nav-item:hover {
-    color: black;
-    background: #ffa64d;
+    color: rgb(215, 235, 223);
+    background: #af4040;
 }
 
 
@@ -254,7 +254,7 @@ Check
 .navbar-dark .navbar-nav>.active>a,
 .navbar-dark .navbar-nav>.active>a:hover,
 .navbar-dark .navbar-nav>.active>a:focus {
-    color: #f0d3a2
+    color: #4d3000
 }
 
 
