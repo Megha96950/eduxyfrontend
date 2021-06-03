@@ -43,7 +43,7 @@
                         Login
                     </button>
 
-                    <button class="col-md-4 offset-md-2 btn btn-primary" type="reset" (click)="errorMessage"
+                    <button class="col-md-4 offset-md-2 btn btn-primary" type="reset" (click)="errorMessage='null'"
                         [disabled]="loginForm.pristine">
                         Reset
                     </button>
@@ -52,7 +52,7 @@
             </form>
            
             <h5 *ngIf="tryToLogin" class="text-center text-info"> Logging...Please Wait!!</h5>
-            <h5 class="error-message text-justify">{{errorMessage}}</h5>
+            <h5 *ngIf="errorMessage!='null'" class="error-message text-justify">{{errorMessage}}</h5>
             <br />
             <div class="text-info">Are you a new user? <a routerLink="../register">Sign up</a></div>
         </div>

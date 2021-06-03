@@ -10,6 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from './user-landing-page/login/login.service';
 import { RegisterService } from './user-landing-page/register/register.service';
+import { HomeService } from './home/home.service';
+import { HomeSharedService } from './home/home-shared-service';
 
 
 
@@ -31,7 +33,10 @@ import { RegisterService } from './user-landing-page/register/register.service';
   providers: [
    
     LoginService,
-    RegisterService
+    RegisterService,
+    HomeService,
+    HomeSharedService
+
 ],
 })
 export class UserModule { }

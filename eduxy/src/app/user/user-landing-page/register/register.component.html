@@ -7,6 +7,22 @@
                 <h3 class="title">Registration</h3>
                 <form [formGroup]="registerUserForm">
                     <div class="form-group">
+                        <label for="role">Role</label>
+                        <select name="role" class="form-control"  id="role"  >
+                              <option value="0" selected disabled>--select--</option>
+                              <option formControlName="role"value="teacher">teacher</option>
+                              <option formControlName="role" value="student">student</option>
+                            </select>
+                            
+                          <div *ngIf="registerUserForm.controls.role.invalid && registerUserForm.controls.role.touched">
+
+                            <div  class="field-error-message" *ngIf="registerUserForm.controls.role.hasError('required')">
+                                Please select the role
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="name">Name</label>
                         <input class="form-control" formControlName="name" placeholder="Name" id="name" />
                         <div *ngIf="registerUserForm.controls.name.invalid  && registerUserForm.controls.name.touched">
@@ -81,8 +97,25 @@
                         </div>
                     </div>
 
+                   
+                     <br>
+                    <div class="row">
+                        <button [disabled]="!registerUserForm.valid" class="col-md-4 offset-md-1 btn btn-info">
+                            Register
+                        </button>
+                        <button type="reset" [disabled]="registerUserForm.pristine" class="col-md-4 offset-md-2 btn btn-danger">
+                            Reset
+                        </button>
 
+                    </div>
                 </form>
+
+                <h5 class="success-message">{{successMessage}}</h5>
+                <h5 class="error-message">{{errorMessage}}</h5>
+                <br/>
+               <div class="text-info">Are you a registered user? <a routerLink="../login">Sign in</a></div>
+
+               
             </div>
         </div>
     </div>

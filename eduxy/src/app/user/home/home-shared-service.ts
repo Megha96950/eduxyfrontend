@@ -1,25 +1,26 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
-import { User } from "src/app/shared/model/user";
-import { Observable, throwError } from "rxjs";
-import { environment } from "src/environments/environment";
+
+import { BehaviorSubject, throwError, Observable } from "rxjs";
+
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
+import { User } from "src/app/shared/model/user";
+
+
 @Injectable({
-    providedIn:'root'
+    providedIn: 'root'
 })
-export class LoginService {
-    private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    constructor(private http: HttpClient) {
+export class HomeSharedService {
+    
+    constructor(private http: HttpClient){}
 
-    }
+  
 
-    login(user: User): Observable<User> {
-        const url = environment.userAPIUrl + '/userLogin';
+    private loggedInCustomer = new BehaviorSubject<User>(JSON.parse(sessionStorage.getItem("user")|| '{}'));
+    updatedCustomer = this.loggedInCustomer.asObservable();
 
-        return this.http.post<User>(url,user,{headers:this.headers})
-        .pipe(catchError(this.handleError));
-
-    }
+  
 
     private handleError(err: HttpErrorResponse) {
         console.log(err)
@@ -40,4 +41,5 @@ export class LoginService {
          }
             return throwError(errMsg);
     }
+
 }
