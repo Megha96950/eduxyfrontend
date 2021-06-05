@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserLandingPageComponent } from './user/user-landing-page/user-landing-page.component';
 import { UserModule } from './user/user.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,10 @@ import { UserModule } from './user/user.module';
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
-    UserModule
+    UserModule,
+    NgbModule
+
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
