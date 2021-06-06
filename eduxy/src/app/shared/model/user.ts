@@ -17,7 +17,7 @@ export class User {
     newPassword!: string;
     phoneNumber!: string;
     role!:string;
-    addresses!: Address[];
+    address!: Address[];
     student!: Student[];
     teacher!: Teacher[];
 

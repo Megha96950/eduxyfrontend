@@ -1,0 +1,31 @@
+
+    <div class="container">
+        <div class="cover" ></div>
+        <div class="main-content mt-5 container-fluid p-5" *ngIf="currentUser">
+            <div class="row profile">
+                <div class="col-md-12 main-col" style ="background-color: darkcyan;">
+                    <div class="card w-100 shadow-sm pt-5 pl-4 pr-4 mb-3 pb-4 quick-details">
+                        <div style="text-align: center;height: 25px;">
+                            <img src="" class="profile-pic" alt="">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10 details">
+                                <h4 class="mt-2">
+                                    {{currentUser.name}} 
+                                </h4>
+                           <span class="location">
+                              {{currentUser.emailId}} 
+                             </span>
+                             
+                       </div>
+                       <div  class="col-md-12 " style="text-align: end; ">
+                        
+                            <a routerLink="/home/detail" ><button class="col-md-4 offset-md-2 btn btn-primary" style="width: 100px;" > Add detail</button></a>  
+                        
+                       </div>
+                     </div>
+                 </div>
+             </div>
+       </div>
+   </div>
+</div>

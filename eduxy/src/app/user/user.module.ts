@@ -12,6 +12,8 @@ import { LoginService } from './user-landing-page/login/login.service';
 import { RegisterService } from './user-landing-page/register/register.service';
 import { HomeService } from './home/home.service';
 import { HomeSharedService } from './home/home-shared-service';
+import { ViewComponent } from './view/view.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
 
 
@@ -20,7 +22,9 @@ import { HomeSharedService } from './home/home-shared-service';
     UserLandingPageComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    ViewComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,

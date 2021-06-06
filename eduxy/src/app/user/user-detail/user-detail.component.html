@@ -1,0 +1,83 @@
+
+
+
+ 
+    <div class="page-top-offset"></div>
+<div class="row">
+    <div class="container-fluid">
+        <div class="col-md-6 offset-md-3">
+            <div class="form-bg-light">
+
+                <h3 class="title">Add detail</h3>
+               
+                <form [formGroup]="detailForm">
+                   <div class="form-group">
+                        <label for="subjects">Subject to Teach</label>
+                        
+                        <select name="subjects" class="form-control " id="subjects" multiple="multiple"   >
+                              <option value="0" selected disabled></option>
+                          
+                              <option><input type="checkbox"> Maths</option>
+                              <option formControlName="role" value="">Science</option>
+                              <option formControlName="role"value="">Physics</option>
+                              <option formControlName="role" value="">Chemistry</option>
+                            </select>
+
+                            
+                            
+                          
+
+                            <div  class="field-error-message" *ngIf="detailForm.controls.subjects.hasError('required')">
+                                Please select the role
+                            </div>
+                            
+                        </div>
+                    <div class="form-group">
+                        <label for="higherQualification">Higher Qualification</label>
+                        <input type="text" class="form-control" formControlName="higherQualification" placeholder="higherQualification" id="higherQualification">
+
+               
+                        <div  class="field-error-message" *ngIf="detailForm.controls.higherQualification.hasError('required')">
+                     Mandatory!
+                   </div>
+                  </div>
+                    <div class="form-group">
+                        <label for="name">Description</label>
+               
+                   <textarea style="height: 150px;" class="form-control" formControlName="description" placeholder="Describe yourself" id="description"> </textarea>    
+                   <div  class="field-error-message" *ngIf="detailForm.controls.description.hasError('required')">
+                     Mandatory!
+                   </div>
+                  </div>
+                   
+                    
+                    
+                    <div class="row">
+                    <button [disabled]="!detailForm.valid" class="col-md-4 offset-md-1 btn btn-info">
+                            Add
+                    </button>
+                    </div>
+                </form>
+
+                <h5 class="success-message">{{successMessage}}</h5>
+                <h5 class="error-message">{{errorMessage}}</h5>
+                <br/>
+            
+
+               
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <script type="text/javascript">
+     
+        $(document).ready(function() {
+     
+            $('#multi-select-demo').multiselect();
+     
+        });
+     
+    </script>
