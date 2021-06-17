@@ -4,25 +4,19 @@
     <div class="w-100 order-1 order-md-0">
         <a class="navbar-brand" routerLink="/home">Eduxy</a>
     </div>
-<div class="navbar-collapse collapse w-100 order-1 order-md-0 "  id="collapsibleNavbar">
-        <ul class="nav navbar-nav ml-auto" style="padding-right:40px;">
-            <li class="nav-item dropdown"  routerLinkActive="active" >
-                <a class="nav-link dropdown-toggle"  id="navbardrop" data-toggle="dropdown">{{loggedInUser.name}}</a>
 
-                <div class="dropdown-menu"  style="padding-right: 65px;">
-                    <li class="nav-item" >
-                        <a routerLink="detail"  routerLinkActive="active" class="nav-link">My Details</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" routerLinkActive="active" (click)="logout()">Logout</a>
-                    </li>
-                </div>
-            </li>
-         </ul>
-    </div>
+        <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                {{loggedInUser.name}}
+            </a>
+          
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li><a class="dropdown-item nav-link" routerLink="detail"  routerLinkActive="active" >My detail</a></li>
+              <li><a class="dropdown-item nav-link"  routerLinkActive="active"  (click)="logout()" >logout</a></li>
+              
+            </ul>
+          </div>
     
-
 </nav>
 
 </div>
@@ -33,7 +27,7 @@
 
            
 <div class="wrapper">
-  
+    
                 <router-outlet></router-outlet>
         </div>
     </div>

@@ -1,62 +1,114 @@
 
-
-
- 
-    <div class="page-top-offset"></div>
+<div class="page-top-offset"></div>
 <div class="row">
     <div class="container-fluid">
         <div class="col-md-6 offset-md-3">
             <div class="form-bg-light">
 
                 <h3 class="title">Add detail</h3>
-               
+              
                 <form [formGroup]="detailForm">
                    <div class="form-group">
                         <label for="subjects">Subject to Teach</label>
-                        
-                        <select name="subjects" class="form-control " id="subjects" multiple="multiple"   >
-                              <option value="0" selected disabled></option>
+                        <div class="dropdown">
+                            <input type="text" style="width:78%" formControlName="subjects" id="subjects" placeholder="Mathmatics" readonly >
+                            <button type="button" class="btn btn-primary dropdown-toggle" style="background-color: rgb(53, 43, 187); height:40px" data-bs-toggle="dropdown" aria-expanded="false">
+                                Select
+                            </button>
                           
-                              <option><input type="checkbox"> Maths</option>
-                              <option formControlName="role" value="">Science</option>
-                              <option formControlName="role"value="">Physics</option>
-                              <option formControlName="role" value="">Chemistry</option>
-                            </select>
-
-                            
-                            
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                
+                                <li><input type="checkbox" value="Mathmatics" class="chkvalue">Mathmatics</li>
+                                <input type="checkbox" value="Physics" class="chkvalue" >Physics<br>
+                                <input type="checkbox" value="Chemistry" class="chkvalue">Chemistry<br>
+                                <input type="checkbox" value="Biology" class="chkvalue">Biology<br>
+                                <input type="checkbox" value="Science" class="chkvalue" >Science<br>
+                                <input type="checkbox" value="English" class="chkvalue">English<br>
+                                <input type="checkbox" value="Hindi" class="chkvalue">Hindi<br>
+                                <input type="checkbox" value="History" class="chkvalue" >History<br>
+                                <input type="checkbox" value="Civics" class="chkvalue">Civics<br>
+                                <input type="checkbox" value="Geography" class="chkvalue">Geography<br>
+                                <input type="checkbox" value="Economics" class="chkvalue" >Economics<br>
+                                <input type="checkbox" value="Accounting" class="chkvalue">Accounting<br>
+                                <input type="checkbox" value="Finance" class="chkvalue">Finance<br>
+                                <input type="checkbox" value="Computer" class="chkvalue" >Computer<br>
+                                <input type="checkbox" value="Music" class="chkvalue">Music<br>
+                                <input type="checkbox" value="Dance" class="chkvalue">Dance<br>
+                            </ul>
                           
-
-                            <div  class="field-error-message" *ngIf="detailForm.controls.subjects.hasError('required')">
-                                Please select the role
-                            </div>
+                          </div>
+                    
+                      <div  class="field-error-message" *ngIf="detailForm.controls.subjects.hasError('required')">
+                                Please select the subjects
+                      </div>
                             
+                </div>
+
+
+                <div class="form-group">
+                        <label for="degreePhoto">Degree</label>
+                        <input type="text" class="form-control" formControlName="degreePhoto" placeholder="degreePhoto" id="degreePhoto">
+
+               
+                        <div  class="field-error-message" *ngIf="detailForm.controls.degreePhoto.hasError('required')">
+                         Mandatory!
                         </div>
-                    <div class="form-group">
-                        <label for="higherQualification">Higher Qualification</label>
-                        <input type="text" class="form-control" formControlName="higherQualification" placeholder="higherQualification" id="higherQualification">
+                </div>
 
-               
-                        <div  class="field-error-message" *ngIf="detailForm.controls.higherQualification.hasError('required')">
-                     Mandatory!
-                   </div>
+                <div class="form-group">
+                  <label for="higherQualification">Higher Qualification :</label>
+                  <input type="file" class="form-control" formControlName="higherQualification" placeholder="higherQualification" id="higherQualification">
+
+         
+                  <div  class="field-error-message" *ngIf="detailForm.controls.higherQualification.hasError('required')">
+                   Mandatory!
                   </div>
-                    <div class="form-group">
+          </div>
+           
+
+          <div class="form-group">
+            <label for="idProof">Aadhar :</label>
+          <input type="text" class="form-control" formControlName="idProof" placeholder="012345678912" id="idProof">
+
+   
+            <div  class="field-error-message" *ngIf="detailForm.controls.idProof.hasError('required')">
+             Mandatory!
+            </div>
+    </div>
+
+    <div class="form-group">
+      <label for="idPhoto">Aadhar :</label>
+      <input type="file" class="form-control" formControlName="idPhoto" placeholder="idPhoto" id="idPhoto">
+
+
+      <div  class="field-error-message" *ngIf="detailForm.controls.idPhoto.hasError('required')">
+       Mandatory!
+      </div>
+</div>
+            <div class="form-group">
+                  <label for="feesPerStudent">Fees Charged :</label>
+                  <input type="text" class="form-control" formControlName="feesPerStudent" placeholder="feesPerStudent" id="feesPerStudent">
+
+         
+                  <div  class="field-error-message" *ngIf="detailForm.controls.feesPerStudent.hasError('required')">
+                   Mandatory!
+                  </div>
+             </div>
+
+
+                <div class="form-group">
                         <label for="name">Description</label>
-               
-                   <textarea style="height: 150px;" class="form-control" formControlName="description" placeholder="Describe yourself" id="description"> </textarea>    
-                   <div  class="field-error-message" *ngIf="detailForm.controls.description.hasError('required')">
-                     Mandatory!
-                   </div>
-                  </div>
-                   
-                    
-                    
-                    <div class="row">
-                    <button [disabled]="!detailForm.valid" class="col-md-4 offset-md-1 btn btn-info">
-                            Add
+                        <textarea style="height: 150px;" class="form-control" formControlName="description" placeholder="Describe yourself" id="description"> </textarea>    
+                        <div  class="field-error-message" *ngIf="detailForm.controls.description.hasError('required')">
+                         Mandatory!
+                        </div>
+                </div>
+                   <br>
+                <div class="row">
+                    <button style="width:94%; margin-left:14px; background-color:rgb(15, 15, 201);" [disabled]="!detailForm.valid" class="col-md-4 offset-md-0 btn btn-primary">
+                            Submit
                     </button>
-                    </div>
+                </div>
                 </form>
 
                 <h5 class="success-message">{{successMessage}}</h5>
@@ -66,18 +118,10 @@
 
                
             </div>
-        </div>
+        </div> 
 
 
     </div>
 
 
-    <script type="text/javascript">
-     
-        $(document).ready(function() {
-     
-            $('#multi-select-demo').multiselect();
-     
-        });
-     
-    </script>
+ 

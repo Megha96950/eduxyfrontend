@@ -25,15 +25,33 @@ export class RegisterComponent implements OnInit {
   createForm() {
 
     this.registerUserForm = this.fb.group({
-        emailId: [this.user.emailId, [Validators.required]],
-        name: [this.user.name, [Validators.required]],
-        phoneNumber: [this.user.phoneNumber, [Validators.required, LoginValidators.validatePhoneNumber]],
-        password: [this.user.password, [Validators.required, LoginValidators.validatePassword]],
+        emailId: ["", [Validators.required]],
+        name: ["", [Validators.required]],
+        phoneNumber: ["", [Validators.required]],
+        password: ["" ,[Validators.required]],
         confirmPassword: ["", [Validators.required]],
-        role: [this.user.role,[Validators.required]]
+        role: ["",[Validators.required]]
 
     });
    // this.registerUserForm.get('confirmPassword').setValidators([Validators.required,LoginValidators.confirmPassword(this.registerUserForm.get('password'))]);
   // this.registerUserForm.get('confirmPassword')?.setValidators([Validators.required,LoginValidators.confirmPassword(this.registerUserForm.get)]);
+}
+
+
+
+registerUser() {
+  this.errorMessage = 'null';
+  this.successMessage = 'null';
+  this.user = this.registerUserForm.value as User;
+
+  this.registerService.registerCustomer(this.user)
+      .subscribe(
+          message => {
+              this.successMessage = message;
+              this.registerUserForm.reset();
+          }
+          , error => this.errorMessage = <any>error
+      )
+
 }
 }
