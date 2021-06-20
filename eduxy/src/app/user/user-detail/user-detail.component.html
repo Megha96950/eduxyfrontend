@@ -7,11 +7,11 @@
 
                 <h3 class="title">Add detail</h3>
               
-                <form [formGroup]="detailForm">
+                <form [formGroup]="teacherDetailForm" (ngSubmit)="addTeacherDetail()"  >
                    <div class="form-group">
                         <label for="subjects">Subject to Teach</label>
                         <div class="dropdown">
-                            <input type="text" style="width:78%" formControlName="subjects" id="subjects" placeholder="Mathmatics" readonly >
+                            <input type="text" class="form-control" formControlName="subjects" style="width:78%"  id="subjects" placeholder="Mathmatics" readonly >
                             <button type="button" class="btn btn-primary dropdown-toggle" style="background-color: rgb(53, 43, 187); height:40px" data-bs-toggle="dropdown" aria-expanded="false">
                                 Select
                             </button>
@@ -37,11 +37,11 @@
                             </ul>
                           
                           </div>
-                    
-                      <div  class="field-error-message" *ngIf="detailForm.controls.subjects.hasError('required')">
+                          <div *ngIf="teacherDetailForm.controls.subjects.invalid && teacherDetailForm.controls.subjects.touched">
+                      <div  class="field-error-message" *ngIf="teacherDetailForm.controls.subjects.hasError('required')">
                                 Please select the subjects
                       </div>
-                            
+                       </div>     
                 </div>
 
 
@@ -49,9 +49,10 @@
                         <label for="degreePhoto">Degree</label>
                         <input type="text" class="form-control" formControlName="degreePhoto" placeholder="degreePhoto" id="degreePhoto">
 
-               
-                        <div  class="field-error-message" *ngIf="detailForm.controls.degreePhoto.hasError('required')">
+                        <div *ngIf="teacherDetailForm.controls.degreePhoto.invalid && teacherDetailForm.controls.degreePhoto.touched">
+                        <div  class="field-error-message" *ngIf="teacherDetailForm.controls.degreePhoto.hasError('required')">
                          Mandatory!
+                        </div>
                         </div>
                 </div>
 
@@ -59,9 +60,10 @@
                   <label for="higherQualification">Higher Qualification :</label>
                   <input type="file" class="form-control" formControlName="higherQualification" placeholder="higherQualification" id="higherQualification">
 
-         
-                  <div  class="field-error-message" *ngIf="detailForm.controls.higherQualification.hasError('required')">
+                  <div *ngIf="teacherDetailForm.controls.higherQualification.invalid && teacherDetailForm.controls.higherQualification.touched">
+                  <div  class="field-error-message" *ngIf="teacherDetailForm.controls.higherQualification.hasError('required')">
                    Mandatory!
+                  </div>
                   </div>
           </div>
            
@@ -70,9 +72,10 @@
             <label for="idProof">Aadhar :</label>
           <input type="text" class="form-control" formControlName="idProof" placeholder="012345678912" id="idProof">
 
-   
-            <div  class="field-error-message" *ngIf="detailForm.controls.idProof.hasError('required')">
+          <div *ngIf="teacherDetailForm.controls.idProof.invalid && teacherDetailForm.controls.idProof.touched">
+            <div  class="field-error-message" *ngIf="teacherDetailForm.controls.idProof.hasError('required')">
              Mandatory!
+            </div>
             </div>
     </div>
 
@@ -80,39 +83,43 @@
       <label for="idPhoto">Aadhar :</label>
       <input type="file" class="form-control" formControlName="idPhoto" placeholder="idPhoto" id="idPhoto">
 
-
-      <div  class="field-error-message" *ngIf="detailForm.controls.idPhoto.hasError('required')">
+      <div *ngIf="teacherDetailForm.controls.idPhoto.invalid && teacherDetailForm.controls.idPhoto.touched">
+      <div  class="field-error-message" *ngIf="teacherDetailForm.controls.idPhoto.hasError('required')">
        Mandatory!
+      </div>
       </div>
 </div>
             <div class="form-group">
                   <label for="feesPerStudent">Fees Charged :</label>
                   <input type="text" class="form-control" formControlName="feesPerStudent" placeholder="feesPerStudent" id="feesPerStudent">
 
-         
-                  <div  class="field-error-message" *ngIf="detailForm.controls.feesPerStudent.hasError('required')">
+                  <div *ngIf="teacherDetailForm.controls.feesPerStudent.invalid && teacherDetailForm.controls.feesPerStudent.touched">
+                  <div  class="field-error-message" *ngIf="teacherDetailForm.controls.feesPerStudent.hasError('required')">
                    Mandatory!
+                  </div>
                   </div>
              </div>
 
 
                 <div class="form-group">
                         <label for="name">Description</label>
-                        <textarea style="height: 150px;" class="form-control" formControlName="description" placeholder="Describe yourself" id="description"> </textarea>    
-                        <div  class="field-error-message" *ngIf="detailForm.controls.description.hasError('required')">
+                        <textarea style="height: 150px;" class="form-control" formControlName="description" placeholder="Describe yourself" id="description"> </textarea>  
+                        <div *ngIf="teacherDetailForm.controls.description.invalid && teacherDetailForm.controls.description.touched">  
+                        <div  class="field-error-message" *ngIf="teacherDetailForm.controls.description.hasError('required')">
                          Mandatory!
+                        </div>
                         </div>
                 </div>
                    <br>
                 <div class="row">
-                    <button style="width:94%; margin-left:14px; background-color:rgb(15, 15, 201);" [disabled]="!detailForm.valid" class="col-md-4 offset-md-0 btn btn-primary">
+                    <button class="col-md-4 offset-md-0 btn btn-primary" style="width:94%; margin-left:14px; background-color:rgb(15, 15, 201);" >
                             Submit
                     </button>
                 </div>
                 </form>
 
-                <h5 class="success-message">{{successMessage}}</h5>
-                <h5 class="error-message">{{errorMessage}}</h5>
+                <h5 *ngIf="successMessage!='null'"class="success-message">{{successMessage}}</h5>
+                <h5 *ngIf="errorMessage!='null'" class="error-message">{{errorMessage}}</h5>
                 <br/>
             
 

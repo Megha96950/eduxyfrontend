@@ -3,8 +3,8 @@ export class Teacher{
     subjects!:string;
     description!:string;
     higherQualification!:string;
-    degreePhoto!:string;
-    idPhoto!:string;
+    degreePhoto!:File;
+    idPhoto!:File;
     feesPerStudent!:string;
     emailId!:string;
     idProof!:string;
