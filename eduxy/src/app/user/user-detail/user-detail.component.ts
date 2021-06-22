@@ -3,6 +3,7 @@ import { Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Teacher } from 'src/app/shared/model/teacher';
+import { TeacherFile } from 'src/app/shared/model/techerfile';
 import { User } from 'src/app/shared/model/user';
 import { UserDetailService } from './user-detail.service';
 
@@ -22,11 +23,15 @@ export class UserDetailComponent implements OnInit {
   teacherDetailForm!: FormGroup ;
   errorMessage!: string;
   successMessage!: string;
+  dPhoto!: File;
+  iPhoto!: File;
+  teacherFile!:TeacherFile;
   constructor(private fb: FormBuilder,private userDetailService: UserDetailService) { }
 
   ngOnInit(): void {
     this.teacher = new Teacher();
     this.createForm();
+    console.log(this.teacher);
   }
   createForm() {
 
@@ -34,19 +39,28 @@ export class UserDetailComponent implements OnInit {
         description: ['',[Validators.required]],
         higherQualification: ['', [Validators.required]],
         idProof: ['', [Validators.required]],
-        degreePhoto: ['', [Validators.required]],
-        idPhoto: ['',[Validators.required]],
-        feesPerStudent: ['',[Validators.required]],
+        feesCharged: ['',[Validators.required]],
         subjects: ['',[Validators.required]]
 
 
     });
+  }
+  selectDegree(event: any) {
+    this.dPhoto = event.target.files[0];
+    console.log(this.dPhoto)
+  }
+  selectId(event: any) {
+    this.iPhoto = event.target.files[0];
+    console.log(this.iPhoto)
   }
 
   addTeacherDetail(){
     this.errorMessage = 'null';
     this.successMessage = 'null';
     this.teacher = this.teacherDetailForm.value as Teacher;
+ 
+    
+
 
   this.userDetailService.addTeacher(this.teacher,this.currentUser.emailId)
       .subscribe(

@@ -45,20 +45,20 @@
                 </div>
 
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                         <label for="degreePhoto">Degree</label>
-                        <input type="text" class="form-control" formControlName="degreePhoto" placeholder="degreePhoto" id="degreePhoto">
+                        <input type="file" class="form-control" formControlName="degreePhoto" placeholder="degreePhoto" id="degreePhoto" (change)="selectDegree($event)">
 
                         <div *ngIf="teacherDetailForm.controls.degreePhoto.invalid && teacherDetailForm.controls.degreePhoto.touched">
                         <div  class="field-error-message" *ngIf="teacherDetailForm.controls.degreePhoto.hasError('required')">
                          Mandatory!
                         </div>
                         </div>
-                </div>
+                </div> -->
 
                 <div class="form-group">
                   <label for="higherQualification">Higher Qualification :</label>
-                  <input type="file" class="form-control" formControlName="higherQualification" placeholder="higherQualification" id="higherQualification">
+                  <input type="text" class="form-control" formControlName="higherQualification" placeholder="higherQualification" id="higherQualification" >
 
                   <div *ngIf="teacherDetailForm.controls.higherQualification.invalid && teacherDetailForm.controls.higherQualification.touched">
                   <div  class="field-error-message" *ngIf="teacherDetailForm.controls.higherQualification.hasError('required')">
@@ -79,22 +79,22 @@
             </div>
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="idPhoto">Aadhar :</label>
-      <input type="file" class="form-control" formControlName="idPhoto" placeholder="idPhoto" id="idPhoto">
+      <input type="file" class="form-control" formControlName="idPhoto" placeholder="idPhoto" id="idPhoto" (change)="selectId($event)">
 
       <div *ngIf="teacherDetailForm.controls.idPhoto.invalid && teacherDetailForm.controls.idPhoto.touched">
       <div  class="field-error-message" *ngIf="teacherDetailForm.controls.idPhoto.hasError('required')">
        Mandatory!
       </div>
       </div>
-</div>
+</div> -->
             <div class="form-group">
-                  <label for="feesPerStudent">Fees Charged :</label>
-                  <input type="text" class="form-control" formControlName="feesPerStudent" placeholder="feesPerStudent" id="feesPerStudent">
+                  <label for="feesCharged">Fees Charged :</label>
+                  <input type="text" class="form-control" formControlName="feesCharged" placeholder="feesPerStudent" id="feesPerStudent">
 
-                  <div *ngIf="teacherDetailForm.controls.feesPerStudent.invalid && teacherDetailForm.controls.feesPerStudent.touched">
-                  <div  class="field-error-message" *ngIf="teacherDetailForm.controls.feesPerStudent.hasError('required')">
+                  <div *ngIf="teacherDetailForm.controls.feesCharged.invalid && teacherDetailForm.controls.feesCharged.touched">
+                  <div  class="field-error-message" *ngIf="teacherDetailForm.controls.feesCharged.hasError('required')">
                    Mandatory!
                   </div>
                   </div>
