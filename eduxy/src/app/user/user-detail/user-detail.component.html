@@ -1,7 +1,7 @@
 
 <div class="page-top-offset"></div>
-<div class="row">
-    <div class="container-fluid">
+<div class="row"  >
+    <div class="container-fluid" *ngIf="flag && status" >
         <div class="col-md-6 offset-md-3">
             <div class="form-bg-light">
 
@@ -11,30 +11,35 @@
                    <div class="form-group">
                         <label for="subjects">Subject to Teach</label>
                         <div class="dropdown">
-                            <input type="text" class="form-control" formControlName="subjects" style="width:78%"  id="subjects" placeholder="Mathmatics" readonly >
-                            <button type="button" class="btn btn-primary dropdown-toggle" style="background-color: rgb(53, 43, 187); height:40px" data-bs-toggle="dropdown" aria-expanded="false">
-                                Select
-                            </button>
-                          
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <div class="input-group mb-3">
+                            <input type="text" class="form-control" formControlName="subjects" style="width:50%"  id="subjects" placeholder="Mathmatics" readonly >
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-primary dropdown-toggle" style="background-color: rgb(53, 43, 187);" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Select
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 
-                                <li><input type="checkbox" value="Mathmatics" class="chkvalue">Mathmatics</li>
-                                <input type="checkbox" value="Physics" class="chkvalue" >Physics<br>
-                                <input type="checkbox" value="Chemistry" class="chkvalue">Chemistry<br>
-                                <input type="checkbox" value="Biology" class="chkvalue">Biology<br>
-                                <input type="checkbox" value="Science" class="chkvalue" >Science<br>
-                                <input type="checkbox" value="English" class="chkvalue">English<br>
-                                <input type="checkbox" value="Hindi" class="chkvalue">Hindi<br>
-                                <input type="checkbox" value="History" class="chkvalue" >History<br>
-                                <input type="checkbox" value="Civics" class="chkvalue">Civics<br>
-                                <input type="checkbox" value="Geography" class="chkvalue">Geography<br>
-                                <input type="checkbox" value="Economics" class="chkvalue" >Economics<br>
-                                <input type="checkbox" value="Accounting" class="chkvalue">Accounting<br>
-                                <input type="checkbox" value="Finance" class="chkvalue">Finance<br>
-                                <input type="checkbox" value="Computer" class="chkvalue" >Computer<br>
-                                <input type="checkbox" value="Music" class="chkvalue">Music<br>
-                                <input type="checkbox" value="Dance" class="chkvalue">Dance<br>
-                            </ul>
+                                    <li><input type="checkbox" value="Mathmatics" class="chkvalue">Mathmatics</li>
+                                    <input type="checkbox" value="Physics" class="chkvalue" >Physics<br>
+                                    <input type="checkbox" value="Chemistry" class="chkvalue">Chemistry<br>
+                                    <input type="checkbox" value="Biology" class="chkvalue">Biology<br>
+                                    <input type="checkbox" value="Science" class="chkvalue" >Science<br>
+                                    <input type="checkbox" value="English" class="chkvalue">English<br>
+                                    <input type="checkbox" value="Hindi" class="chkvalue">Hindi<br>
+                                    <input type="checkbox" value="History" class="chkvalue" >History<br>
+                                    <input type="checkbox" value="Civics" class="chkvalue">Civics<br>
+                                    <input type="checkbox" value="Geography" class="chkvalue">Geography<br>
+                                    <input type="checkbox" value="Economics" class="chkvalue" >Economics<br>
+                                    <input type="checkbox" value="Accounting" class="chkvalue">Accounting<br>
+                                    <input type="checkbox" value="Finance" class="chkvalue">Finance<br>
+                                    <input type="checkbox" value="Computer" class="chkvalue" >Computer<br>
+                                    <input type="checkbox" value="Music" class="chkvalue">Music<br>
+                                    <input type="checkbox" value="Dance" class="chkvalue">Dance<br>
+                                </ul>
+                            </div>
+                            </div>
+                            
+                           
                           
                           </div>
                           <div *ngIf="teacherDetailForm.controls.subjects.invalid && teacherDetailForm.controls.subjects.touched">
@@ -121,14 +126,66 @@
                 <h5 *ngIf="successMessage!='null'"class="success-message">{{successMessage}}</h5>
                 <h5 *ngIf="errorMessage!='null'" class="error-message">{{errorMessage}}</h5>
                 <br/>
+             </div>
+        </div>
+    </div> 
+
+    <div class="container-fluid" *ngIf="!status || !flag" >
+        <div class="form-bg-light">  
+                <div class="row"> 
+                    <form [formGroup]="ID" (ngSubmit)="addId()"  >
+                        <div class="form-group">
+                             <label for="idPhoto">Aadhar :</label>
+                             <div class="input-group mb-3">
+                             <input type="file" class="form-control" formControlName="idPhoto" placeholder="idPhoto" id="idPhoto" (change)="selectId($event)" >
+                             <div class="input-group-append">
+                             <button class=" btn btn-primary" style="background-color:rgb(15, 15, 201);" >
+                                Upload
+                            </button>
+                            </div>
+                            </div>
+                             <div *ngIf="ID.controls.idPhoto.invalid && ID.controls.idPhoto.touched">
+                             <div  class="field-error-message" *ngIf="ID.controls.idPhoto.hasError('required')">
+                              Mandatory!
+                             </div>
+                             </div>
+                       </div>
+                       </form>
+              </div>
+    
+                    <div class="row"> 
+                        <form [formGroup]="degree" (ngSubmit)="addDegree()"  >
+                            <div class="form-group">
+                                 <label for="degreePhoto">Degree:</label>
+                                 <div class="input-group mb-3">
+                                 <input type="file" class="form-control" formControlName="degreePhoto" placeholder="degreePhoto" id="degreePhoto" (change)="selectDegree($event)">
+                                 <div class="input-group-append">
+                                 <button class="btn btn-primary" style=" background-color:rgb(15, 15, 201);" >
+                                    Upload
+                                </button>
+                                </div>
+                                 </div>
+                                 <div *ngIf="degree.controls.degreePhoto.invalid && degree.controls.degreePhoto.touched">
+                                 <div  class="field-error-message" *ngIf="degree.controls.degreePhoto.hasError('required')">
+                                  Mandatory!
+                                 </div>
+                                 </div>
+                           </div>
             
+                           <div class="row">
+                          
+                        </div>
+                           </form>
+              </div>
+            
+            </div> 
+         
+           
+          </div>
+          
 
-               
-            </div>
-        </div> 
 
 
-    </div>
 
-
- 
+ </div>  
+  
