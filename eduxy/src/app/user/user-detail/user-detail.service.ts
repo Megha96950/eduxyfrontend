@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Teacher } from 'src/app/shared/model/teacher';
+import { User } from 'src/app/shared/model/user';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -10,14 +11,29 @@ import { environment } from 'src/environments/environment';
 })
 export class UserDetailService {
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
   constructor(private http: HttpClient) { }
-    addTeacher(teacher: Teacher, emailId: string): Observable<string> {
+    addTeacher(teacher: Teacher, emailId: string): Observable<number> {
     const url = environment.userAPIUrl + '/addTeacher/' + emailId;
-    return this.http.post<string>(url,teacher,{ headers: this.headers, responseType: 'text' as 'json' })
+    return this.http.post<number>(url,teacher,{ headers: this.headers, responseType: 'text' as 'json' })
     .pipe(catchError(this.handleError));
     // return this.http.post<User>(url, user, { headers: this.headers, responseType: 'text' as 'json' })
     //     .pipe(catchError(this.handleError));
 
+}
+
+addId(iPhoto:FormData,emailId: string,id:number):Observable<string>{
+  
+  const url = environment.teacherAPIUrl + '/uploadId/' + emailId + '/'+id;
+  return this.http.post<string>(url,iPhoto)
+  .pipe(catchError(this.handleError));
+}
+
+addDegree(dPhoto:FormData,emailId: string,id:number):Observable<string>{
+  
+  const url = environment.teacherAPIUrl + '/uploadDegree/' + emailId + '/'+id;
+  return this.http.post<string>(url,dPhoto)
+  .pipe(catchError(this.handleError));
 }
 
 private handleError(err: HttpErrorResponse) {
