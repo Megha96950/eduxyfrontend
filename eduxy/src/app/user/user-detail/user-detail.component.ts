@@ -17,9 +17,10 @@ export class UserDetailComponent implements OnInit {
 
 
   teacher!: Teacher;
+  teachers!:Teacher[]
   role!:string ;
   currentUser: User = JSON.parse(sessionStorage.getItem("user")|| '{}')
-  id!: number 
+
 
   teacherDetailForm!: FormGroup ;
   errorMessage!: string;
@@ -29,8 +30,10 @@ export class UserDetailComponent implements OnInit {
   teacherFile!:TeacherFile;
   ID!: FormGroup;
   degree!:FormGroup;
-  flag:boolean=true
-  status:boolean=Boolean(JSON.parse(sessionStorage.getItem("status")|| '{}'))
+
+  status!:number
+
+ 
 
 
  
@@ -41,6 +44,24 @@ export class UserDetailComponent implements OnInit {
     this.createForm();
     this.idForm()
     this.degreeForm()
+    this.currentUser=JSON.parse(sessionStorage.getItem("user")|| '{}')
+    this.status=Number( JSON.parse(sessionStorage.getItem("status")|| '{}'))
+    this.teachers=this.currentUser.teacher
+    console.log(this.status)
+    if(isNaN(this.status)){
+         if(this.currentUser.teacher[0]==undefined)
+            this.status=1 
+         else {
+              if(this.currentUser.teacher[0].idPhoto==null||this.currentUser.teacher[0].degreePhoto==null)
+              this.status=2;
+          else 
+          this.status=3;
+      }
+      sessionStorage.setItem("status", JSON.stringify(this.status));
+      this.status=Number( JSON.parse(sessionStorage.getItem("status")|| '{}'))
+      console.log(this.status)
+     
+    }
   }
   
 
@@ -83,21 +104,24 @@ export class UserDetailComponent implements OnInit {
   }
   
   addId(){
-    var tempId;
-    if(this.currentUser.teacher[0]==undefined)
-       tempId=this.id;
-    else
-      tempId=  this.currentUser.teacher[0].teacherId 
-  
+
     this.errorMessage = 'null';
     this.successMessage = 'null';
     const uploadImageData = new FormData();
    uploadImageData.append('id_Photo', this.iPhoto, this.iPhoto.name);
-    this.userDetailService.addId(uploadImageData,this.currentUser.emailId,tempId).
+    this.userDetailService.addId(uploadImageData,this.currentUser.emailId,this.teachers[0].teacherId).
        subscribe(
-        message => {
-          this.successMessage = message;
-          this.ID.reset();
+        (response) => {
+          this.successMessage = response;
+          let T=this.teachers[0];
+          T.idPhoto=this.iPhoto
+          this.teachers.pop
+          this.teachers.push(T);
+          this.currentUser.teacher = this.teachers;
+          sessionStorage.setItem("user", JSON.stringify(this.currentUser));
+          console.log(this.currentUser.teacher[0])
+
+          //this.ID.reset();
       }
       , error => this.errorMessage = <any>error
 
@@ -107,21 +131,23 @@ export class UserDetailComponent implements OnInit {
   }
 
   addDegree(){
-    var tempId;
-   if(this.currentUser.teacher[0]==undefined)
-      tempId=this.id;
-   else
-     tempId=  this.currentUser.teacher[0].teacherId 
-  
     this.errorMessage = 'null';
     this.successMessage = 'null';
     const uploadImageData = new FormData();
-   uploadImageData.append('degree_Photo', this.dPhoto, this.dPhoto.name);
-    this.userDetailService.addDegree(uploadImageData,this.currentUser.emailId,tempId).
+    uploadImageData.append('degree_Photo', this.dPhoto, this.dPhoto.name);
+    this.userDetailService.addDegree(uploadImageData,this.currentUser.emailId,this.teachers[0].teacherId ).
        subscribe(
-        message => {
-          this.successMessage = message;
-          this.ID.reset();
+        (response) => {
+          this.successMessage = response;
+          let T=this.teachers[0];
+          console.log(T)
+          T.degreePhoto=this.dPhoto
+          // this.teachers.pop
+          // this.teachers.push(T);
+          this.currentUser.teacher = this.teachers;
+          sessionStorage.setItem("user", JSON.stringify(this.currentUser));
+          console.log(this.currentUser.teacher[0])
+;
       }
       , error => this.errorMessage = <any>error
 
@@ -138,12 +164,17 @@ export class UserDetailComponent implements OnInit {
       .subscribe(
      
           (response) => {
-            this.id= response
-            this.flag=false;
-            sessionStorage.setItem("status", JSON.stringify(this.flag));
-           
-           
-        }   
+            this.successMessage= response
+            this.status=2;
+            let id = this.successMessage.substring(this.successMessage.indexOf(":")+1).trim();
+            this.teacher.teacherId = parseInt(id);
+            this.teachers.push(this.teacher);
+            this.currentUser.teacher = this.teachers;
+         
+            sessionStorage.setItem("status", JSON.stringify(this.status));
+            sessionStorage.setItem("user", JSON.stringify(this.currentUser));
+            console.log(this.currentUser.teacher[0])
+          }   
         
           , error => this.errorMessage = <any>error
       )

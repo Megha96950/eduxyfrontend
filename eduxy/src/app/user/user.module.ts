@@ -14,6 +14,7 @@ import { HomeService } from './home/home.service';
 import { HomeSharedService } from './home/home-shared-service';
 import { ViewComponent } from './view/view.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { UserSharedService } from './user-shared-service';
 
 
 
@@ -39,7 +40,8 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     LoginService,
     RegisterService,
     HomeService,
-    HomeSharedService
+    HomeSharedService,
+    UserSharedService
 
 ],
 })

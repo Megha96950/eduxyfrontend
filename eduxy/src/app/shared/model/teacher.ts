@@ -6,6 +6,8 @@ export class Teacher{
     feesCharged!:string;
     emailId!:string;
     idProof!:string;
+    idPhoto!:File;
+    degreePhoto!:File;
 
 
 }

@@ -11,11 +11,11 @@ import { environment } from 'src/environments/environment';
 })
 export class UserDetailService {
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
+  private header=new HttpHeaders();
   constructor(private http: HttpClient) { }
-    addTeacher(teacher: Teacher, emailId: string): Observable<number> {
+    addTeacher(teacher: Teacher, emailId: string): Observable<string> {
     const url = environment.userAPIUrl + '/addTeacher/' + emailId;
-    return this.http.post<number>(url,teacher,{ headers: this.headers, responseType: 'text' as 'json' })
+    return this.http.post<string>(url,teacher,{ headers: this.headers, responseType: 'text' as 'json' })
     .pipe(catchError(this.handleError));
     // return this.http.post<User>(url, user, { headers: this.headers, responseType: 'text' as 'json' })
     //     .pipe(catchError(this.handleError));
@@ -25,14 +25,14 @@ export class UserDetailService {
 addId(iPhoto:FormData,emailId: string,id:number):Observable<string>{
   
   const url = environment.teacherAPIUrl + '/uploadId/' + emailId + '/'+id;
-  return this.http.post<string>(url,iPhoto)
+  return this.http.post<string>(url,iPhoto,{ responseType: 'text' as 'json'})
   .pipe(catchError(this.handleError));
 }
 
 addDegree(dPhoto:FormData,emailId: string,id:number):Observable<string>{
   
   const url = environment.teacherAPIUrl + '/uploadDegree/' + emailId + '/'+id;
-  return this.http.post<string>(url,dPhoto)
+  return this.http.post<string>(url,dPhoto,{responseType: 'text' as 'json'})
   .pipe(catchError(this.handleError));
 }
 

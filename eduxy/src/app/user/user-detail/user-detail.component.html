@@ -1,7 +1,7 @@
 
 <div class="page-top-offset"></div>
 <div class="row"  >
-    <div class="container-fluid" *ngIf="flag && status" >
+    <div class="container-fluid" *ngIf="status==1" >
         <div class="col-md-6 offset-md-3">
             <div class="form-bg-light">
 
@@ -48,18 +48,6 @@
                       </div>
                        </div>     
                 </div>
-
-
-                <!-- <div class="form-group">
-                        <label for="degreePhoto">Degree</label>
-                        <input type="file" class="form-control" formControlName="degreePhoto" placeholder="degreePhoto" id="degreePhoto" (change)="selectDegree($event)">
-
-                        <div *ngIf="teacherDetailForm.controls.degreePhoto.invalid && teacherDetailForm.controls.degreePhoto.touched">
-                        <div  class="field-error-message" *ngIf="teacherDetailForm.controls.degreePhoto.hasError('required')">
-                         Mandatory!
-                        </div>
-                        </div>
-                </div> -->
 
                 <div class="form-group">
                   <label for="higherQualification">Higher Qualification :</label>
@@ -130,7 +118,7 @@
         </div>
     </div> 
 
-    <div class="container-fluid" *ngIf="!status || !flag" >
+    <div class="container-fluid" *ngIf="status==2" >
         <div class="form-bg-light">  
                 <div class="row"> 
                     <form [formGroup]="ID" (ngSubmit)="addId()"  >
@@ -169,22 +157,21 @@
                                  <div  class="field-error-message" *ngIf="degree.controls.degreePhoto.hasError('required')">
                                   Mandatory!
                                  </div>
+                               
                                  </div>
                            </div>
-            
-                           <div class="row">
-                          
-                        </div>
-                           </form>
+                     </form>
+                     
               </div>
-            
+              <h5 class="success-message">rrrrrr{{successMessage}}</h5>
+              <h5 *ngIf="errorMessage!='null'" class="error-message">{{errorMessage}}</h5>
             </div> 
          
            
           </div>
-          
-
-
+          <div *ngIf="status==3">
+    gdgsjfhbhfyh
+</div>
 
 
  </div>  
