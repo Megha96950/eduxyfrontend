@@ -3,6 +3,7 @@ import { Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Teacher } from 'src/app/shared/model/teacher';
 import { TeacherFile } from 'src/app/shared/model/techerfile';
 import { User } from 'src/app/shared/model/user';
@@ -14,7 +15,7 @@ import { UserDetailService } from './user-detail.service';
   styleUrls: ['./user-detail.component.css']
 })
 export class UserDetailComponent implements OnInit {
-
+  
 
   teacher!: Teacher;
   teachers!:Teacher[]
@@ -37,7 +38,9 @@ export class UserDetailComponent implements OnInit {
 
 
  
-  constructor(private fb: FormBuilder,private userDetailService: UserDetailService, private router: Router) { }
+  constructor(private fb: FormBuilder,private userDetailService: UserDetailService, private router: Router,private modalService: NgbModal) {
+    
+   }
 
   ngOnInit(): void {
     this.teacher = new Teacher();
@@ -181,5 +184,9 @@ export class UserDetailComponent implements OnInit {
 
   }
 
+
+  open(content: any) {
+    this.modalService.open(content, { centered: true, size: 'lg' }).result.then(() => {}, () => {});
+  }
  
 }

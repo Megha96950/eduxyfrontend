@@ -170,8 +170,70 @@
            
           </div>
           <div *ngIf="status==3">
-    gdgsjfhbhfyh
-</div>
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col" colspan="3">Details</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Username</th>
+                    <td>{{ currentUser.name}}</td>
+                    <td>
+                        <a class="btn btn-primary"  (click)="open(educationModal)" style=" background-color:rgb(15, 15, 201);"> update </a>
+                    </td>
+                   
+                  </tr>
+                  <tr>
+                    <th scope="row">EmailId</th>
+                    <td>{{ currentUser.emailId}}</td>
+                    <td>
+                        <a class="btn btn-primary" style=" background-color:rgb(15, 15, 201);" href=""> update </a>
+                    </td> 
+                    
+                  </tr>
+                  <tr>
+                    <th scope="row">Phone Number</th>
+                    <td>{{ currentUser.phoneNumber}}</td>
+                    <td>
+                        <a class="btn btn-primary"style=" background-color:rgb(15, 15, 201);" href=""> update </a>
+                    </td> 
+                  
+                  </tr>
+                  <tr>
+                    <th scope="row">Password</th>
+                    <td>***********</td>
+                    <td>
+                        <a class="btn btn-primary" style=" background-color:rgb(15, 15, 201);" href=""> update </a>
+                    </td>  
+                  </tr>
+                  <tr>
+                    <th scope="row">Qualification</th>
+                    <td>{{ currentUser.teacher[0].higherQualification}}</td>
+                    <td>
+                        <a class="btn btn-primary" style=" background-color:rgb(15, 15, 201);" href=""> update </a>
+                    </td>  
+                  </tr>
+                  <tr>
+                    <th scope="row">About</th>
+                    <td>{{ currentUser.teacher[0].description}}</td>
+                    <td>
+                        <a class="btn btn-primary" style=" background-color:rgb(15, 15, 201);" href=""> update </a>
+                    </td>  
+                  </tr>
+                </tbody>
+              </table>
+              
+
+
+
+              <ng-template #educationModal let-modal>
+                  huidghuhngu
+              </ng-template>
+   
+          </div>
 
 
  </div>  
