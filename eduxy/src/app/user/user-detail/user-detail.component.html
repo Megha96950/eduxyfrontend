@@ -163,7 +163,7 @@
                      </form>
                      
               </div>
-              <h5 class="success-message">rrrrrr{{successMessage}}</h5>
+              <h5 *ngIf="successMessage!='null'" class="success-message">{{successMessage}}</h5>
               <h5 *ngIf="errorMessage!='null'" class="error-message">{{errorMessage}}</h5>
             </div> 
          
@@ -182,23 +182,21 @@
                     <th scope="row">Username</th>
                     <td>{{ currentUser.name}}</td>
                     <td>
-                        <a class="btn btn-primary"  (click)="open(educationModal)" style=" background-color:rgb(15, 15, 201);"> update </a>
+                        <a class="btn btn-primary"  (click)="open(updateUserName)" style=" background-color:rgb(15, 15, 201);"> update </a>
                     </td>
                    
                   </tr>
                   <tr>
                     <th scope="row">EmailId</th>
                     <td>{{ currentUser.emailId}}</td>
-                    <td>
-                        <a class="btn btn-primary" style=" background-color:rgb(15, 15, 201);" href=""> update </a>
-                    </td> 
+                    <td></td>
                     
                   </tr>
                   <tr>
                     <th scope="row">Phone Number</th>
                     <td>{{ currentUser.phoneNumber}}</td>
                     <td>
-                        <a class="btn btn-primary"style=" background-color:rgb(15, 15, 201);" href=""> update </a>
+                        <a class="btn btn-primary" (click)="open(updateUserNumber)" style=" background-color:rgb(15, 15, 201);" > update </a>
                     </td> 
                   
                   </tr>
@@ -206,33 +204,112 @@
                     <th scope="row">Password</th>
                     <td>***********</td>
                     <td>
-                        <a class="btn btn-primary" style=" background-color:rgb(15, 15, 201);" href=""> update </a>
+                        <a class="btn btn-primary"  (click)="open(updateUserPassword)" style=" background-color:rgb(15, 15, 201);" > update </a>
                     </td>  
                   </tr>
                   <tr>
                     <th scope="row">Qualification</th>
                     <td>{{ currentUser.teacher[0].higherQualification}}</td>
                     <td>
-                        <a class="btn btn-primary" style=" background-color:rgb(15, 15, 201);" href=""> update </a>
+                       
                     </td>  
                   </tr>
                   <tr>
                     <th scope="row">About</th>
                     <td>{{ currentUser.teacher[0].description}}</td>
                     <td>
-                        <a class="btn btn-primary" style=" background-color:rgb(15, 15, 201);" href=""> update </a>
+                        <a class="btn btn-primary" (click)="open(updateTeacherDescription)" style=" background-color:rgb(15, 15, 201);"> update </a>
                     </td>  
                   </tr>
                 </tbody>
               </table>
               
+           
+
+
+              <ng-template #updateUserName let-modal>
+
+                <div class="modal-header">
+                  <label  id="modal-basic-title">Edit</label>
+                  <button type="button" class="close" (click)="modal.dismiss('Cross click')">  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+                    <label for="">Enter The Name</label>
+                     <div class="input-group mb-3">
+                     <input type="Text" class="form-control" [(ngModel)]="edit_username"  placeholder="new Name" id="name">
+                     <div class="input-group-append">
+                     <button class="btn btn-primary" (click)="updateName()" style=" background-color:rgb(15, 15, 201);" >
+                        Update
+                    </button>
+                    </div>
+                     </div>
+                     <h5 *ngIf="successMessage!='null'" class="success-message">{{successMessage}}</h5>
+                     <h5 *ngIf="errorMessage!='null'" class="error-message">{{errorMessage}}</h5>
+             </ng-template>
 
 
 
-              <ng-template #educationModal let-modal>
-                  huidghuhngu
-              </ng-template>
-   
+             <ng-template #updateUserNumber let-modal>
+
+              <div class="modal-header">
+                <label  id="modal-basic-title">Edit</label>
+                <button type="button" class="close" (click)="modal.dismiss('Cross click')">  <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+                  <label for="">Enter The Number</label>
+                   <div class="input-group mb-3">
+                   <input type="Text" class="form-control" [(ngModel)]="edit_number"  placeholder="Number" id="number">
+                   <div class="input-group-append">
+                   <button class="btn btn-primary" (click)="updateNumber()" style=" background-color:rgb(15, 15, 201);" >
+                      Update
+                  </button>
+                  </div>
+                   </div>
+                   <h5 *ngIf="successMessage!='null'" class="success-message">{{successMessage}}</h5>
+                   <h5 *ngIf="errorMessage!='null'" class="error-message">{{errorMessage}}</h5>
+           </ng-template>
+
+
+           <ng-template #updateUserPassword let-modal>
+
+            <div class="modal-header">
+              <label  id="modal-basic-title">Edit</label>
+              <button type="button" class="close" (click)="modal.dismiss('Cross click')">  <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+                <label for="">Enter The Number</label>
+                 <div class="input-group mb-3">
+                 <input type="password" class="form-control" [(ngModel)]="edit_password"  placeholder="Password" id="number">
+                 <div class="input-group-append">
+                 <button class="btn btn-primary" (click)="updatePassword()" style=" background-color:rgb(15, 15, 201);" >
+                    Update
+                </button>
+                </div>
+                 </div>
+                 <h5 *ngIf="successMessage!='null'" class="success-message">{{successMessage}}</h5>
+                 <h5 *ngIf="errorMessage!='null'" class="error-message">{{errorMessage}}</h5>
+         </ng-template>
+ 
+         <ng-template #updateTeacherDescription let-modal>
+
+          <div class="modal-header">
+            <label  id="modal-basic-title">Edit</label>
+            <button type="button" class="close" (click)="modal.dismiss('Cross click')">  <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+              <label for="">About</label>
+               <div class="input-group mb-3">
+               <textarea type="text" class="form-control" [(ngModel)]="edit_About"  placeholder="About yourself" id="about"></textarea>
+               <div class="input-group-append">
+               <button class="btn btn-primary" (click)="updateAbout()" style=" background-color:rgb(15, 15, 201);" >
+                  Update
+              </button>
+              </div>
+               </div>
+               <h5 *ngIf="successMessage!='null'" class="success-message">{{successMessage}}</h5>
+               <h5 *ngIf="errorMessage!='null'" class="error-message">{{errorMessage}}</h5>
+       </ng-template>
+        
           </div>
 
 

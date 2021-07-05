@@ -36,6 +36,40 @@ addDegree(dPhoto:FormData,emailId: string,id:number):Observable<string>{
   .pipe(catchError(this.handleError));
 }
 
+
+updateName(edit_username:string , emailId: string ) :Observable<string>{
+  console.log(edit_username)
+  const url = environment.userAPIUrl + '/updateName/' + emailId;
+  return this.http.post<string>(url,edit_username,{  responseType: 'text' as 'json'})
+  .pipe(catchError(this.handleError));
+
+}
+
+updateNumber(edit_number:string , emailId: string ) :Observable<string>{
+
+  const url = environment.userAPIUrl + '/updateNumber/' + emailId;
+  return this.http.post<string>(url,edit_number,{  responseType: 'text' as 'json'})
+  .pipe(catchError(this.handleError));
+
+}
+
+updatePassword(edit_password:string , emailId: string ) :Observable<string>{
+
+  const url = environment.userAPIUrl + '/updatePassword/' + emailId;
+  return this.http.post<string>(url,edit_password,{  responseType: 'text' as 'json'})
+  .pipe(catchError(this.handleError));
+
+}
+
+updateAbout(edit_About:string , Id: number ) :Observable<string>{
+
+  const url = environment.teacherAPIUrl + '/updateAbout/' + Id;
+  return this.http.post<string>(url,edit_About,{  responseType: 'text' as 'json'})
+  .pipe(catchError(this.handleError));
+
+}
+
+
 private handleError(err: HttpErrorResponse) {
   console.log(err)
   let errMsg:string='';

@@ -34,7 +34,10 @@ export class UserDetailComponent implements OnInit {
 
   status!:number
 
- 
+  edit_username!:string
+  edit_number!:string
+  edit_password!:string
+  edit_About!:string
 
 
  
@@ -116,11 +119,7 @@ export class UserDetailComponent implements OnInit {
        subscribe(
         (response) => {
           this.successMessage = response;
-          let T=this.teachers[0];
-          T.idPhoto=this.iPhoto
-          this.teachers.pop
-          this.teachers.push(T);
-          this.currentUser.teacher = this.teachers;
+          this.currentUser.teacher[0].idPhoto = this.iPhoto;
           sessionStorage.setItem("user", JSON.stringify(this.currentUser));
           console.log(this.currentUser.teacher[0])
 
@@ -141,13 +140,8 @@ export class UserDetailComponent implements OnInit {
     this.userDetailService.addDegree(uploadImageData,this.currentUser.emailId,this.teachers[0].teacherId ).
        subscribe(
         (response) => {
-          this.successMessage = response;
-          let T=this.teachers[0];
-          console.log(T)
-          T.degreePhoto=this.dPhoto
-          // this.teachers.pop
-          // this.teachers.push(T);
-          this.currentUser.teacher = this.teachers;
+          this.successMessage = response
+          this.currentUser.teacher[0].degreePhoto = this.dPhoto
           sessionStorage.setItem("user", JSON.stringify(this.currentUser));
           console.log(this.currentUser.teacher[0])
 ;
@@ -187,6 +181,83 @@ export class UserDetailComponent implements OnInit {
 
   open(content: any) {
     this.modalService.open(content, { centered: true, size: 'lg' }).result.then(() => {}, () => {});
+  }
+
+
+  updateName(){
+    this.errorMessage = 'null';
+    this.successMessage = 'null';
+    this.userDetailService.updateName(this.edit_username,this.currentUser.emailId)
+    .subscribe(
+   
+        (response) => {
+          this.successMessage= response
+          this.currentUser.name=this.edit_username
+          sessionStorage.setItem("user", JSON.stringify(this.currentUser));
+          console.log(this.currentUser)
+          
+        }   
+      
+        , error => this.errorMessage = <any>error
+    )
+
+  }
+
+  updateNumber(){
+    this.errorMessage = 'null';
+    this.successMessage = 'null';
+    this.userDetailService.updateName(this.edit_number,this.currentUser.emailId)
+    .subscribe(
+   
+        (response) => {
+          this.successMessage= response
+          this.currentUser.phoneNumber=this.edit_number
+          sessionStorage.setItem("user", JSON.stringify(this.currentUser));
+          console.log(this.currentUser)
+          
+        }   
+      
+        , error => this.errorMessage = <any>error
+    )
+
+  }
+
+  updatePassword(){
+    this.errorMessage = 'null';
+    this.successMessage = 'null';
+    this.userDetailService.updatePassword(this.edit_password,this.currentUser.emailId)
+    .subscribe(
+   
+        (response) => {
+          this.successMessage= response
+          this.currentUser.password=this.edit_password
+          sessionStorage.setItem("user", JSON.stringify(this.currentUser));
+          console.log(this.currentUser)
+          
+        }   
+      
+        , error => this.errorMessage = <any>error
+    )
+
+  }
+
+  updateAbout(){
+    this.errorMessage = 'null';
+    this.successMessage = 'null';
+    this.userDetailService.updateAbout(this.edit_About,this.currentUser.teacher[0].teacherId)
+    .subscribe(
+   
+        (response) => {
+          this.successMessage= response
+          this.currentUser.teacher[0].description=this.edit_About
+          sessionStorage.setItem("user", JSON.stringify(this.currentUser));
+          console.log(this.currentUser)
+          
+        }   
+      
+        , error => this.errorMessage = <any>error
+    )
+
   }
  
 }
