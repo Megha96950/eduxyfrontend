@@ -7,6 +7,7 @@ import { RegisterComponent } from './user-landing-page/register/register.compone
 import { HomeComponent } from './home/home.component';
 import { ViewComponent } from './view/view.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { StudentDetailComponent } from './student-detail/student-detail.component';
 
 const routes : Routes =[
   { path: 'eduxy', component: UserLandingPageComponent, children: [
@@ -17,7 +18,8 @@ const routes : Routes =[
   { path: 'home', component: HomeComponent, children: [
     {path: '', redirectTo: 'view', pathMatch: 'full'},
     {path: 'view', component: ViewComponent},
-    {path: 'detail', component: UserDetailComponent}
+    {path: 'teacher-detail', component: UserDetailComponent},
+    {path: 'student-detail', component: StudentDetailComponent}
   
 ]},
   { path: '', redirectTo: '/eduxy', pathMatch: 'full' }

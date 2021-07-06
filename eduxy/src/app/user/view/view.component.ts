@@ -10,13 +10,20 @@ import { User } from 'src/app/shared/model/user';
 export class ViewComponent implements OnInit {
 
 
-  currentUser: User = JSON.parse(sessionStorage.getItem("user")|| '{}')
+  currentUser!: User
   id: number = Number(localStorage.getItem('currentUser'));
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.currentUser = JSON.parse(sessionStorage.getItem("user")|| '{}')
   }
 
+  forward(){
+    if(this.currentUser.role=='teacher')
+      this.router.navigate(["/home/teacher-detail"])
+    else 
+    this.router.navigate(["/home/student-detail"])
+  }
  
 }

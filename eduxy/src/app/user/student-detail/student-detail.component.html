@@ -1,0 +1,286 @@
+
+<div class="page-top-offset"></div>
+<div class="row"  >
+    <div class="container-fluid" *ngIf="status==1" >
+        <div class="col-md-6 offset-md-3">
+            <div class="form-bg-light">
+
+                <h3 class="title">Add detail</h3>
+              
+                <form [formGroup]="studentDetailForm" (ngSubmit)="addStudentDetail()"  >
+                   <div class="form-group">
+                        <label for="subjects">Subject to Teach</label>
+                        <div class="dropdown">
+                            <div class="input-group mb-3">
+                            <input type="text" class="form-control" formControlName="subjects" style="width:50%"  id="subjects" placeholder="Mathmatics" readonly >
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-primary dropdown-toggle" style="background-color: rgb(53, 43, 187);" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Select
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                
+                                    <li><input type="checkbox" value="Mathmatics" class="chkvalue">Mathmatics</li>
+                                    <input type="checkbox" value="Physics" class="chkvalue" >Physics<br>
+                                    <input type="checkbox" value="Chemistry" class="chkvalue">Chemistry<br>
+                                    <input type="checkbox" value="Biology" class="chkvalue">Biology<br>
+                                    <input type="checkbox" value="Science" class="chkvalue" >Science<br>
+                                    <input type="checkbox" value="English" class="chkvalue">English<br>
+                                    <input type="checkbox" value="Hindi" class="chkvalue">Hindi<br>
+                                    <input type="checkbox" value="History" class="chkvalue" >History<br>
+                                    <input type="checkbox" value="Civics" class="chkvalue">Civics<br>
+                                    <input type="checkbox" value="Geography" class="chkvalue">Geography<br>
+                                    <input type="checkbox" value="Economics" class="chkvalue" >Economics<br>
+                                    <input type="checkbox" value="Accounting" class="chkvalue">Accounting<br>
+                                    <input type="checkbox" value="Finance" class="chkvalue">Finance<br>
+                                    <input type="checkbox" value="Computer" class="chkvalue" >Computer<br>
+                                    <input type="checkbox" value="Music" class="chkvalue">Music<br>
+                                    <input type="checkbox" value="Dance" class="chkvalue">Dance<br>
+                                </ul>
+                            </div>
+                            </div>
+                            
+                           
+                          
+                          </div>
+                          <div *ngIf="studentDetailForm.controls.subjects.invalid && studentDetailForm.controls.subjects.touched">
+                      <div  class="field-error-message" *ngIf="studentDetailForm.controls.subjects.hasError('required')">
+                                Please select the subjects
+                      </div>
+                       </div>     
+                </div>
+
+                <div class="form-group">
+                  <label for="standard"> Standard:</label>
+                  <input type="text" class="form-control" formControlName="standard" placeholder="standard" id="standard" >
+
+                  <div *ngIf="studentDetailForm.controls.standard.invalid && studentDetailForm.controls.standard.touched">
+                  <div  class="field-error-message" *ngIf="studentDetailForm.controls.standard.hasError('required')">
+                   Mandatory!
+                  </div>
+                  </div>
+          </div>
+           
+
+          <div class="form-group">
+            <label for="idProof">Aadhar :</label>
+          <input type="text" class="form-control" formControlName="idProof" placeholder="012345678912" id="idProof">
+
+          <div *ngIf="studentDetailForm.controls.idProof.invalid && studentDetailForm.controls.idProof.touched">
+            <div  class="field-error-message" *ngIf="studentDetailForm.controls.idProof.hasError('required')">
+             Mandatory!
+            </div>
+            </div>
+    </div>
+
+                   <br>
+                <div class="row">
+                    <button class="col-md-4 offset-md-0 btn btn-primary" style="width:94%; margin-left:14px; background-color:rgb(15, 15, 201);" >
+                            Submit
+                    </button>
+                </div>
+                </form>
+
+                <h5 *ngIf="successMessage!='null'"class="success-message">{{successMessage}}</h5>
+                <h5 *ngIf="errorMessage!='null'" class="error-message">{{errorMessage}}</h5>
+                <br/>
+             </div>
+        </div>
+    </div> 
+
+    <!-- <div class="container-fluid" *ngIf="status==2" >
+        <div class="form-bg-light">  
+                <div class="row"> 
+                    <form [formGroup]="ID" (ngSubmit)="addId()"  >
+                        <div class="form-group">
+                             <label for="idPhoto">Aadhar :</label>
+                             <div class="input-group mb-3">
+                             <input type="file" class="form-control" formControlName="idPhoto" placeholder="idPhoto" id="idPhoto" (change)="selectId($event)" >
+                             <div class="input-group-append">
+                             <button class=" btn btn-primary" style="background-color:rgb(15, 15, 201);" >
+                                Upload
+                            </button>
+                            </div>
+                            </div>
+                             <div *ngIf="ID.controls.idPhoto.invalid && ID.controls.idPhoto.touched">
+                             <div  class="field-error-message" *ngIf="ID.controls.idPhoto.hasError('required')">
+                              Mandatory!
+                             </div>
+                             </div>
+                       </div>
+                       </form>
+              </div>
+    
+                    <div class="row"> 
+                        <form [formGroup]="degree" (ngSubmit)="addDegree()"  >
+                            <div class="form-group">
+                                 <label for="degreePhoto">Degree:</label>
+                                 <div class="input-group mb-3">
+                                 <input type="file" class="form-control" formControlName="degreePhoto" placeholder="degreePhoto" id="degreePhoto" (change)="selectDegree($event)">
+                                 <div class="input-group-append">
+                                 <button class="btn btn-primary" style=" background-color:rgb(15, 15, 201);" >
+                                    Upload
+                                </button>
+                                </div>
+                                 </div>
+                                 <div *ngIf="degree.controls.degreePhoto.invalid && degree.controls.degreePhoto.touched">
+                                 <div  class="field-error-message" *ngIf="degree.controls.degreePhoto.hasError('required')">
+                                  Mandatory!
+                                 </div>
+                               
+                                 </div>
+                           </div>
+                     </form>
+                     
+              </div>
+              <h5 *ngIf="successMessage!='null'" class="success-message">{{successMessage}}</h5>
+              <h5 *ngIf="errorMessage!='null'" class="error-message">{{errorMessage}}</h5>
+            </div> 
+         
+           
+          </div>
+          <div *ngIf="status==3">
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col" colspan="3">Details</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Username</th>
+                    <td>{{ currentUser.name}}</td>
+                    <td>
+                        <a class="btn btn-primary"  (click)="open(updateUserName)" style=" background-color:rgb(15, 15, 201);"> update </a>
+                    </td>
+                   
+                  </tr>
+                  <tr>
+                    <th scope="row">EmailId</th>
+                    <td>{{ currentUser.emailId}}</td>
+                    <td></td>
+                    
+                  </tr>
+                  <tr>
+                    <th scope="row">Phone Number</th>
+                    <td>{{ currentUser.phoneNumber}}</td>
+                    <td>
+                        <a class="btn btn-primary" (click)="open(updateUserNumber)" style=" background-color:rgb(15, 15, 201);" > update </a>
+                    </td> 
+                  
+                  </tr>
+                  <tr>
+                    <th scope="row">Password</th>
+                    <td>***********</td>
+                    <td>
+                        <a class="btn btn-primary"  (click)="open(updateUserPassword)" style=" background-color:rgb(15, 15, 201);" > update </a>
+                    </td>  
+                  </tr>
+                  <tr>
+                    <th scope="row">Qualification</th>
+                    <td>{{ currentUser.teacher[0].standard}}</td>
+                    <td>
+                       
+                    </td>  
+                  </tr>
+                  <tr>
+                    <th scope="row">About</th>
+                    <td>{{ currentUser.teacher[0].description}}</td>
+                    <td>
+                        <a class="btn btn-primary" (click)="open(updateTeacherDescription)" style=" background-color:rgb(15, 15, 201);"> update </a>
+                    </td>  
+                  </tr>
+                </tbody>
+              </table>
+              
+           
+
+
+              <ng-template #updateUserName let-modal>
+
+                <div class="modal-header">
+                  <label  id="modal-basic-title">Edit</label>
+                  <button type="button" class="close" (click)="modal.dismiss('Cross click')">  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+                    <label for="">Enter The Name</label>
+                     <div class="input-group mb-3">
+                     <input type="Text" class="form-control" [(ngModel)]="edit_username"  placeholder="new Name" id="name">
+                     <div class="input-group-append">
+                     <button class="btn btn-primary" (click)="updateName()" style=" background-color:rgb(15, 15, 201);" >
+                        Update
+                    </button>
+                    </div>
+                     </div>
+                     <h5 *ngIf="successMessage!='null'" class="success-message">{{successMessage}}</h5>
+                     <h5 *ngIf="errorMessage!='null'" class="error-message">{{errorMessage}}</h5>
+             </ng-template>
+
+
+
+             <ng-template #updateUserNumber let-modal>
+
+              <div class="modal-header">
+                <label  id="modal-basic-title">Edit</label>
+                <button type="button" class="close" (click)="modal.dismiss('Cross click')">  <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+                  <label for="">Enter The Number</label>
+                   <div class="input-group mb-3">
+                   <input type="Text" class="form-control" [(ngModel)]="edit_number"  placeholder="Number" id="number">
+                   <div class="input-group-append">
+                   <button class="btn btn-primary" (click)="updateNumber()" style=" background-color:rgb(15, 15, 201);" >
+                      Update
+                  </button>
+                  </div>
+                   </div>
+                   <h5 *ngIf="successMessage!='null'" class="success-message">{{successMessage}}</h5>
+                   <h5 *ngIf="errorMessage!='null'" class="error-message">{{errorMessage}}</h5>
+           </ng-template>
+
+
+           <ng-template #updateUserPassword let-modal>
+
+            <div class="modal-header">
+              <label  id="modal-basic-title">Edit</label>
+              <button type="button" class="close" (click)="modal.dismiss('Cross click')">  <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+                <label for="">Enter The Number</label>
+                 <div class="input-group mb-3">
+                 <input type="password" class="form-control" [(ngModel)]="edit_password"  placeholder="Password" id="number">
+                 <div class="input-group-append">
+                 <button class="btn btn-primary" (click)="updatePassword()" style=" background-color:rgb(15, 15, 201);" >
+                    Update
+                </button>
+                </div>
+                 </div>
+                 <h5 *ngIf="successMessage!='null'" class="success-message">{{successMessage}}</h5>
+                 <h5 *ngIf="errorMessage!='null'" class="error-message">{{errorMessage}}</h5>
+         </ng-template>
+ 
+         <ng-template #updateTeacherDescription let-modal>
+
+          <div class="modal-header">
+            <label  id="modal-basic-title">Edit</label>
+            <button type="button" class="close" (click)="modal.dismiss('Cross click')">  <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+              <label for="">About</label>
+               <div class="input-group mb-3">
+               <textarea type="text" class="form-control" [(ngModel)]="edit_About"  placeholder="About yourself" id="about"></textarea>
+               <div class="input-group-append">
+               <button class="btn btn-primary" (click)="updateAbout()" style=" background-color:rgb(15, 15, 201);" >
+                  Update
+              </button>
+              </div>
+               </div>
+               <h5 *ngIf="successMessage!='null'" class="success-message">{{successMessage}}</h5>
+               <h5 *ngIf="errorMessage!='null'" class="error-message">{{errorMessage}}</h5>
+       </ng-template>
+        
+          </div>
+
+
+ </div>  
+   -->

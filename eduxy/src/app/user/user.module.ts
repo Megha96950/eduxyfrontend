@@ -15,6 +15,7 @@ import { HomeSharedService } from './home/home-shared-service';
 import { ViewComponent } from './view/view.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserSharedService } from './user-shared-service';
+import { StudentDetailComponent } from './student-detail/student-detail.component';
 
 
 
@@ -25,7 +26,8 @@ import { UserSharedService } from './user-shared-service';
     RegisterComponent,
     HomeComponent,
     ViewComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    StudentDetailComponent
   ],
   imports: [
     BrowserModule,
