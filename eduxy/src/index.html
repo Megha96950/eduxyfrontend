@@ -13,7 +13,7 @@
               txt+=$(this).val()+","
           });
           console.log(txt);
-          $('#subjects').val(txt)
+          $('#subjects').val(txt.substring(0,txt.length-1))
       });
     });
 </script>

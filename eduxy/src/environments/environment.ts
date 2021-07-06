@@ -9,5 +9,6 @@ export const environment = {
   production: false,
   userAPIUrl: 'http://' + HOSTNAME + ':' + PORT_NUMBER + APPLICATION_NAME + '/UserAPI',
   teacherAPIUrl: 'http://' + HOSTNAME + ':' + PORT_NUMBER + APPLICATION_NAME + '/TeacherAPI',
+  studentAPIUrl: 'http://' + HOSTNAME + ':' + PORT_NUMBER + APPLICATION_NAME + '/StudentAPI'
 };
 
