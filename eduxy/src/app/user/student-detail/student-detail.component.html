@@ -71,6 +71,17 @@
             </div>
             </div>
     </div>
+    
+    <div class="form-group">
+      <label for="instituteName">Institute/School :</label>
+    <input type="text" class="form-control" formControlName="instituteName" placeholder="School/College/Institute" id="instituteName">
+
+    <div *ngIf="studentDetailForm.controls.instituteName.invalid && studentDetailForm.controls.instituteName.touched">
+      <div  class="field-error-message" *ngIf="studentDetailForm.controls.instituteName.hasError('required')">
+       Mandatory!
+      </div>
+      </div>
+</div>
 
                    <br>
                 <div class="row">
@@ -87,7 +98,7 @@
         </div>
     </div> 
 
-    <!-- <div class="container-fluid" *ngIf="status==2" >
+  <div class="container-fluid" *ngIf="status==2" >
         <div class="form-bg-light">  
                 <div class="row"> 
                     <form [formGroup]="ID" (ngSubmit)="addId()"  >
@@ -109,36 +120,13 @@
                        </div>
                        </form>
               </div>
-    
-                    <div class="row"> 
-                        <form [formGroup]="degree" (ngSubmit)="addDegree()"  >
-                            <div class="form-group">
-                                 <label for="degreePhoto">Degree:</label>
-                                 <div class="input-group mb-3">
-                                 <input type="file" class="form-control" formControlName="degreePhoto" placeholder="degreePhoto" id="degreePhoto" (change)="selectDegree($event)">
-                                 <div class="input-group-append">
-                                 <button class="btn btn-primary" style=" background-color:rgb(15, 15, 201);" >
-                                    Upload
-                                </button>
-                                </div>
-                                 </div>
-                                 <div *ngIf="degree.controls.degreePhoto.invalid && degree.controls.degreePhoto.touched">
-                                 <div  class="field-error-message" *ngIf="degree.controls.degreePhoto.hasError('required')">
-                                  Mandatory!
-                                 </div>
-                               
-                                 </div>
-                           </div>
-                     </form>
-                     
-              </div>
               <h5 *ngIf="successMessage!='null'" class="success-message">{{successMessage}}</h5>
               <h5 *ngIf="errorMessage!='null'" class="error-message">{{errorMessage}}</h5>
             </div> 
          
            
           </div>
-          <div *ngIf="status==3">
+            <!-- <div *ngIf="status==3">
             <table class="table">
                 <thead class="thead-dark">
                   <tr>

@@ -15,12 +15,19 @@ export class StudentDetailService {
 
 
   addstudent(student: Student, emailId: string): Observable<string> {
-    const url = environment.studentAPIUrl + '/addstudent/' + emailId;
+    const url = environment.userAPIUrl + '/addStudent/' + emailId;
     return this.http.post<string>(url,student,{ headers: this.headers, responseType: 'text' as 'json' })
     .pipe(catchError(this.handleError));
     // return this.http.post<User>(url, user, { headers: this.headers, responseType: 'text' as 'json' })
     //     .pipe(catchError(this.handleError));
 
+}
+
+addId(iPhoto:FormData,emailId: string,id:number):Observable<string>{
+  
+  const url = environment.studentAPIUrl + '/uploadId/' + emailId + '/'+id;
+  return this.http.post<string>(url,iPhoto,{ responseType: 'text' as 'json'})
+  .pipe(catchError(this.handleError));
 }
 
 private handleError(err: HttpErrorResponse) {
