@@ -6,10 +6,16 @@
             <div class="form-bg-light">
 
                 <h3 class="title">Add detail</h3>
-              
+                <ng-select [items]="categories"
+                bindLabel="name"
+                placeholder="Select Category"
+                appendTo="body"
+                [multiple]="true"
+                [(ngModel)]="selected">
+  </ng-select>
                 <form [formGroup]="studentDetailForm" (ngSubmit)="addStudentDetail()"  >
-                   <div class="form-group">
-                        <label for="subjects">Subject to Teach</label>
+                   <div >
+                        <!-- <label for="subjects">Subject to Teach</label>
                         <div class="dropdown">
                             <div class="input-group mb-3">
                             <input type="text" class="form-control" formControlName="subjects"  style="width:50%"  id="subjects" placeholder="Mathmatics" readonly>
@@ -46,8 +52,32 @@
                       <div  class="field-error-message" *ngIf="studentDetailForm.controls.subjects.hasError('required')">
                                 Please select the subjects
                       </div>
-                       </div>     
+                       </div>      -->
+                       
                 </div>
+                 
+
+                <div class="form-group">
+                  <label for="fatherName"> Father Name:</label>
+                  <input type="text" class="form-control" formControlName="fatherName" placeholder="fatherName" id="fatherName" >
+
+                  <div *ngIf="studentDetailForm.controls.fatherName.invalid && studentDetailForm.controls.fatherName.touched">
+                  <div  class="field-error-message" *ngIf="studentDetailForm.controls.fatherName.hasError('required')">
+                   Mandatory!
+                  </div>
+                  </div>
+          </div>
+
+          <div class="form-group">
+            <label for="motherName"> Mother Name:</label>
+            <input type="text" class="form-control" formControlName="motherName" placeholder="motherName" id="motherName" >
+
+            <div *ngIf="studentDetailForm.controls.motherName.invalid && studentDetailForm.controls.motherName.touched">
+            <div  class="field-error-message" *ngIf="studentDetailForm.controls.motherName.hasError('required')">
+             Mandatory!
+            </div>
+            </div>
+    </div>
 
                 <div class="form-group">
                   <label for="standard"> Standard:</label>
@@ -90,7 +120,7 @@
                     </button>
                 </div>
                 </form>
-
+                <h5 *ngIf="tryToLogin" class="text-center text-info"> Logging...Please Wait!!</h5>
                 <h5 *ngIf="successMessage!='null'"class="success-message">{{successMessage}}</h5>
                 <h5 *ngIf="errorMessage!='null'" class="error-message">{{errorMessage}}</h5>
                 <br/>
@@ -126,7 +156,7 @@
          
            
           </div>
-            <!-- <div *ngIf="status==3">
+            <div *ngIf="status==3">
             <table class="table">
                 <thead class="thead-dark">
                   <tr>
@@ -149,14 +179,7 @@
                     <td></td>
                     
                   </tr>
-                  <tr>
-                    <th scope="row">Phone Number</th>
-                    <td>{{ currentUser.phoneNumber}}</td>
-                    <td>
-                        <a class="btn btn-primary" (click)="open(updateUserNumber)" style=" background-color:rgb(15, 15, 201);" > update </a>
-                    </td> 
-                  
-                  </tr>
+               
                   <tr>
                     <th scope="row">Password</th>
                     <td>***********</td>
@@ -166,22 +189,39 @@
                   </tr>
                   <tr>
                     <th scope="row">Qualification</th>
-                    <td>{{ currentUser.teacher[0].standard}}</td>
+                    <td>{{ currentUser.student[0].standard}}</td>
                     <td>
                        
                     </td>  
                   </tr>
                   <tr>
-                    <th scope="row">About</th>
-                    <td>{{ currentUser.teacher[0].description}}</td>
+                    <th scope="row">Father name</th>
+                    <td>{{ currentUser.student[0].fatherName}}</td>
                     <td>
-                        <a class="btn btn-primary" (click)="open(updateTeacherDescription)" style=" background-color:rgb(15, 15, 201);"> update </a>
+                        
                     </td>  
                   </tr>
+                  <tr>
+                    <th scope="row">Mother name</th>
+                    <td>{{ currentUser.student[0].motherName}}</td>
+                    <td>
+                        
+                    </td>  
+                  </tr>
+                  <tr>
+                    <th scope="row">Phone Number</th>
+                    <td>{{ currentUser.phoneNumber}}</td>
+                    <td>
+                        <a class="btn btn-primary" (click)="open(updateUserNumber)" style=" background-color:rgb(15, 15, 201);" > update </a>
+                    </td> 
+                  
+                  </tr>
                 </tbody>
+            
+  
               </table>
               
-           
+     
 
 
               <ng-template #updateUserName let-modal>
@@ -247,7 +287,7 @@
                  <h5 *ngIf="errorMessage!='null'" class="error-message">{{errorMessage}}</h5>
          </ng-template>
  
-         <ng-template #updateTeacherDescription let-modal>
+         <!-- <ng-template #updateTeacherDescription let-modal>
 
           <div class="modal-header">
             <label  id="modal-basic-title">Edit</label>
@@ -267,9 +307,9 @@
                <h5 *ngIf="errorMessage!='null'" class="error-message">{{errorMessage}}</h5>
        </ng-template>
         
-          </div>
+          </div> -->
 
 
  </div>  
-   -->
+  
    

@@ -6,6 +6,8 @@ export class Student{
     emailId!:string;
     idProof!:string;
     idPhoto!:File;
+    motherName!:string;
+    fatherName!:string
    
 
 }

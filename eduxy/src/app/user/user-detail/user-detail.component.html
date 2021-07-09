@@ -6,10 +6,16 @@
             <div class="form-bg-light">
 
                 <h3 class="title">Add detail</h3>
-              
+                <ng-select [items]="categories"
+                bindLabel="name"
+                placeholder="Select Category"
+                appendTo="body"
+                [multiple]="true"
+                [(ngModel)]="selected">
+  </ng-select> 
                 <form [formGroup]="teacherDetailForm" (ngSubmit)="addTeacherDetail()"  >
                    <div class="form-group">
-                        <label for="subjects">Subject to Teach</label>
+                        <!-- <label for="subjects">Subject to Teach</label>
                         <div class="dropdown">
                             <div class="input-group mb-3">
                             <input type="text" class="form-control" formControlName="subjects" style="width:50%"  id="subjects" placeholder="Mathmatics" readonly >
@@ -46,7 +52,7 @@
                       <div  class="field-error-message" *ngIf="teacherDetailForm.controls.subjects.hasError('required')">
                                 Please select the subjects
                       </div>
-                       </div>     
+                       </div>      -->
                 </div>
 
                 <div class="form-group">
@@ -110,7 +116,7 @@
                     </button>
                 </div>
                 </form>
-
+                <h5 *ngIf="tryToLogin" class="text-center text-info"> Logging...Please Wait!!</h5>
                 <h5 *ngIf="successMessage!='null'"class="success-message">{{successMessage}}</h5>
                 <h5 *ngIf="errorMessage!='null'" class="error-message">{{errorMessage}}</h5>
                 <br/>
@@ -163,6 +169,7 @@
                      </form>
                      
               </div>
+             
               <h5 *ngIf="successMessage!='null'" class="success-message">{{successMessage}}</h5>
               <h5 *ngIf="errorMessage!='null'" class="error-message">{{errorMessage}}</h5>
             </div> 

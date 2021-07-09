@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Student } from 'src/app/shared/model/student';
 import { User } from 'src/app/shared/model/user';
+import { UserDetailService } from '../user-detail/user-detail.service';
 import { StudentDetailService } from './student-detail.service';
 
 @Component({
@@ -13,19 +14,57 @@ import { StudentDetailService } from './student-detail.service';
 })
 export class StudentDetailComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private router: Router,private studentDetailService: StudentDetailService,private modalService: NgbModal) { }
+  constructor(private fb: FormBuilder, private router: Router,private studentDetailService: StudentDetailService,private userDetailService: UserDetailService,private modalService: NgbModal) { }
 
   studentDetailForm!:FormGroup
   errorMessage!: string;
   successMessage!: string;
+  tryToLogin: boolean = false;
    student!:Student
-   edit_password!:string
+   
    currentUser!:User;
   status!:number
   students!:Student[]
 
   ID!: FormGroup;
   iPhoto!: File;
+
+
+
+  edit_username!:string
+  edit_number!:string
+  edit_password!:string
+
+  name = 'Mathematics';
+  
+  categories = [
+    {id: 1, name: 'Science'},
+    {id: 2, name: 'Physics'},
+    {id: 3, name: 'Chemistry'},
+    {id: 4, name: 'Biology'},
+    {id: 5, name: 'History'},
+    {id: 6, name: 'Geography'},
+    {id: 7, name: 'Civics'},
+    {id: 8, name: 'Economics'},
+    {id: 8, name: 'Accounting'},
+    {id: 8, name: 'Taxation'},
+    {id: 8, name: 'English'},
+    {id: 8, name: 'Hindi'},
+    {id: 8, name: 'Computer'},
+    {id: 8, name: 'Coding'},
+    {id: 8, name: 'Music'},
+    {id: 8, name: 'Dance'},
+
+  ];
+    
+  selected = [
+    {id: 5, name: 'Mathemarics'},
+   
+  ];
+   
+ 
+ 
+
   ngOnInit(): void {
     this.student = new Student();
     this.currentUser=JSON.parse(sessionStorage.getItem("user")|| '{}')
@@ -53,9 +92,10 @@ export class StudentDetailComponent implements OnInit {
       
         idProof: ['', [Validators.required]],
         standard: ['',[Validators.required]],
-        subjects: ['',[Validators.required]],
-        instituteName:['',[Validators.required]]
-
+        instituteName:['',[Validators.required]],
+        motherName:['',[Validators.required]],
+        fatherName:['',[Validators.required]],
+      
 
     });
   }
@@ -74,9 +114,16 @@ export class StudentDetailComponent implements OnInit {
   
   
   addStudentDetail(){
+    this.tryToLogin=true
     this.errorMessage = 'null';
     this.successMessage = 'null';
+    let subjects="";
     this.student = this.studentDetailForm.value as Student;
+    for(let i=0;i<this.selected.length;i++){
+      subjects=subjects+this.selected[i].name+",";
+
+    }
+    this.student.subjects=subjects.substring(0,subjects.length-1)
      console.log(this.student)
     this.studentDetailService.addstudent(this.student,this.currentUser.emailId)
       .subscribe(
@@ -110,6 +157,8 @@ export class StudentDetailComponent implements OnInit {
         (response) => {
           this.successMessage = response;
           this.currentUser.student[0].idPhoto = this.iPhoto;
+          this.status=3;
+          sessionStorage.setItem("status", JSON.stringify(this.status));
           sessionStorage.setItem("user", JSON.stringify(this.currentUser));
           console.log(this.currentUser.student[0])
 
@@ -121,4 +170,66 @@ export class StudentDetailComponent implements OnInit {
 
     
   }
+
+  open(content: any) {
+    this.modalService.open(content, { centered: true, size: 'lg' }).result.then(() => {}, () => {});
+  }
+
+  updateName(){
+    this.errorMessage = 'null';
+    this.successMessage = 'null';
+    this.userDetailService.updateName(this.edit_username,this.currentUser.emailId)
+    .subscribe(
+   
+        (response) => {
+          this.successMessage= response
+          this.currentUser.name=this.edit_username
+          sessionStorage.setItem("user", JSON.stringify(this.currentUser));
+          console.log(this.currentUser)
+          
+        }   
+      
+        , error => this.errorMessage = <any>error
+    )
+
+  }
+
+  updateNumber(){
+    this.errorMessage = 'null';
+    this.successMessage = 'null';
+    this.userDetailService.updateName(this.edit_number,this.currentUser.emailId)
+    .subscribe(
+   
+        (response) => {
+          this.successMessage= response
+          this.currentUser.phoneNumber=this.edit_number
+          sessionStorage.setItem("user", JSON.stringify(this.currentUser));
+          console.log(this.currentUser)
+          
+        }   
+      
+        , error => this.errorMessage = <any>error
+    )
+
+  }
+
+  updatePassword(){
+    this.errorMessage = 'null';
+    this.successMessage = 'null';
+    this.userDetailService.updatePassword(this.edit_password,this.currentUser.emailId)
+    .subscribe(
+   
+        (response) => {
+          this.successMessage= response
+          this.currentUser.password=this.edit_password
+          sessionStorage.setItem("user", JSON.stringify(this.currentUser));
+          console.log(this.currentUser)
+          
+        }   
+      
+        , error => this.errorMessage = <any>error
+    )
+
+  }
+
 }

@@ -13,14 +13,26 @@
                                 <h4 class="mt-2">
                                     {{currentUser.name}} 
                                 </h4>
-                           <span class="location" >
+                           <span class="location" *ngIf="userType=='teacher'">
                               {{currentUser.emailId}} <br>
                               ------------------------------------------------------------------------------------------------------
                               {{ currentUser.teacher[0].description}} <br>
                               {{ currentUser.teacher[0].higherQualification}}
                              </span>
+
+                             <span class="location" *ngIf="userType=='student'">
+                                {{currentUser.emailId}} <br>
+                                {{currentUser.phoneNumber }} <br>
+                                ------------------------------------------------------------------------------------------------------
+                                {{ currentUser.student[0].standard}} <br>
+                                
+                               </span>
+                               
                              
                        </div>
+
+
+                      
                        <div  class="col-md-12 " style="text-align: end; ">
                         
                             <a  ><button (click)="forward()" class="col-md-4 offset-md-2 btn btn-primary" style="width: 100px;" > Add detail</button></a>  

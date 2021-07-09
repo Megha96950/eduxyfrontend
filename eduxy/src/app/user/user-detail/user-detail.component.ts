@@ -16,7 +16,7 @@ import { UserDetailService } from './user-detail.service';
 })
 export class UserDetailComponent implements OnInit {
   
-
+  
   teacher!: Teacher;
   teachers!:Teacher[]
   role!:string ;
@@ -26,6 +26,7 @@ export class UserDetailComponent implements OnInit {
   teacherDetailForm!: FormGroup ;
   errorMessage!: string;
   successMessage!: string;
+  tryToLogin: boolean = false;
   dPhoto!: File;
   iPhoto!: File;
   teacherFile!:TeacherFile;
@@ -40,6 +41,32 @@ export class UserDetailComponent implements OnInit {
   edit_About!:string
 
 
+  name = 'Mathematics';
+  
+  categories = [
+    {id: 1, name: 'Science'},
+    {id: 2, name: 'Physics'},
+    {id: 3, name: 'Chemistry'},
+    {id: 4, name: 'Biology'},
+    {id: 5, name: 'History'},
+    {id: 6, name: 'Geography'},
+    {id: 7, name: 'Civics'},
+    {id: 8, name: 'Economics'},
+    {id: 8, name: 'Accounting'},
+    {id: 8, name: 'Taxation'},
+    {id: 8, name: 'English'},
+    {id: 8, name: 'Hindi'},
+    {id: 8, name: 'Computer'},
+    {id: 8, name: 'Coding'},
+    {id: 8, name: 'Music'},
+    {id: 8, name: 'Dance'},
+
+  ];
+    
+  selected = [
+    {id: 5, name: 'Mathemarics'},
+   
+  ];
  
   constructor(private fb: FormBuilder,private userDetailService: UserDetailService, private router: Router,private modalService: NgbModal) {
     
@@ -80,7 +107,7 @@ export class UserDetailComponent implements OnInit {
         higherQualification: ['', [Validators.required]],
         idProof: ['', [Validators.required]],
         feesCharged: ['',[Validators.required]],
-        subjects: ['',[Validators.required]],
+       
        
 
 
@@ -153,10 +180,17 @@ export class UserDetailComponent implements OnInit {
     
   }
   addTeacherDetail(){
+    this.tryToLogin = true;
     this.errorMessage = 'null';
     this.successMessage = 'null';
     
     this.teacher = this.teacherDetailForm.value as Teacher;
+    let subjects="";
+    for(let i=0;i<this.selected.length;i++){
+      subjects=subjects+this.selected[i].name+",";
+
+    }
+    this.teacher.subjects=subjects.substring(0,subjects.length-1)
     this.userDetailService.addTeacher(this.teacher,this.currentUser.emailId)
       .subscribe(
      

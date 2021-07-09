@@ -11,12 +11,14 @@ export class ViewComponent implements OnInit {
 
 
   currentUser!: User
+  userType!:string
   id: number = Number(localStorage.getItem('currentUser'));
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.currentUser = JSON.parse(sessionStorage.getItem("user")|| '{}')
+    this.userType= JSON.parse(sessionStorage.getItem("userType")|| '{}')
   }
 
   forward(){

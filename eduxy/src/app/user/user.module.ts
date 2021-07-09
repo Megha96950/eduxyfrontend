@@ -16,6 +16,7 @@ import { ViewComponent } from './view/view.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserSharedService } from './user-shared-service';
 import { StudentDetailComponent } from './student-detail/student-detail.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 
@@ -35,7 +36,8 @@ import { StudentDetailComponent } from './student-detail/student-detail.componen
     ReactiveFormsModule,
     HttpClientModule,
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    NgSelectModule
   ],
   providers: [
    

@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { UserLandingPageComponent } from './user/user-landing-page/user-landing-page.component';
 import { UserModule } from './user/user.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserModule,
     AppRoutingModule,
     UserModule,
-    NgbModule
+    NgbModule,
+    NgSelectModule
 
     
   ],
