@@ -85,7 +85,7 @@ export class UserDetailComponent implements OnInit {
          if(this.currentUser.teacher[0]==undefined)
             this.status=1 
          else {
-              if(this.currentUser.teacher[0].idPhoto==null||this.currentUser.teacher[0].degreePhoto==null)
+              if(this.currentUser.teacher[0].idPhoto==null || this.currentUser.teacher[0].degreePhoto==null)
               this.status=2;
           else 
           this.status=3;
@@ -148,6 +148,15 @@ export class UserDetailComponent implements OnInit {
           this.successMessage = response;
           this.currentUser.teacher[0].idPhoto = this.iPhoto;
           sessionStorage.setItem("user", JSON.stringify(this.currentUser));
+          if(this.currentUser.teacher[0].degreePhoto==null)
+          this.status=2;
+          else
+        {
+          this.errorMessage = 'null';
+          this.successMessage = 'null';
+          this.status=3;
+          sessionStorage.setItem("status", JSON.stringify(this.status));
+        }
           console.log(this.currentUser.teacher[0])
 
           //this.ID.reset();
@@ -170,6 +179,14 @@ export class UserDetailComponent implements OnInit {
           this.successMessage = response
           this.currentUser.teacher[0].degreePhoto = this.dPhoto
           sessionStorage.setItem("user", JSON.stringify(this.currentUser));
+          if(this.currentUser.teacher[0].idPhoto==null)
+          this.status=2;
+        else{
+          this.errorMessage = 'null';
+          this.successMessage = 'null';
+          this.status=3;
+          sessionStorage.setItem("status", JSON.stringify(this.status));
+        }
           console.log(this.currentUser.teacher[0])
 ;
       }
@@ -285,6 +302,7 @@ export class UserDetailComponent implements OnInit {
           this.successMessage= response
           this.currentUser.teacher[0].description=this.edit_About
           sessionStorage.setItem("user", JSON.stringify(this.currentUser));
+       
           console.log(this.currentUser)
           
         }   
