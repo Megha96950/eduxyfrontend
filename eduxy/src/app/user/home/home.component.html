@@ -4,7 +4,12 @@
     <div class="w-100 order-1 order-md-0">
         <a class="navbar-brand" routerLink="/home">Eduxy</a>
     </div>
-
+    <!-- <ng-template #search> -->
+     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" style="margin-right: 350px;">
+        <input placeholder="Enter something" class="form-control" [(ngModel)]="searchString" >
+        <button class="btn btn-info"  (click)="search()">Search</button>
+    </div>
+    <!-- </ng-template> -->
         <div class="dropdown">
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                 {{loggedInUser.name}}
@@ -24,10 +29,13 @@
 
     <div class="row">
         <div class="col-md-8 offset-md-2">
-
-           
-<div class="wrapper">
-    
+   
+     </div>      
+      <div class="wrapper">
+        <div *ngIf="flag==true">
+            ydiuoyhfyerhgpieh
+                {{teachers.higherQualification}}
+         </div>
                 <router-outlet></router-outlet>
         </div>
     </div>

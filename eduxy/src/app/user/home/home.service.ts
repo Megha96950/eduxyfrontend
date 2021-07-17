@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { environment } from "../../../environments/environment";
 
 import { catchError } from 'rxjs/operators';
+import { Teacher } from "src/app/shared/model/teacher";
 
 
 
@@ -12,6 +13,15 @@ import { catchError } from 'rxjs/operators';
     providedIn: 'root'
 })
 export class HomeService {
+    private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    constructor(private http: HttpClient) { }
+
+    search(searchString: String):Observable<Teacher>{
+  
+        const url = environment.studentAPIUrl + '/searchTeacher/'+searchString
+        return this.http.get<Teacher>(url,{ responseType: 'text' as 'json'})
+        .pipe(catchError(this.handleError));
+      }
    
     private handleError(err: HttpErrorResponse) {
         console.log(err)
