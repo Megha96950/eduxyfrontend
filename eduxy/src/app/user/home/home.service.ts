@@ -16,10 +16,10 @@ export class HomeService {
     private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     constructor(private http: HttpClient) { }
 
-    search(searchString: String):Observable<Teacher>{
+    search(searchString: String):Observable<Teacher []>{
   
         const url = environment.studentAPIUrl + '/searchTeacher/'+searchString
-        return this.http.get<Teacher>(url,{ responseType: 'text' as 'json'})
+        return this.http.post<Teacher[]>(url,{ responseType: 'text' as 'json'})
         .pipe(catchError(this.handleError));
       }
    

@@ -30,12 +30,27 @@
     <div class="row">
         <div class="col-md-8 offset-md-2">
    
-     </div>      
-      <div class="wrapper">
-        <div *ngIf="flag==true">
-            ydiuoyhfyerhgpieh
-                {{teachers.higherQualification}}
-         </div>
+     </div> 
+       <div *ngIf="flag">
+        <div class="col-md-offset-4 col-md-4">  
+            <table class="table table-bordered table-striped table-responsive">  
+                <tr>  
+                    <th>Name</th>  
+                    <th>Email</th>  
+                    <th>Qualification</th>  
+                </tr>  
+                <ng-container *ngFor="let item of data">   
+                    <tr>  
+                        <td>  {{item.teacherId}}</td>  
+                        <td>{{item.subjects}}</td>  
+                        <td>{{item.higherQualification}}</td>  
+                    </tr>  
+                </ng-container>  
+            </table>  
+            
+  </div>    
+      <div class="wrapper" *ngIf="!flag">
+       
                 <router-outlet></router-outlet>
         </div>
     </div>

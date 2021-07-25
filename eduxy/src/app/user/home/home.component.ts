@@ -22,6 +22,8 @@ export class HomeComponent implements OnInit {
     teachers:Teacher=JSON.parse(sessionStorage.getItem("teachers")|| '{}')
     errorMessage!:String;
     flag:boolean=false;
+
+    public data: any;
   constructor(private router: Router, private route: ActivatedRoute, private homeService: HomeService, private userSharedService : UserSharedService) { }
 
   ngOnInit(): void {
@@ -45,11 +47,10 @@ search(){
   .subscribe(
  
       (response) => {
-        this.teachers= response
+        this.data= response
+        console.log(this.data)
          this.flag=true;
-         sessionStorage.setItem("teacher", JSON.stringify(this.teachers));
-        let teacher=JSON.parse(sessionStorage.getItem("teachers")|| '{}');
-        console.log(teacher)
+
         
       }   
     
