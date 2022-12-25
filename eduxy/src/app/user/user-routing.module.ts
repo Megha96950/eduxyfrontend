@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { ViewComponent } from './view/view.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { StudentDetailComponent } from './student-detail/student-detail.component';
+import { ChatComponent } from './chat/chat.component';
 
 const routes : Routes =[
   { path: 'eduxy', component: UserLandingPageComponent, children: [
@@ -19,7 +20,8 @@ const routes : Routes =[
     {path: '', redirectTo: 'view', pathMatch: 'full'},
     {path: 'view', component: ViewComponent},
     {path: 'teacher-detail', component: UserDetailComponent},
-    {path: 'student-detail', component: StudentDetailComponent}
+    {path: 'student-detail', component: StudentDetailComponent},
+    {path: 'chat', component: ChatComponent}
   
 ]},
   { path: '', redirectTo: '/eduxy', pathMatch: 'full' }

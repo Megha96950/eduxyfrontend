@@ -57,4 +57,9 @@ search(){
       , error => this.errorMessage = <any>error
   )
 }
+
+chat() {
+  
+  this.router.navigate(["/chat"])
+}
 }

@@ -1,12 +1,12 @@
 
     <div class="container">
-        <div class="cover" ></div>
+       <!-- <div class="cover" ></div>
         <div class="main-content mt-5 container-fluid p-5" *ngIf="currentUser">
             <div class="row profile">
                 <div class="col-md-12 main-col" style ="background-color: darkcyan;">
                     <div class="card w-100 shadow-sm pt-5 pl-4 pr-4 mb-3 pb-4 quick-details">
-                        <div style="text-align: center;height: 25px;">
-                            <img src="" class="profile-pic" alt="">
+                        div style="text-align: center;height: 25px;">
+                        <img src="" class="profile-pic" alt="">
                         </div>
                         <div class="row">
                             <div class="col-md-10 details">
@@ -30,7 +30,7 @@
                                
                              
                        </div>
-
+                      
 
                       
                        <div  class="col-md-12 " style="text-align: end; ">
@@ -43,5 +43,78 @@
                  </div>
              </div>
        </div>
-   </div>
+   </div>-->
+
+   <div class="student-profile py-4" *ngIf="currentUser"  >
+    <div class="container">
+      <div class="row" *ngIf="role=='student'">
+        <div class="col-lg-4">
+          <div class="card shadow-sm">
+            <div class="card-header bg-transparent text-center">
+              <img class="profile_img" src={{currentUser.student[0].idPhoto}} alt="student dp">
+              <h3> {{currentUser.name}} </h3>
+            </div>
+            <div class="card-body">
+              <p class="mb-0"><strong class="pr-1">Student ID:</strong>{{currentUser.student[0].studentId}}</p>
+              <p class="mb-0"><strong class="pr-1">Standard:</strong>{{currentUser.student[0].standard}}</p>
+              <p class="mb-0"><strong class="pr-1">Subject:</strong>{{currentUser.student[0].subjects}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="card shadow-sm">
+            <div class="card-header bg-transparent border-0">
+              <h3 class="mb-0"><i class="far fa-clone pr-1"></i>General Information
+                <a  ><button (click)="forward()" class="col-md-8 offset-md-7 btn btn-primary" style="width: 100px;" > Add detail</button></a>
+            </h3>
+              
+            </div>
+            <div class="card-body pt-0">
+              <table class="table table-bordered">
+                <tr>
+                  <th width="30%">Instituation name</th>
+                  <td width="2%">:</td>
+                  <td>{{currentUser.student[0].instituteName}}</td>
+                </tr>
+                <tr>
+                  <th width="30%">Email	</th>
+                  <td width="2%">:</td>
+                  <td>{{currentUser.emailId}}</td>
+                </tr>
+                <tr>
+                  <th width="30%">phoneNumber</th>
+                  <td width="2%">:</td>
+                  <td>{{currentUser.phoneNumber}}</td>
+                </tr>
+                <tr>
+                  <th width="30%">Father Name</th>
+                  <td width="2%">:</td>
+                  <td>{{currentUser.student[0].fatherName}}</td>
+                </tr>
+                <tr>
+                  <th width="30%">Mother Name</th>
+                  <td width="2%">:</td>
+                  <td>{{currentUser.student[0].motherName}}</td>
+                </tr>
+                <tr>
+                    <th width="30%">Adhar no</th>
+                    <td width="2%">:</td>
+                    <td>{{currentUser.student[0].idProof}}</td>
+                  </tr>
+              </table>
+            </div>
+          </div>
+            <div style="height: 26px"></div>
+          <div class="card shadow-sm">
+            <div class="card-header bg-transparent border-0">
+              <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Other Information</h3>
+            </div>
+            <div class="card-body pt-0">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -113,5 +113,8 @@
       }
     }
   },
-  "defaultProject": "eduxy"
+  "defaultProject": "eduxy",
+  "cli": {
+    "analytics": false
+  }
 }

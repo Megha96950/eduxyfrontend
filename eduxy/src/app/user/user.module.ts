@@ -17,6 +17,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserSharedService } from './user-shared-service';
 import { StudentDetailComponent } from './student-detail/student-detail.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ChatComponent } from './chat/chat.component';
 
 
 
@@ -28,7 +29,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     HomeComponent,
     ViewComponent,
     UserDetailComponent,
-    StudentDetailComponent
+    StudentDetailComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
