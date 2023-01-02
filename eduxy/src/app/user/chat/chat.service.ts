@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { chatChannel } from 'src/app/shared/model/chatChannel';
+import { chatMessage } from 'src/app/shared/model/chatMessage';
 import { EstablishedchatConnection } from 'src/app/shared/model/EstablishedChatConnection';
 import { environment } from 'src/environments/environment';
 
@@ -11,12 +12,22 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ChatService {
+
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  
   constructor(private http: HttpClient) { }
   
   establishChatSession(ChatChannel: chatChannel):Observable<EstablishedchatConnection>{
+    console.log(ChatChannel)
     const url = environment.chatAPIUrl + '/chat/';
-     return this.http.put<EstablishedchatConnection>(url,chatChannel,{ responseType: 'text' as 'json'})
+     return this.http.post<EstablishedchatConnection>(url,ChatChannel,{headers:this.headers})
+     .pipe(catchError(this.handleError));
+  }
+
+  Sent(ChannelId:String,chatmessage:chatMessage):Observable<chatMessage>{
+     console.log(chatmessage)
+    const url = environment.chatAPIUrl + '/chat/'+ChannelId;
+    return this.http.post<chatMessage>(url,chatmessage,{headers:this.headers})
      .pipe(catchError(this.handleError));
   }
 

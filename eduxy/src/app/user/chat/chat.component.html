@@ -11,8 +11,21 @@
     </div>
   </div>
 
-  <form>
-    <input type="text" class="form-control pull-left" style="width:90%" ng-model="currentMessage" />
-    <button type="submit" class="btn btn-primary-outline pull-right" style="width:10%" ng-click="sendChatMessage()">send</button>
-  </form>
+  <!-- <form [formGroup]="message" (ngSubmit)="SentMessage()">
+    <div class="form-group">
+    <input type="text" class="form-control" formControlName="msg" style="width:90%" id="msg" />
+    <button class=" btn btn-primary" style="background-color:rgb(15, 15, 201);" >
+      Upload
+  </button>
+</div>
+  </form> -->
+ 
+  <div class="input-group mb-3">
+  <input type="Text" class="form-control" [(ngModel)]="msg"  id="name">
+  <div class="input-group-append">
+  <button class="btn btn-primary" (click)="SentMessage()" style=" background-color:rgb(15, 15, 201);" >
+     Update
+ </button>
+ </div>
+  </div>
 </div>

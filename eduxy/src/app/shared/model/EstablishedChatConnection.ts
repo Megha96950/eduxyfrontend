@@ -1,5 +1,5 @@
 export class EstablishedchatConnection{
-    uuid!:String;
-    userIdOne!: String;
-    userIdTwo!: String ;
+    channelUuid!:String;
+    userOneFullName!: String;
+    userTwoFullName!: String ;
     }
