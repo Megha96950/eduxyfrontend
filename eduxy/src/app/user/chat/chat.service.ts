@@ -25,6 +25,7 @@ export class ChatService {
   }
 
   Sent(ChannelId:String,chatmessage:chatMessage):Observable<chatMessage>{
+  
      console.log(chatmessage)
     const url = environment.chatAPIUrl + '/chat/'+ChannelId;
     return this.http.post<chatMessage>(url,chatmessage,{headers:this.headers})
