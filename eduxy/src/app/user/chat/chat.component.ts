@@ -10,6 +10,7 @@ import { User } from 'src/app/shared/model/user';
 import { UserSharedService } from '../user-shared-service';
 import { ChatService } from './chat.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { WebsocketService } from 'src/app/shared/websocket.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent  implements OnInit,AfterViewChecked {
+export class ChatComponent  {
 
   establishedChatChannel!: EstablishedchatConnection;
   errorMessage!:String;
@@ -27,25 +28,45 @@ export class ChatComponent  implements OnInit,AfterViewChecked {
   message!: FormGroup;
   msg!: string;
   channelUuid!: string;
+  webSocketService!: WebsocketService;
+  greeting: any;
+  name!: string;
   constructor(private fb: FormBuilder,private router: Router, private route: ActivatedRoute,
-     private userSharedService : UserSharedService,private chatService:ChatService,private modalService: NgbModal) { }
-  ngAfterViewChecked(): void {
-    throw new Error('Method not implemented.');
-  }
+     private chatService:ChatService) { }
+ 
   ngOnInit(): void {
     
-  
+   this.webSocketService=new WebsocketService(new ChatComponent(this.fb,this.router,this.route,this.chatService))
     this.chatChannel=new chatChannel();
     this.loggedInUser = JSON.parse(sessionStorage.getItem("user")|| '{}');
     console.log(this.loggedInUser);
     this.chatChannel.userIdOne=this.loggedInUser.emailId;
     this.chatChannel.userIdTwo="test12@gmail.com";
- 
+    this.connect()
     this.establishconnection()
   
 
   }
-  
+  connect(){
+    this.webSocketService._connect();
+  }
+
+  disconnect(){
+    this.webSocketService._disconnect();
+  }
+
+  sendMessage(){
+    this.webSocketService._send(this.chatMessage);
+  }
+
+  handleMessage(chatMessage: chatMessage){
+      this.chatMessage={ id:1,
+      authorUserId:this.chatChannel.userIdOne,
+      recipientUserId: this.chatChannel.userIdTwo,
+      contents:this.msg,
+  }
+    
+  }
   
 
   establishconnection(){
@@ -62,26 +83,21 @@ export class ChatComponent  implements OnInit,AfterViewChecked {
 )
 
 }
-open(content: any) {
-  this.modalService.open(content, { centered: true, size: 'lg' }).result.then(() => {}, () => {});
-}
-SentMessage(){
-  this.chatMessage={ id:1,
-    authorUserId:this.chatChannel.userIdOne,
-    recipientUserId: this.chatChannel.userIdTwo,
-    contents:this.msg,
-}
-console.log(this.chatMessage)
-  this.establishedChatChannel= JSON.parse(sessionStorage.getItem("chatSession")|| '{}');
-  
-this.chatService.Sent(this.establishedChatChannel.channelUuid,this.chatMessage).subscribe(
-  (response) => {
-    this.chatMessage= response
-    console.log(this.chatMessage)
-  }   
 
-  , error => this.errorMessage = <any>error
-)
-}
+// SentMessage(){
+ 
+// console.log(this.chatMessage)
+//   this.establishedChatChannel= JSON.parse(sessionStorage.getItem("chatSession")|| '{}');
+  
+// this.chatService.Sent(this.establishedChatChannel.channelUuid,this.chatMessage).subscribe(
+//   (response) => {
+//     this.chatMessage= response
+//     console.log(this.chatMessage)
+//   }   
+
+//   , error => this.errorMessage = <any>error
+// )
+// }
+
 
 }
