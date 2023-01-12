@@ -31,7 +31,11 @@ export class ChatService {
     return this.http.post<chatMessage>(url,chatmessage,{headers:this.headers})
      .pipe(catchError(this.handleError));
   }
-
+  getExistingChatSessionMessages(ChannelId:String):Observable<chatMessage[]>{
+    const url = environment.chatAPIUrl + '/channel/'+ChannelId;
+    return this.http.post<chatMessage[]>(url,{headers:this.headers})
+     .pipe(catchError(this.handleError));
+  }
   private handleError(err: HttpErrorResponse) {
     console.log(err)
     let errMsg: string = '';

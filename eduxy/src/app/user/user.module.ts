@@ -18,6 +18,7 @@ import { UserSharedService } from './user-shared-service';
 import { StudentDetailComponent } from './student-detail/student-detail.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ChatComponent } from './chat/chat.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -39,7 +40,8 @@ import { ChatComponent } from './chat/chat.component';
     HttpClientModule,
     CommonModule,
     UserRoutingModule,
-    NgSelectModule
+    NgSelectModule,
+    NgbModule,
   ],
   providers: [
    
@@ -50,5 +52,6 @@ import { ChatComponent } from './chat/chat.component';
     UserSharedService
 
 ],
+bootstrap: [HomeComponent]
 })
 export class UserModule { }

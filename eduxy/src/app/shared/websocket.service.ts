@@ -30,7 +30,7 @@ export class WebsocketService {
     _this.stompClient.connect({}, function (frame:any) {
       _this.stompClient.subscribe(_this.topic, function (sdkEvent:any) {
         console.log(sdkEvent)
-          _this.onMessageReceived(sdkEvent);
+      
       } );
       //_this.stompClient.reconnect_delay = 2000;
     },this.errorCallBack );
@@ -43,15 +43,18 @@ _disconnect() {
   console.log("Disconnected");
 }
  
-_send(chatMessage:chatMessage) {
-  console.log("calling logout api via web socket");
-  this.stompClient.send("/app/chat", chatMessage);
+_send(chatMessage:chatMessage,channelUuid:String) {
+  console.log(chatMessage);
+  
+  this.stompClient.send("/app/chat/"+channelUuid,{},JSON.stringify({
+    id:1,
+    authorUserId:chatMessage.authorUserId,
+    recipientUserId:chatMessage.recipientUserId,
+    contents:chatMessage.contents
+  }));
 }
 
-onMessageReceived(message:any) {
-  console.log("Message Recieved from Server :: " + message);
-  this.chatComponent.handleMessage(this.chatMessage);
-}
+
 
 errorCallBack(error:any) {
   console.log("errorCallBack -> " + error)

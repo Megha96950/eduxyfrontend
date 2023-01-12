@@ -8,10 +8,12 @@ import { UserLandingPageComponent } from './user/user-landing-page/user-landing-
 import { UserModule } from './user/user.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { HomeComponent } from './user/home/home.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
    
   ],
   imports: [
@@ -27,6 +29,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
     
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent,HomeComponent]
 })
 export class AppModule { }

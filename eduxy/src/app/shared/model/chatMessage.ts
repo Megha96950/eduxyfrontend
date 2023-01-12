@@ -1,7 +1,7 @@
 export class chatMessage{
     id !:number;
-    authorUserId!:String;
-    recipientUserId!:String; 
-    contents!:String;
+    authorUserId!:string;
+    recipientUserId!:string; 
+    contents!:string;
     
     }

@@ -11,6 +11,7 @@ import { UserSharedService } from '../user-shared-service';
 import { ChatService } from './chat.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { WebsocketService } from 'src/app/shared/websocket.service';
+import * as $ from 'jquery';
 
 
 @Component({
@@ -25,14 +26,19 @@ export class ChatComponent  {
   chatChannel!:chatChannel;
   loggedInUser!: User;
   chatMessage!:chatMessage;
-  message!: FormGroup;
+ messages: chatMessage[] = [];
   msg!: string;
   channelUuid!: string;
   webSocketService!: WebsocketService;
   greeting: any;
   name!: string;
+  MESSAGES_RENDERING_WAIT_TIME = 1000
+  
   constructor(private fb: FormBuilder,private router: Router, private route: ActivatedRoute,
-     private chatService:ChatService) { }
+     private chatService:ChatService) { 
+      
+    
+     }
  
   ngOnInit(): void {
     
@@ -41,9 +47,10 @@ export class ChatComponent  {
     this.loggedInUser = JSON.parse(sessionStorage.getItem("user")|| '{}');
     console.log(this.loggedInUser);
     this.chatChannel.userIdOne=this.loggedInUser.emailId;
-    this.chatChannel.userIdTwo="test12@gmail.com";
-    this.connect()
-    this.establishconnection()
+    this.chatChannel.userIdTwo="";
+    this.connect();
+    this.establishconnection();
+    this.getExistingChatMessages();
   
 
   }
@@ -56,19 +63,15 @@ export class ChatComponent  {
   }
 
   sendMessage(){
-    this.webSocketService._send(this.chatMessage);
-  }
-
-  handleMessage(chatMessage: chatMessage){
-      this.chatMessage={ id:1,
+    this.chatMessage={ id:1,
       authorUserId:this.chatChannel.userIdOne,
       recipientUserId: this.chatChannel.userIdTwo,
-      contents:this.msg,
-  }
-    
-  }
-  
+      contents:this.msg,}
+      
+    this.webSocketService._send(this.chatMessage,this.establishedChatChannel.channelUuid);
+    this.onMessage(this.chatMessage);
 
+  }
   establishconnection(){
   this.chatService.establishChatSession(this.chatChannel).subscribe(
  
@@ -83,6 +86,54 @@ export class ChatComponent  {
 )
 
 }
+getExistingChatMessages(){
+  this.establishedChatChannel= JSON.parse(sessionStorage.getItem("chatSession")|| '{}');
+
+  this.chatService.getExistingChatSessionMessages(this.establishedChatChannel.channelUuid).subscribe(
+    (response)=>{
+      console.log(response)
+      response.forEach(element => {
+        
+        this.addChatMessageToUI(element)
+     
+      });
+      this.scrollToLatestChatMessage();
+    }
+  )
+   
+};
+
+scrollToLatestChatMessage() {
+  var chatContainer = $('#chat-area');
+
+  setTimeout(function(){
+    if (chatContainer.length > 0) { chatContainer.scrollTop(chatContainer[0].scrollHeight); }        
+  }, this.MESSAGES_RENDERING_WAIT_TIME);
+ 
+    
+};
+
+addChatMessageToUI(message: chatMessage) {
+     this.messages.push({
+      id:message.id,
+      contents:message.contents,
+      authorUserId:message.authorUserId,
+      recipientUserId:message.recipientUserId
+     });
+  // self.message.push({
+  //     contents: message.contents,
+  //     isFromRecipient: message.fromUserId != UserService.getUserInfo().id,
+  //     author: (message.fromUserId == UserService.getUserInfo().id) ? self.userOneFullName : self.userTwoFullName
+  //   });
+
+  // if (withForceApply) { self.$apply(); }
+}
+
+  onMessage(chatMessage:chatMessage) {
+  this.addChatMessageToUI(chatMessage);
+  this.scrollToLatestChatMessage();
+};
+
 
 // SentMessage(){
  
@@ -101,3 +152,4 @@ export class ChatComponent  {
 
 
 }
+
