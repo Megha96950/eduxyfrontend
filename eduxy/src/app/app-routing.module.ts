@@ -3,7 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
  // {path:'error',component:AuthorisationErrorComponent},
-    {path:'',redirectTo:'/eduxy/login',pathMatch:'full'}
+    {path:'',redirectTo:'/eduxy/login',pathMatch:'full'},
+   
+    
 ];
 
 @NgModule({

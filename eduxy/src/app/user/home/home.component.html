@@ -43,18 +43,24 @@
      </div> 
        <div >
         
-        <div class="col-md-offset-4 col-md-4" *ngIf="flag">  
-            <table class="table table-bordered table-striped table-responsive">  
-                <tr>  
+        <div  *ngIf="flag">  
+            <table id="myTable">  
+                <tr class="header">  
                     <th>Name</th>  
+                    <th></th>
                     <th>Email</th>  
-                    <th>Qualification</th>  
+                    <th>Qualification</th> 
+                    <th>About</th> 
+                    <th> </th>
                 </tr>  
                 <ng-container *ngFor="let item of data">   
-                    <tr>  
+                    <tr class="header">  
                         <td>  {{item.teacherId}}</td>  
+                        <td><img class="profile_img" src={{item.idPhoto}} alt="teacher dp"></td>
                         <td>{{item.subjects}}</td>  
-                        <td>{{item.higherQualification}}</td>  
+                        <td>{{item.higherQualification}}</td>
+                        <td>{{item.description}}</td>
+                        <td><button (click)="chat(item)" class="btn btn-info">message</button></td>  
                     </tr>  
                 </ng-container>  
             </table>  

@@ -6,6 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { chatChannel } from 'src/app/shared/model/chatChannel';
 import { chatMessage } from 'src/app/shared/model/chatMessage';
 import { EstablishedchatConnection } from 'src/app/shared/model/EstablishedChatConnection';
+import { User } from 'src/app/shared/model/user';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -32,8 +33,15 @@ export class ChatService {
      .pipe(catchError(this.handleError));
   }
   getExistingChatSessionMessages(ChannelId:String):Observable<chatMessage[]>{
+    console.log(ChannelId)
     const url = environment.chatAPIUrl + '/channel/'+ChannelId;
     return this.http.post<chatMessage[]>(url,{headers:this.headers})
+     .pipe(catchError(this.handleError));
+  }
+
+  getFriendList(Id :String):Observable<User[]>{
+    const url = environment.chatAPIUrl + '/friend/'+Id;
+    return this.http.get<User[]>(url,{headers:this.headers})
      .pipe(catchError(this.handleError));
   }
   private handleError(err: HttpErrorResponse) {

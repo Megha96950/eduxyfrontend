@@ -16,7 +16,7 @@ export class WebsocketService {
   socket = new SockJS('http://localhost:3333/Eduxy_Server/ws');
   stompClient!:any
   chatComponent!:ChatComponent
-  topic: string = "/chat/greating";
+  topic: string = "/chat/";
   chatMessage!:chatMessage
   constructor(chatComponent: ChatComponent) { 
     this.chatComponent=chatComponent;
@@ -28,11 +28,9 @@ export class WebsocketService {
     this.stompClient = Stomp.over(ws);
     const _this = this;
     _this.stompClient.connect({}, function (frame:any) {
-      _this.stompClient.subscribe(_this.topic, function (sdkEvent:any) {
-        console.log(sdkEvent)
-      
-      } );
-      //_this.stompClient.reconnect_delay = 2000;
+      console.log(frame)
+   
+      _this.stompClient.reconnect_delay = 2000;
     },this.errorCallBack );
   };
 
@@ -52,6 +50,11 @@ _send(chatMessage:chatMessage,channelUuid:String) {
     recipientUserId:chatMessage.recipientUserId,
     contents:chatMessage.contents
   }));
+  this.stompClient.subscribe(this.topic+channelUuid, (sdkEvent:any)=> {
+    this.onMessageReceived(sdkEvent)
+    console.log(sdkEvent)
+  
+  } );
 }
 
 
@@ -61,5 +64,11 @@ errorCallBack(error:any) {
   setTimeout(() => {
       this._connect();
   }, 5000);
+}
+
+
+onMessageReceived(message:any) {
+  console.log("Message Recieved from Server :: " + message.body);
+  //this.chatComponent.handleMessage(JSON.stringify(message.body);
 }
 }

@@ -20,6 +20,7 @@ export class User {
     address!: Address[];
     student!: Student[];
     teacher!: Teacher[];
+    channelId!:String
 
   
     //check for customer carts

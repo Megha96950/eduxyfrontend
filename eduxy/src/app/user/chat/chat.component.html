@@ -1,4 +1,17 @@
-
+<table class="table table-bordered">
+  <th width="20%">
+    <div class="panel panel-default friendslist">
+      <div class="panel-heading">
+        <h3 class="panel-title">Friends List</h3>
+      </div>
+      <div class="panel-body">
+        <div class="list-group" *ngFor="let frnd of friends " >
+          <a (click)="getExistingChatMessages(frnd.channelId,frnd.emailId)" class="list-group-item">{{frnd.emailId}}</a>
+        </div>
+      </div>
+    </div>
+  </th>
+  <th>
 
 <div class="panel panel-default" ng-show="showChat" ng-init="messages = []">
   <div class="panel-heading">Private Chat</div>
@@ -25,8 +38,11 @@
   <input type="Text" class="form-control" [(ngModel)]="msg"  id="name">
   <div class="input-group-append">
   <button class="btn btn-primary" (click)="sendMessage()" style=" background-color:rgb(15, 15, 201);" >
-     Update
+     send
  </button>
  </div>
   </div>
 </div>
+</th>
+
+</table>

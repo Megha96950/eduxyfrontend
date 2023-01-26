@@ -21,6 +21,7 @@ export class ViewComponent implements OnInit {
     this.currentUser = JSON.parse(sessionStorage.getItem("user")|| '{}')
     this.userType= JSON.parse(sessionStorage.getItem("userType")|| '{}')
     this.role=this.currentUser.role
+   
     console.log(this.currentUser.role)
   }
 

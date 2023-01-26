@@ -5,10 +5,13 @@ import { HomeService } from './home.service';
 import { HomeSharedService } from "./home-shared-service";
 import { UserSharedService } from '../user-shared-service';
 import { Teacher } from 'src/app/shared/model/teacher';
+import { ChatComponent } from '../chat/chat.component';
+import { ChatService } from '../chat/chat.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 
 })
 export class HomeComponent implements OnInit {
@@ -22,9 +25,12 @@ export class HomeComponent implements OnInit {
     teachers:Teacher=JSON.parse(sessionStorage.getItem("teachers")|| '{}')
     errorMessage!:String;
     flag:boolean=false;
+    friend!:User;
+    chatComponent!:ChatComponent
+  
 
     public data: any;
-  constructor(private router: Router, private route: ActivatedRoute, private homeService: HomeService, private userSharedService : UserSharedService) { }
+  constructor(private router: Router, private chatService:ChatService, private route: ActivatedRoute, private homeService: HomeService, private userSharedService : UserSharedService) { }
 
   ngOnInit(): void {
     this.teachers=new Teacher()
@@ -33,7 +39,8 @@ export class HomeComponent implements OnInit {
         this.loggedInUser = JSON.parse(sessionStorage.getItem("user")|| '{}');
         console.log(this.loggedInUser);
         this.flag=false
-        console.log(this.teachers)
+        console.log(this.teachers);
+       this.chatComponent=new ChatComponent(this.router,this.route,this.chatService)
   }
 
   
@@ -50,16 +57,27 @@ search(){
         this.data= response
         console.log(this.data)
          this.flag=true;
-
-        
-      }   
+    }   
     
       , error => this.errorMessage = <any>error
   )
 }
 
-chat() {
-  
-  this.router.navigate(["/chat"])
+chat(teacher : Teacher) {
+  console.log(teacher)
+ this.friend={ emailId:teacher.emailId,
+  name: "",
+  password: "",
+  newPassword:"",
+  phoneNumber:"",
+  role:"",
+  address:[],
+  student: [],
+  teacher: [],
+  channelId:""
+  }
+  sessionStorage.setItem("friend", JSON.stringify(this.friend));
+
+window.location.href="http://localhost:4200/home/chat"
 }
 }

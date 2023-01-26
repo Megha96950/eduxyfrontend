@@ -21,10 +21,12 @@ const routes : Routes =[
     {path: 'view', component: ViewComponent},
     {path: 'teacher-detail', component: UserDetailComponent},
     {path: 'student-detail', component: StudentDetailComponent},
-    {path: 'chat', component: ChatComponent}
-  
+    {path: 'chat', component: ChatComponent},
+
+    
 ]},
-  { path: '', redirectTo: '/eduxy', pathMatch: 'full' }
+  { path: '', redirectTo: '/eduxy', pathMatch: 'full' },
+  
 ];
 
 @NgModule({
