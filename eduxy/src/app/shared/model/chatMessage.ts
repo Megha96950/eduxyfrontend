@@ -3,5 +3,6 @@ export class chatMessage{
     authorUserId!:string;
     recipientUserId!:string; 
     contents!:string;
-    
+   // channelID!:string;
+  
     }

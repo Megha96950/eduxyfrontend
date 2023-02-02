@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
         console.log(this.loggedInUser);
         this.flag=false
         console.log(this.teachers);
-       this.chatComponent=new ChatComponent(this.router,this.route,this.chatService)
+    //   this.chatComponent=new ChatComponent(this.router,this.route,this.chatService)
   }
 
   

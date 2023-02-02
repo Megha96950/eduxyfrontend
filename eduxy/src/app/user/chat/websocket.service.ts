@@ -4,8 +4,10 @@ import * as SockJS from 'sockjs-client';
 
 
 
-import { ChatComponent } from '../user/chat/chat.component';
-import { chatMessage } from './model/chatMessage';
+
+import { ActivatedRoute } from '@angular/router';
+import { ChatComponent } from './chat.component';
+import { chatMessage } from 'src/app/shared/model/chatMessage';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +18,14 @@ export class WebsocketService {
   socket = new SockJS('http://localhost:3333/Eduxy_Server/ws');
   stompClient!:any
   chatComponent!:ChatComponent
-  topic: string = "/chat/";
+  topic!: string ;
   chatMessage!:chatMessage
-  constructor(chatComponent: ChatComponent) { 
+   channelUuid!:String;
+ 
+  constructor( chatComponent: ChatComponent,private route: ActivatedRoute) { 
     this.chatComponent=chatComponent;
+    this.channelUuid=this.route.snapshot.params['channelId']
+    this.topic="/topic/message/"+this.channelUuid
    }
 
    _connect() {
@@ -29,7 +35,10 @@ export class WebsocketService {
     const _this = this;
     _this.stompClient.connect({}, function (frame:any) {
       console.log(frame)
-   
+      _this.stompClient.subscribe(_this.topic, (sdkEvent:any)=> {
+        _this.onMessageReceived(sdkEvent)
+        console.log(sdkEvent)
+      } );
       _this.stompClient.reconnect_delay = 2000;
     },this.errorCallBack );
   };
@@ -40,6 +49,7 @@ _disconnect() {
   }
   console.log("Disconnected");
 }
+
  
 _send(chatMessage:chatMessage,channelUuid:String) {
   console.log(chatMessage);
@@ -50,16 +60,8 @@ _send(chatMessage:chatMessage,channelUuid:String) {
     recipientUserId:chatMessage.recipientUserId,
     contents:chatMessage.contents
   }));
-  this.stompClient.subscribe(this.topic+channelUuid, (sdkEvent:any)=> {
-    this.onMessageReceived(sdkEvent)
-    console.log(sdkEvent)
   
-  } );
-}
-
-
-
-errorCallBack(error:any) {
+}errorCallBack(error:any) {
   console.log("errorCallBack -> " + error)
   setTimeout(() => {
       this._connect();
@@ -68,7 +70,10 @@ errorCallBack(error:any) {
 
 
 onMessageReceived(message:any) {
-  console.log("Message Recieved from Server :: " + message.body);
-  //this.chatComponent.handleMessage(JSON.stringify(message.body);
+  console.log("Message Recieved from Server :: " + JSON.stringify(message.body));
+  
+  this.chatComponent.handleMessage(JSON.parse(message.body));
+
+  //(JSON.stringify(message.body);
 }
 }

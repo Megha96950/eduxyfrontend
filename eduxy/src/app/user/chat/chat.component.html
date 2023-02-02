@@ -6,12 +6,15 @@
       </div>
       <div class="panel-body">
         <div class="list-group" *ngFor="let frnd of friends " >
-          <a (click)="getExistingChatMessages(frnd.channelId,frnd.emailId)" class="list-group-item">{{frnd.emailId}}</a>
+          <!-- <a (click)="getExistingChatMessages(frnd.channelId,frnd.emailId)" class="list-group-item">{{frnd.emailId}}</a> -->
+          <a href="http://localhost:4200/home/chat/{{frnd.channelId}}" class="list-group-item">{{frnd.emailId}}</a>
         </div>
       </div>
     </div>
   </th>
   <th>
+    df<p>{{greeting}}</p>
+    
 
 <div class="panel panel-default" ng-show="showChat" ng-init="messages = []">
   <div class="panel-heading">Private Chat</div>
@@ -25,7 +28,7 @@
     </div>
   </div>
 
-  <!-- <form [formGroup]="message" (ngSubmit)="SentMessage()">
+  <!-- <form (ngSubmit)="SentMessage()">
     <div class="form-group">
     <input type="text" class="form-control" formControlName="msg" style="width:90%" id="msg" />
     <button class=" btn btn-primary" style="background-color:rgb(15, 15, 201);" >
@@ -33,7 +36,7 @@
   </button>
 </div>
   </form> -->
- 
+
   <div class="input-group mb-3">
   <input type="Text" class="form-control" [(ngModel)]="msg"  id="name">
   <div class="input-group-append">

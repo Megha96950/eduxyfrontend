@@ -19,6 +19,8 @@ import { StudentDetailComponent } from './student-detail/student-detail.componen
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ChatComponent } from './chat/chat.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { WebsocketService } from './chat/websocket.service';
+import { ChatService } from './chat/chat.service';
 
 
 
@@ -49,7 +51,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RegisterService,
     HomeService,
     HomeSharedService,
-    UserSharedService
+    UserSharedService,
+    WebsocketService,
+    ChatService
 
 ],
 bootstrap: [HomeComponent]
