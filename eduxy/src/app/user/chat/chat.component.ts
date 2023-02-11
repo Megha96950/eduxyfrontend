@@ -21,6 +21,7 @@ import { environment } from 'src/environments/environment';
 import { WebsocketService } from './websocket.service';
 
 
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -41,9 +42,10 @@ export class ChatComponent  {
   friends:User[]=[];
   emailId!: string;
   MESSAGES_RENDERING_WAIT_TIME = 1000;  
- greeting!:string;
+  greeting!:string;
   newMessage = new FormControl('');
-  //greeting:String[]=[]
+  message?: Observable<Array<chatMessage>>;
+  private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   socket = new SockJS('http://localhost:3333/Eduxy_Server/ws');
   stompClient!:any
   
@@ -51,7 +53,7 @@ export class ChatComponent  {
 
 
   constructor(private router: Router, private route: ActivatedRoute,
-     private chatService:ChatService) { 
+     private chatService:ChatService,private http: HttpClient, private el: ElementRef) { 
       
     
      }
@@ -61,30 +63,40 @@ export class ChatComponent  {
    //this.webSocketService=new WebsocketService(new ChatComponent(this.router,this.route,this.chatService),this.route)
     this.chatChannel=new chatChannel();
     this.channelUuid=this.route.snapshot.params['channelId']
-    this.loggedInUser = JSON.parse(sessionStorage.getItem("user")|| '{}');
-    console.log(this.loggedInUser);
     this.connect(this.channelUuid);
+    this.loggedInUser = JSON.parse(sessionStorage.getItem("user")|| '{}')
+   
     this.getFriendList();
+    //this.loadChat(this.channelUuid)
     this.getExistingChatMessages(this.channelUuid)
-  
+    this.el.nativeElement.querySelector("#chat-area").scrollIntoView();
   
 
   }
 
-
+  ngAfterViewChecked(): void {
+      this.scrollDown();
+    }
+    
+    scrollDown(){
+      var container = this.el.nativeElement.querySelector("#chat-area");
+      container.scrollTop = container.scrollHeight;
+    }
   connect(channelId:string){
     console.log("Initialize WebSocket Connection");
     let ws = new SockJS('http://localhost:3333/Eduxy_Server/ws');
     this.stompClient = Stomp.over(ws);
     const _this = this;
+    this.getExistingChatMessages(channelId)
     _this.stompClient.connect({}, function (frame:any) {
       console.log(frame)
       _this.stompClient.subscribe(_this.topic+channelId, (sdkEvent:any)=> {
-        _this.onMessage(JSON.parse(sdkEvent.body))
-        console.log(sdkEvent)
+        _this.getExistingChatMessages(channelId)
+       
       } );
       _this.stompClient.reconnect_delay = 2000;
     },this.errorCallBack );
+   
   }
 
   disconnect(){
@@ -102,7 +114,8 @@ export class ChatComponent  {
     id:1,
     authorUserId:this.loggedInUser.emailId,
     recipientUserId: this.friends[0].emailId,
-    contents:this.msg
+    contents:this.msg,
+    timeSent:""
   }
   
     this.stompClient.send("/app/chat/"+this.channelUuid,{},JSON.stringify({
@@ -111,7 +124,7 @@ export class ChatComponent  {
       recipientUserId: this.friends[0].emailId,
       contents:this.msg
     }));
-    this.onMessage(this.chatMessage);
+
   }
   
   errorCallBack(error:any) {
@@ -139,18 +152,17 @@ export class ChatComponent  {
 
 }
 getExistingChatMessages(channelId :String){
+ this.messages = [];
   //this.establishedChatChannel= JSON.parse(sessionStorage.getItem("chatSession")|| '{}');
   sessionStorage.setItem("channelId", JSON.stringify(channelId));
- // ;
 
   this.chatService.getExistingChatSessionMessages(channelId).subscribe(
     (response)=>{
       console.log(response)
-      this.chatService.setStorage(response)
       response.forEach(element => {
     
         this.addChatMessageToUI(element)
-     
+       
       });
       this.scrollToLatestChatMessage();
     }
@@ -158,23 +170,7 @@ getExistingChatMessages(channelId :String){
 
 };
 
-selectUserHandler(phone: string): void {
-   this.messages= this.chatService.getStorage();
-  
-  // this.selectedUser = this.userList.find(user => user.phone === phone);
-  // this.roomId = this.selectedUser.roomId[this.currentUser.id];
-  // this.messageArray = [];
 
-  // this.storageArray = this.chatService.getStorage();
-  // const storeIndex = this.storageArray
-  //   .findIndex((storage) => storage.roomId === this.roomId);
-
-  // if (storeIndex > -1) {
-  //   this.messageArray = this.storageArray[storeIndex].chats;
-  // }
-
-  // this.join(this.currentUser.name, this.roomId);
-}
 
 
 
@@ -189,37 +185,15 @@ scrollToLatestChatMessage() {
 };
 
 addChatMessageToUI(message: chatMessage) {
-  console.log(message)
+ 
      this.messages.push({
       id:message.id,
       contents:message.contents,
       authorUserId:message.authorUserId,
-      recipientUserId:message.recipientUserId
+      recipientUserId:message.recipientUserId,
+      timeSent:message.timeSent
      });
-     console.log(this.messages)
-  // self.message.push({
-  //     contents: message.contents,
-  //     isFromRecipient: message.fromUserId != UserService.getUserInfo().id,
-  //     author: (message.fromUserId == UserService.getUserInfo().id) ? self.userOneFullName : self.userTwoFullName
-  //   });
-
-  // if (withForceApply) { self.$apply(); }
-}
-
-onMessage(chatMessage:chatMessage) {
- // this.greeting=chatMessage.contents
-  this.addChatMessageToUI(chatMessage);
-  this.scrollToLatestChatMessage();
-};
-
-handleMessage(chatMessage:chatMessage){  
-   //this.channelUuid = JSON.parse(sessionStorage.getItem("channelId")|| '{}');
-  //   this.emailId= JSON.parse(sessionStorage.getItem("emailId")|| '{}');
-  console.log("guiawhD");
-//this.getExistingChatMessages(this.channelUuid)
-this.greeting=chatMessage.contents
-console.log(this.greeting)
-
+     
 }
 getFriendList(){
   this.chatService.getFriendList(this.loggedInUser.emailId).subscribe(
@@ -296,7 +270,7 @@ addfriend(friend:User){
 // socket?: WebSocket;
 // stompClient:any;
 // newMessage = new FormControl('');
-// messages?: Observable<Array<chatMessage>>;
+//
 // loggedInUser!: User;
 // friends:User[]=[];
 // chatChannel!:chatChannel;
@@ -443,28 +417,29 @@ addfriend(friend:User){
 //   }
 // }
 
-// loadChat(){
+// loadChat(channelId:string){
 //   this.establishedChatChannel= JSON.parse(sessionStorage.getItem("chatSession")|| '{}');
-// const url = environment.chatAPIUrl + '/channel/63928a1d-c6b2-4915-b1da-9c34bcedb07f';
-//   this.messages =this.http.post<chatMessage[]>(url,{headers:this.headers});
+// const url = environment.chatAPIUrl + '/channel/'+channelId;
+//   this.message =this.http.post<chatMessage[]>(url,{headers:this.headers});
 //   //http.post<Array<io>>(this.url+'/getMessages' ,  this.channelName);
-//   this.messages.subscribe(data => {
+//   this.message.subscribe(data => {
 //     let mgs:Array<chatMessage> = data;
 //     //mgs.sort((a, b) => (a.ms_id > b.ms_id) ? 1 : -1)
-//     console.log(this.messages)
-//     this.messages = of(mgs);
+//     console.log(this.messages);
+//     this.message = of(mgs);
 //   })
 //   console.log(this.messages);
 // }
 
-// whenWasItPublished(myTimeStamp: string) {
-//   const endDate = myTimeStamp.indexOf('-');
-//   return (
-//     myTimeStamp.substring(0, endDate) +
-//     ' at ' +
-//     myTimeStamp.substring(endDate + 1)
-//   );
-// }
+whenWasItPublished(myTimeStamp: string) {
+  const endDate = myTimeStamp.indexOf('-');
+  
+  return (
+    myTimeStamp.substring(0, endDate) +
+    ' at ' +
+    myTimeStamp.substring(endDate + 1)
+  );
+}
 
 }
 

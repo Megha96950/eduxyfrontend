@@ -1,11 +1,12 @@
+<div class="chat-component" >
 <table class="table table-bordered">
-  <th width="20%">
-    <div class="panel panel-default friendslist">
-      <div class="panel-heading">
-        <h3 class="panel-title">Friends List</h3>
+  <th width="30%">
+    <div >
+      <div>
+        <h3 >Friends List</h3>
       </div>
-      <div class="panel-body">
-        <div class="list-group" *ngFor="let frnd of friends " >
+      <div >
+        <div  *ngFor="let frnd of friends " >
           <!-- <a (click)="getExistingChatMessages(frnd.channelId,frnd.emailId)" class="list-group-item">{{frnd.emailId}}</a> -->
           <a href="http://localhost:4200/home/chat/{{frnd.channelId}}" class="list-group-item">{{frnd.emailId}}</a>
         </div>
@@ -13,29 +14,40 @@
     </div>
   </th>
   <th>
-    df<p>{{greeting}}</p>
-    
+<div ng-show="showChat" ng-init="messages = []">
+  <div >Private Chat</div>
 
-<div class="panel panel-default" ng-show="showChat" ng-init="messages = []">
-  <div class="panel-heading">Private Chat</div>
-
-  <div class="panel-body" id="chat-area">
-    
-    <div *ngFor="let msg of messages ">
-      <p class="chat-message" ng-class="{'from-recipient': msg.recipientUserId}">
+  <div class="" id="chat-area">
+   
+    <div *ngFor="let msg of messages  ">
+      <div  *ngIf="msg.authorUserId === friends[0].emailId; else thisUserMsg">
+        <div class="d-flex justify-content-start mb-4">
+        <div class="msg_cotainer">
+          {{ msg.contents }}
+          <span class="msg_time">
+            {{whenWasItPublished(msg.timeSent)}}
+           </span>
+        </div>
+     
+      <!-- <p class="chat-message" ng-class="{'from-recipient': msg.recipientUserId}">
         <strong>{{msg.authorUserId}}</strong>: {{msg.contents}}
-      </p>
+      </p> -->
+     </div>
     </div>
+    <ng-template #thisUserMsg>
+      <div class="d-flex justify-content-end mb-4">
+        <div class="msg_cotainer_send">
+          {{ msg.contents }}
+          <span class="msg_time_send">{{
+            whenWasItPublished(msg.timeSent)
+          }}</span>
+        </div>
+       
+      </div>
+    </ng-template>
   </div>
-
-  <!-- <form (ngSubmit)="SentMessage()">
-    <div class="form-group">
-    <input type="text" class="form-control" formControlName="msg" style="width:90%" id="msg" />
-    <button class=" btn btn-primary" style="background-color:rgb(15, 15, 201);" >
-      Upload
-  </button>
-</div>
-  </form> -->
+  
+</div> 
 
   <div class="input-group mb-3">
   <input type="Text" class="form-control" [(ngModel)]="msg"  id="name">
@@ -46,6 +58,6 @@
  </div>
   </div>
 </div>
-</th>
 
 </table>
+</div>

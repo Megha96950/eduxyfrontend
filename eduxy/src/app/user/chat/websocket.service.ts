@@ -72,7 +72,7 @@ _send(chatMessage:chatMessage,channelUuid:String) {
 onMessageReceived(message:any) {
   console.log("Message Recieved from Server :: " + JSON.stringify(message.body));
   
-  this.chatComponent.handleMessage(JSON.parse(message.body));
+  
 
   //(JSON.stringify(message.body);
 }
