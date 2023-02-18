@@ -3,7 +3,7 @@ export class chatMessage{
     authorUserId!:string;
     recipientUserId!:string; 
     contents!:string;
-    timeSent!:string;
+    
    // channelID!:string;
   
     }

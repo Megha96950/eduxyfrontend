@@ -1,4 +1,4 @@
-<div class="chat-component" >
+<div *ngIf="friends[0]!=null"class="chat-component" >
 <table class="table table-bordered">
   <th width="30%">
     <div >
@@ -6,27 +6,29 @@
         <h3 >Friends List</h3>
       </div>
       <div >
-        <div  *ngFor="let frnd of friends " >
-          <!-- <a (click)="getExistingChatMessages(frnd.channelId,frnd.emailId)" class="list-group-item">{{frnd.emailId}}</a> -->
-          <a href="http://localhost:4200/home/chat/{{frnd.channelId}}" class="list-group-item">{{frnd.emailId}}</a>
+        <div class="friend-list" *ngFor="let frnd of friends " >
+          <a (click)="showMessageHandler(frnd.channelId,frnd.emailId)" ><span>{{frnd.name}}</span></a>
+          <!-- <a  href="http://localhost:4200/home/chat/{{frnd.channelId}}/{{frnd.emailId}}"><span>{{frnd.name}}</span></a> -->
         </div>
       </div>
     </div>
   </th>
   <th>
 <div ng-show="showChat" ng-init="messages = []">
-  <div >Private Chat</div>
+
+  <div *ngIf="otherUser!=null" >
+    {{otherUser.name}}</div>
 
   <div class="" id="chat-area">
    
     <div *ngFor="let msg of messages  ">
-      <div  *ngIf="msg.authorUserId === friends[0].emailId; else thisUserMsg">
+      <div  *ngIf="msg.authorUserId === otherUser.emailId; else thisUserMsg">
         <div class="d-flex justify-content-start mb-4">
         <div class="msg_cotainer">
           {{ msg.contents }}
-          <span class="msg_time">
-            {{whenWasItPublished(msg.timeSent)}}
-           </span>
+             <!-- <span class="msg_time">
+       {{whenWasItPublished(msg.timeSent)}}
+      </span> -->
         </div>
      
       <!-- <p class="chat-message" ng-class="{'from-recipient': msg.recipientUserId}">
@@ -38,9 +40,9 @@
       <div class="d-flex justify-content-end mb-4">
         <div class="msg_cotainer_send">
           {{ msg.contents }}
-          <span class="msg_time_send">{{
+          <!-- <span class="msg_time_send">{{
             whenWasItPublished(msg.timeSent)
-          }}</span>
+          }}</span> -->
         </div>
        
       </div>
@@ -50,9 +52,9 @@
 </div> 
 
   <div class="input-group mb-3">
-  <input type="Text" class="form-control" [(ngModel)]="msg"  id="name">
+  <input type="Text" class="form-control type_msg" [(ngModel)]="msg"  id="name">
   <div class="input-group-append">
-  <button class="btn btn-primary" (click)="sendMessage()" style=" background-color:rgb(15, 15, 201);" >
+  <button class= "btn"(click)="sendMessage()" style=" background-color:rgb(15, 15, 201);" >
      send
  </button>
  </div>
@@ -60,4 +62,7 @@
 </div>
 
 </table>
+</div>
+<div *ngIf="friends[0]==null">
+ No chat Available
 </div>

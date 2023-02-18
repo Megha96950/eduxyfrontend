@@ -53,6 +53,12 @@ export class ChatService {
     return this.http.get<User[]>(url,{headers:this.headers})
      .pipe(catchError(this.handleError));
   }
+ 
+  getUserBeEmail(emailId:string):Observable<User>{
+    const url =environment.userAPIUrl+"/user/"+emailId;
+    return this.http.post<User>(url,{headers:this.headers})
+    .pipe(catchError(this.handleError));
+  }
 
   getStorage() {
     const storage = localStorage.getItem('chats');

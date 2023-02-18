@@ -29,6 +29,14 @@
     }
   }
 
+  .btn{
+    border-radius: 0 15px 15px 0 !important;
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    border: 0 !important;
+    color: white !important;
+    cursor: pointer;
+  }
+
 
   .chat-component {
     margin-right: 200px;
@@ -81,7 +89,7 @@
     background-color: rgba(0, 0, 0, 0.3) !important;
     border: 0 !important;
     color: white !important;
-    height: 60px !important;
+    height: 36px !important;
     overflow-y: auto;
   }
   .type_msg:focus {
@@ -218,3 +226,22 @@
       margin-bottom: 15px !important;
     }
   }
+
+ .friend-list{
+  max-width: 490px;
+  width: 100%;
+  border-radius: 12px;
+  height: 30px;
+  align-content: center;
+  background-color:#82ccdd;
+  padding: 15px 15px 20px;
+  display: grid;
+  row-gap: 8px;
+  cursor: pointer;
+  transition: transform .25s cubic-bezier(.7,.98,.86,.98), box-shadow .25s cubic-bezier(.7,.98,.86,.98);
+}
+span{
+  color: black;
+  text-align: center;
+  margin-left: 10px;
+}

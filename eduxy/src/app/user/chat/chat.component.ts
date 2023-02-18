@@ -41,10 +41,11 @@ export class ChatComponent  {
   webSocketService!: WebsocketService;
   friends:User[]=[];
   emailId!: string;
+  otherUser!:User
   MESSAGES_RENDERING_WAIT_TIME = 1000;  
-  greeting!:string;
-  newMessage = new FormControl('');
-  message?: Observable<Array<chatMessage>>;
+  chatId!:string
+
+  
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   socket = new SockJS('http://localhost:3333/Eduxy_Server/ws');
   stompClient!:any
@@ -59,17 +60,26 @@ export class ChatComponent  {
      }
  
   ngOnInit(): void {
-    
+    this.loggedInUser = JSON.parse(sessionStorage.getItem("user")|| '{}')
+    this.getFriendList();
    //this.webSocketService=new WebsocketService(new ChatComponent(this.router,this.route,this.chatService),this.route)
     this.chatChannel=new chatChannel();
-    this.channelUuid=this.route.snapshot.params['channelId']
-    this.connect(this.channelUuid);
-    this.loggedInUser = JSON.parse(sessionStorage.getItem("user")|| '{}')
+    // this.channelUuid=this.route.snapshot.params['channelId']
+    // this.chatId=this.route.snapshot.params['emailId']
+    // this.chatService.getUserBeEmail(this.chatId).subscribe(
+    //   (response)=>{
+    //     this.otherUser=response;
+    //     console.log(this.otherUser)
+    //   }
+    // )
    
-    this.getFriendList();
-    //this.loadChat(this.channelUuid)
-    this.getExistingChatMessages(this.channelUuid)
-    this.el.nativeElement.querySelector("#chat-area").scrollIntoView();
+    // this.connect(this.channelUuid);
+    
+   
+    
+    // //this.loadChat(this.channelUuid)
+    // this.getExistingChatMessages(this.channelUuid)
+    //this.el.nativeElement.querySelector("#chat-area").scrollIntoView();
   
 
   }
@@ -79,10 +89,12 @@ export class ChatComponent  {
     }
     
     scrollDown(){
+      if(this.friends[0]!=null){
       var container = this.el.nativeElement.querySelector("#chat-area");
       container.scrollTop = container.scrollHeight;
     }
-  connect(channelId:string){
+    }
+  connect(channelId:String){
     console.log("Initialize WebSocket Connection");
     let ws = new SockJS('http://localhost:3333/Eduxy_Server/ws');
     this.stompClient = Stomp.over(ws);
@@ -91,6 +103,7 @@ export class ChatComponent  {
     _this.stompClient.connect({}, function (frame:any) {
       console.log(frame)
       _this.stompClient.subscribe(_this.topic+channelId, (sdkEvent:any)=> {
+      
         _this.getExistingChatMessages(channelId)
        
       } );
@@ -113,17 +126,17 @@ export class ChatComponent  {
    this.chatMessage={
     id:1,
     authorUserId:this.loggedInUser.emailId,
-    recipientUserId: this.friends[0].emailId,
-    contents:this.msg,
-    timeSent:""
+    recipientUserId: this.otherUser.emailId,
+    contents:this.msg
   }
   
     this.stompClient.send("/app/chat/"+this.channelUuid,{},JSON.stringify({
       id:1,
       authorUserId:this.loggedInUser.emailId,
-      recipientUserId: this.friends[0].emailId,
+      recipientUserId: this.otherUser.emailId,
       contents:this.msg
     }));
+    this.msg=''
 
   }
   
@@ -152,7 +165,9 @@ export class ChatComponent  {
 
 }
 getExistingChatMessages(channelId :String){
- this.messages = [];
+   while(this.messages.length>0)
+     this.messages.pop()
+ console.log(this.messages);
   //this.establishedChatChannel= JSON.parse(sessionStorage.getItem("chatSession")|| '{}');
   sessionStorage.setItem("channelId", JSON.stringify(channelId));
 
@@ -160,14 +175,15 @@ getExistingChatMessages(channelId :String){
     (response)=>{
       console.log(response)
       response.forEach(element => {
-    
+      
         this.addChatMessageToUI(element)
-       
+        console.log(this.messages);
       });
       this.scrollToLatestChatMessage();
     }
+   
  )
-
+ 
 };
 
 
@@ -185,13 +201,13 @@ scrollToLatestChatMessage() {
 };
 
 addChatMessageToUI(message: chatMessage) {
- 
+
      this.messages.push({
       id:message.id,
       contents:message.contents,
       authorUserId:message.authorUserId,
       recipientUserId:message.recipientUserId,
-      timeSent:message.timeSent
+      
      });
      
 }
@@ -215,7 +231,11 @@ getFriendList(){
       )
       })
       this.friend = JSON.parse(sessionStorage.getItem("friend")|| '{}');
-      if(this.friend!=undefined){
+      const flag=this.friends.some(x=>(x.emailId==this.friend.emailId))
+      console.log(flag+" "+this.friend.emailId)
+
+     
+      if(this.friend.emailId!=null && flag==false){
       this.friends.push(this.friend)
       this.chatChannel.userIdOne=this.loggedInUser.emailId;
       this.chatChannel.userIdTwo=this.friend.emailId;
@@ -223,8 +243,6 @@ getFriendList(){
 
         (response) => {
           this.friend.channelId= response.channelUuid;
-         
-         
         }   
       
         , error => this.errorMessage = <any>error
@@ -232,17 +250,28 @@ getFriendList(){
     )
     }
 
-      console.log(this.friends)
-
     }
   )
 }
 
+showMessageHandler(channelId:String,emailId:string){
+ 
+  sessionStorage.setItem("emailId", JSON.stringify(emailId));
+  sessionStorage.setItem("channelId", JSON.stringify(channelId));
+  this.chatService.getUserBeEmail(emailId).subscribe(
+    (response)=>{
+      this.otherUser=response;
+      
+    }
+  )
+ 
+  this.connect(channelId);
+ // this.getExistingChatMessages(channelId)
+  this.el.nativeElement.querySelector("#chat-area").scrollIntoView();
+}
 addfriend(friend:User){
 
   this.friends.push(friend);
-  
- 
   
 }
 
@@ -431,14 +460,17 @@ addfriend(friend:User){
 //   console.log(this.messages);
 // }
 
-whenWasItPublished(myTimeStamp: string) {
-  const endDate = myTimeStamp.indexOf('-');
+
+whenWasItPublished(myTimeStamp: Date) {
   
-  return (
-    myTimeStamp.substring(0, endDate) +
-    ' at ' +
-    myTimeStamp.substring(endDate + 1)
-  );
+  return myTimeStamp;
+  // const endDate = myTimeStamp.indexOf('-');
+  
+  // return (
+  //   myTimeStamp.substring(0, endDate) +
+  //   ' at ' +
+  //   myTimeStamp.substring(endDate + 1)
+  // );
 }
 
 }

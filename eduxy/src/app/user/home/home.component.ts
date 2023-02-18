@@ -65,18 +65,25 @@ search(){
 
 chat(teacher : Teacher) {
   console.log(teacher)
- this.friend={ emailId:teacher.emailId,
-  name: "",
-  password: "",
-  newPassword:"",
-  phoneNumber:"",
-  role:"",
-  address:[],
-  student: [],
-  teacher: [],
-  channelId:""
-  }
-  sessionStorage.setItem("friend", JSON.stringify(this.friend));
+//  this.friend={ emailId:teacher.emailId,
+//   name:"",
+//   password: "",
+//   newPassword:"",
+//   phoneNumber:"",
+//   role:"",
+//   address:[],
+//   student: [],
+//   teacher: [],
+//   channelId:""
+//   }
+  this.chatService.getUserBeEmail(teacher.emailId).subscribe(
+    (response)=>{
+      this.friend=response;
+      sessionStorage.setItem("friend", JSON.stringify(this.friend));
+    }
+  )
+ 
+
 
 window.location.href="http://localhost:4200/home/chat"
 }
