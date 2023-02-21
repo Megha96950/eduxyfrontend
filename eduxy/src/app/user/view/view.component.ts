@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/shared/model/user';
+import { ViewService } from './view.service';
 
 @Component({
   selector: 'app-view',
@@ -14,15 +15,17 @@ export class ViewComponent implements OnInit {
   userType!:string
   id: number = Number(localStorage.getItem('currentUser'));
   role!:string
+  errorMessage!: string;
+  successMessage!: string;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,private viewService: ViewService) { }
 
   ngOnInit(): void {
     this.currentUser = JSON.parse(sessionStorage.getItem("user")|| '{}')
     this.userType= JSON.parse(sessionStorage.getItem("userType")|| '{}')
     this.role=this.currentUser.role
    
-    console.log(this.currentUser.role)
+    console.log(this.currentUser)
   }
 
 
@@ -31,6 +34,20 @@ export class ViewComponent implements OnInit {
       this.router.navigate(["/home/teacher-detail"])
     else 
     this.router.navigate(["/home/student-detail"])
+  }
+
+  imageUpload(event:any){
+    console.log(event.target.files[0])
+    const file:File=event.target.files[0];
+    this.viewService.addDisplayImage(file,this.currentUser.emailId,this.currentUser.student[0].studentId)
+    .subscribe(
+      (response)=>{
+        this.successMessage=response;
+        this.currentUser.student[0].displayImg=file
+
+      }
+    )
+    
   }
  
 }

@@ -47,7 +47,7 @@
             <table id="myTable">  
                 <tr class="header">  
                     <th>Name</th>  
-                    <th></th>
+                    <th>image</th>
                     <th>Email</th>  
                     <th>Qualification</th> 
                     <th>About</th> 
@@ -56,7 +56,7 @@
                 <ng-container *ngFor="let item of data">   
                     <tr class="header">  
                         <td>  {{item.teacherId}}</td>  
-                        <td><img class="profile_img" src={{item.idPhoto}} alt="teacher dp"></td>
+                        <td><img class="profile_img" src="https://www.w3schools.com/images/picture.jpg" alt="teacher dp"></td>
                         <td>{{item.subjects}}</td>  
                         <td>{{item.higherQualification}}</td>
                         <td>{{item.description}}</td>

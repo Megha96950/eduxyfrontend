@@ -21,6 +21,7 @@ import { ChatComponent } from './chat/chat.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { WebsocketService } from './chat/websocket.service';
 import { ChatService } from './chat/chat.service';
+import { ViewService } from './view/view.service';
 
 
 
@@ -53,7 +54,8 @@ import { ChatService } from './chat/chat.service';
     HomeSharedService,
     UserSharedService,
     WebsocketService,
-    ChatService
+    ChatService,
+    ViewService
 
 ],
 bootstrap: [HomeComponent]

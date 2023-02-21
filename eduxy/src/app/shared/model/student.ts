@@ -7,7 +7,8 @@ export class Student{
     idProof!:string;
     idPhoto!:File;
     motherName!:string;
-    fatherName!:string
+    fatherName!:string;
+    displayImg!:File;
    
 
 }

@@ -50,8 +50,14 @@
         <div class="col-lg-4">
           <div class="card shadow-sm">
             <div class="card-header bg-transparent text-center">
-              <img class="profile_img" src={{currentUser.student[0].idPhoto}} alt="student dp">
-              <h3> {{currentUser.name}} </h3>
+              <div *ngIf="currentUser.student[0].displayImg==null">
+            <input hidden type="file" #profileUpload (change)="imageUpload($event)">
+            <img class="profile_img" src="./assets/download.png" (click)="profileUpload.click()" alt="student dp"><br>
+          </div>
+          <div *ngIf="currentUser.student[0].displayImg!=null">
+            <img class="profile_img" src="data:image/jpeg;base64,{{currentUser.student[0].displayImg}}"alt="student dp">
+          </div>
+            <h3> {{currentUser.name}} </h3>
             </div>
             <div class="card-body">
               <p class="mb-0"><strong class="pr-1">Student ID:</strong>{{currentUser.student[0].studentId}}</p>
