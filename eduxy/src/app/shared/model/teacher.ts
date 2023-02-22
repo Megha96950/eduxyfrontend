@@ -8,6 +8,7 @@ export class Teacher{
     idProof!:string;
     idPhoto!:File;
     degreePhoto!:File;
+    displayImg!:File;
 
 
 }

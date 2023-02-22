@@ -39,14 +39,25 @@ export class ViewComponent implements OnInit {
   imageUpload(event:any){
     console.log(event.target.files[0])
     const file:File=event.target.files[0];
-    this.viewService.addDisplayImage(file,this.currentUser.emailId,this.currentUser.student[0].studentId)
+    if(this.currentUser.role=="student"){
+    this.viewService.addDisplayImageStudent(file,this.currentUser.emailId,this.currentUser.student[0].studentId)
     .subscribe(
       (response)=>{
         this.successMessage=response;
-        this.currentUser.student[0].displayImg=file
+         this.currentUser.student[0].displayImg=file
 
       }
     )
+    }else{
+      this.viewService.addDisplayImageTeacher(file,this.currentUser.emailId,this.currentUser.teacher[0].teacherId)
+      .subscribe(
+        (response)=>{
+          this.successMessage=response;
+           this.currentUser.teacher[0].displayImg=file
+  
+        }
+      )
+    }
     
   }
  

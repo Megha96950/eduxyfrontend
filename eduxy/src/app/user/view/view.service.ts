@@ -12,13 +12,22 @@ export class ViewService {
   private header=new HttpHeaders();
   constructor(private http: HttpClient) { }
 
-  addDisplayImage(dPhoto:File,emailId: string,id:number):Observable<string>{
+  addDisplayImageStudent(dPhoto:File,emailId: string,id:number):Observable<string>{
     const formData=new FormData();
     formData.append('Display_Image',dPhoto,dPhoto.name)
     const url= environment.studentAPIUrl+"/uploadImage/"+emailId+ '/'+id;
     return this.http.post<string>(url,formData,{ responseType: 'text' as 'json'})
     .pipe(catchError(this.handleError));
   }
+
+  addDisplayImageTeacher(dPhoto:File,emailId: string,id:number):Observable<string>{
+    const formData=new FormData();
+    formData.append('Display_Image',dPhoto,dPhoto.name)
+    const url= environment.teacherAPIUrl+"/uploadImage/"+emailId+ '/'+id;
+    return this.http.post<string>(url,formData,{ responseType: 'text' as 'json'})
+    .pipe(catchError(this.handleError));
+  }
+ 
  
   private handleError(err: HttpErrorResponse) {
     console.log(err)

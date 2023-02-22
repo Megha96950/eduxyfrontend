@@ -66,4 +66,11 @@
     filter: blur(1);
   }
 
- 
+ .profile_img{
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin: 10px auto;
+  border: 10px solid #ccc;
+  border-radius: 50%;
+ }

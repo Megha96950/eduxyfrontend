@@ -55,8 +55,16 @@
                 </tr>  
                 <ng-container *ngFor="let item of data">   
                     <tr class="header">  
-                        <td>  {{item.teacherId}}</td>  
-                        <td><img class="profile_img" src="https://www.w3schools.com/images/picture.jpg" alt="teacher dp"></td>
+                        <td>  {{item.name}}</td>  
+                        <td> 
+                        <div *ngIf="item.displayImg==null">
+                        <img class="profile_img" src="./assets/download.png"  alt="teacher dp"><br>
+                        </div>
+                        <div *ngIf="item.displayImg!=null">
+                            <img class="profile_img" src="data:image/jpeg;base64,{{item.displayImg}}" alt="teacher dp">
+                          </div>
+
+                        </td>   
                         <td>{{item.subjects}}</td>  
                         <td>{{item.higherQualification}}</td>
                         <td>{{item.description}}</td>
