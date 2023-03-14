@@ -35,15 +35,13 @@
 </nav>
 
 </div>
-
-
-    <div class="row">
+    <div class="row" >
         <div class="col-md-8 offset-md-2">
             
      </div> 
        <div >
         
-        <div  *ngIf="flag">  
+        <div  *ngIf="flag && role=='student'">  
             <table id="myTable">  
                 <tr class="header">  
                     <th>Name</th>  
@@ -55,7 +53,7 @@
                 </tr>  
                 <ng-container *ngFor="let item of data">   
                     <tr class="header">  
-                        <td>  {{item.name}}</td>  
+                        <td>  <b>{{item.name}}</b></td>  
                         <td> 
                         <div *ngIf="item.displayImg==null">
                         <img class="profile_img" src="./assets/download.png"  alt="teacher dp"><br>
@@ -74,6 +72,41 @@
             </table>  
             
   </div>    
+  <div  *ngIf="flag && role=='teacher'">  
+    <table id="myTable">  
+        <tr class="header">  
+            <th>Name</th>  
+            <th>image</th>
+            <th>Email</th>  
+            <th>standard</th> 
+            <th>instituteName</th> 
+            <th> </th>
+        </tr>  
+        <ng-container *ngFor="let item of data">   
+            <tr class="header">  
+                <td>  <b>{{item.name}}</b></td>  
+                <td> 
+                <div *ngIf="item.displayImg==null">
+                <img class="profile_img" src="./assets/download.png"  alt="teacher dp"><br>
+                </div>
+                <div *ngIf="item.displayImg!=null">
+                    <img class="profile_img" src="data:image/jpeg;base64,{{item.displayImg}}" alt="teacher dp">
+                  </div>
+
+                </td>   
+                <td>{{item.subjects}}</td>  
+                <td>{{item.standard}}</td>
+                <td>{{item.instituteName}}</td>
+                <td><button (click)="chat(item)" class="btn btn-info">message</button></td>  
+            </tr>  
+        </ng-container>  
+    </table>  
+    
+</div>    
+
+ 
+    
+ 
       <div class="wrapper" *ngIf="!flag">
          
                 <router-outlet></router-outlet>

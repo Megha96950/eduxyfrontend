@@ -25,3 +25,25 @@ export class User {
   
     //check for customer carts
 }
+
+export class OnlineUserDto {
+    constructor(userId: string,name: string){
+        this.emailId = userId;
+        this.name = name;
+        this.sessionId = undefined;
+        this.noOfNewMessages = 0;
+        this.status = "OFFLINE";
+      }
+    public emailId!: string;
+    public sessionId?: string;
+    public name!: string;
+    public noOfNewMessages!: number;
+    public status!: string;
+  }
+
+  export class Payload{
+    public name!: string;
+    public emailId!: string;
+    public role!: string;
+    public exp!: number;
+  }

@@ -22,7 +22,18 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { WebsocketService } from './chat/websocket.service';
 import { ChatService } from './chat/chat.service';
 import { ViewService } from './view/view.service';
-
+import { ChatboxComponent } from './chatbox/chatbox.component';
+import { ChatpanelComponent } from './chatpanel/chatpanel.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { AvatarModule } from 'ngx-avatar';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -34,7 +45,12 @@ import { ViewService } from './view/view.service';
     ViewComponent,
     UserDetailComponent,
     StudentDetailComponent,
-    ChatComponent
+    ChatComponent,
+    ChatpanelComponent,
+    ChatboxComponent
+   // MatExpansionModule,
+   // MatSidenavModule
+   
   ],
   imports: [
     BrowserModule,
@@ -45,6 +61,20 @@ import { ViewService } from './view/view.service';
     UserRoutingModule,
     NgSelectModule,
     NgbModule,
+    MatSidenavModule,
+    MatExpansionModule,
+    MatIconModule   ,
+    AvatarModule,
+    MatCardModule,
+    MatListModule,
+    PickerModule,
+    MatBadgeModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule
+    
+
+                    
+
   ],
   providers: [
    

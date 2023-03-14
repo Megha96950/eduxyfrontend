@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
     flag:boolean=false;
     friend!:User;
     chatComponent!:ChatComponent
+    role!:string
   
 
     public data: any;
@@ -50,17 +51,34 @@ export class HomeComponent implements OnInit {
     this.router.navigate([""])
 }
 search(){
-  this.homeService.search(this.searchString)
+  if(this.loggedInUser.role=="student"){
+  this.homeService.searchTeacher(this.searchString)
   .subscribe(
  
       (response) => {
         this.data= response
         console.log(this.data)
          this.flag=true;
+         this.role='student'
     }   
     
       , error => this.errorMessage = <any>error
-  )
+  )}
+  else{
+    this.homeService.searchStudent(this.searchString)
+    .subscribe(
+   
+        (response) => {
+          this.data= response
+          console.log(this.data)
+           this.flag=true;
+           this.role='teacher'
+      }   
+      
+        , error => this.errorMessage = <any>error
+    )
+  }
+
 }
 
 chat(teacher : Teacher) {

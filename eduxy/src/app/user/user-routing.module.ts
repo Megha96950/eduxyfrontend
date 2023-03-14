@@ -21,7 +21,7 @@ const routes : Routes =[
     {path: 'view', component: ViewComponent},
     {path: 'teacher-detail', component: UserDetailComponent},
     {path: 'student-detail', component: StudentDetailComponent},
-    {path: 'chat/:channelId/:emailId', component: ChatComponent},
+    //{path: 'chat/:channelId/:emailId', component: ChatComponent},
     {path: 'chat', component: ChatComponent},
 
     

@@ -9,6 +9,7 @@ export class Teacher{
     idPhoto!:File;
     degreePhoto!:File;
     displayImg!:File;
+    name!:String
 
 
 }

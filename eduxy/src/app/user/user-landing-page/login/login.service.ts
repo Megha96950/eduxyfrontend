@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
+import { EventEmitter, Injectable, Output } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
-import { User } from "src/app/shared/model/user";
+import { Payload, User } from "src/app/shared/model/user";
 import { Observable, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
 import { catchError } from 'rxjs/operators';
@@ -8,6 +8,8 @@ import { catchError } from 'rxjs/operators';
     providedIn:'root'
 })
 export class LoginService {
+
+    @Output()payload: EventEmitter<Payload> = new EventEmitter();
     private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     constructor(private http: HttpClient) {
 

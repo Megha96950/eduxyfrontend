@@ -5,6 +5,7 @@ import { environment } from "../../../environments/environment";
 
 import { catchError } from 'rxjs/operators';
 import { Teacher } from "src/app/shared/model/teacher";
+import { Student } from "src/app/shared/model/student";
 
 
 
@@ -16,10 +17,17 @@ export class HomeService {
     private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     constructor(private http: HttpClient) { }
 
-    search(searchString: String):Observable<Teacher []>{
+    searchTeacher(searchString: String):Observable<Teacher []>{
   
         const url = environment.studentAPIUrl + '/searchTeacher/'+searchString
         return this.http.post<Teacher[]>(url,{ responseType: 'text' as 'json'})
+        .pipe(catchError(this.handleError));
+      }
+
+      searchStudent(searchString: String):Observable<Student []>{
+  
+        const url = environment.teacherAPIUrl + '/searchTeacher/'+searchString
+        return this.http.post<Student[]>(url,{ responseType: 'text' as 'json'})
         .pipe(catchError(this.handleError));
       }
    

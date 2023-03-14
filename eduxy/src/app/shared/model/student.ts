@@ -9,6 +9,7 @@ export class Student{
     motherName!:string;
     fatherName!:string;
     displayImg!:File;
+    name!:string;
    
 
 }

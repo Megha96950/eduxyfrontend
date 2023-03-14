@@ -1,4 +1,4 @@
-<!-- <div *ngIf="friends[0]!=null"class="chat-component" >
+<div *ngIf="friends[0]!=null"class="chat-component" >
 <table class="table table-bordered">
   <th width="30%">
     <div >
@@ -16,10 +16,10 @@
             background-color: red;
             padding-left: 15px;
             padding-right: 15px;">
-           </span> -->
+           </span>
         
           <!-- <a  href="http://localhost:4200/home/chat/{{frnd.channelId}}/{{frnd.emailId}}"><span>{{frnd.name}}</span></a> -->
-        <!-- </div>
+        </div>
       </div>
     </div>
   </th>
@@ -35,24 +35,26 @@
       <div  *ngIf="msg.authorUserId === otherUser.emailId; else thisUserMsg">
         <div class="d-flex justify-content-start mb-4">
         <div class="msg_cotainer">
-          {{ msg.contents }} -->
+          {{ msg.contents }}
              <!-- <span class="msg_time">
        {{whenWasItPublished(msg.timeSent)}}
       </span> -->
-        <!-- </div>
+        </div>
      
-     
+      <!-- <p class="chat-message" ng-class="{'from-recipient': msg.recipientUserId}">
+        <strong>{{msg.authorUserId}}</strong>: {{msg.contents}}
+      </p> -->
      </div>
     </div>
     <ng-template #thisUserMsg>
     
       <div class="d-flex justify-content-end mb-4">
         <div class="msg_cotainer_send">
-          {{ msg.contents }} -->
+          {{ msg.contents }}
           <!-- <span class="msg_time_send">{{
             whenWasItPublished(msg.timeSent)
           }}</span> -->
-        <!-- </div>
+        </div>
        
       </div>
     </ng-template>
@@ -74,38 +76,4 @@
 </div>
 <div *ngIf="friends[0]==null">
  No chat Available
-</div> -->
-
-<div class="navbar-container">
-
-
-  <mat-sidenav-container>
-    <mat-sidenav [opened]="open" [mode]="'side'" [fixedInViewport]="true" fixedTopGap="56">
-     
-    
-     </mat-sidenav>
-
-    <mat-sidenav-content class="mat-drawer-content mat-sidenav-content sidenav-content">
-
-      <div class="maincontent">
-        
-        <app-chatpanel
-          (selectedUsrEvt)="handleSelectedUser($event)"
-          (messagesEvt)="handleMessages($event)"
-          [sentMessage]="sentMessage">
-        </app-chatpanel>
-      </div>
-
-      <div class="bottom-spacer text-center">
-        <app-chatbox
-          *ngIf="!isCloseChatBox"
-          [selectedUser]="selectedUser"
-          [messages]="messages"
-          (isCloseChatBoxEvt)="handleCloseChatBox($event)"
-          (sentMessageEvt)="handleSentMessage($event)">
-        </app-chatbox>
-      </div>
-    </mat-sidenav-content>
-
-  </mat-sidenav-container>
-</div> 
+</div>
