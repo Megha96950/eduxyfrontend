@@ -98,7 +98,7 @@
 
       <div class="bottom-spacer text-center">
         <app-chatbox
-          *ngIf="!isCloseChatBox"
+        *ngIf="!isCloseChatBox"
           [selectedUser]="selectedUser"
           [messages]="messages"
           (isCloseChatBoxEvt)="handleCloseChatBox($event)"

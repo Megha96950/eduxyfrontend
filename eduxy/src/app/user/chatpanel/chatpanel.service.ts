@@ -26,6 +26,6 @@ export class ChatpanelService {
   }
 
   getChatMessages(senderId: string, recipientId: string): Observable<Message[]>{
-    return this.http.get<Message[]>(`${environment.wsAPIUrl}/messages/${senderId}/${recipientId}`);
+    return this.http.get<Message[]>(`${environment.messageAPIUrl}/${senderId}/${recipientId}`);
   }
 }

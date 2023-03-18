@@ -27,32 +27,32 @@ export class ChatService {
   //   this.topic="/topic/message/"+this.channelUuid
   //  }
   
-  establishChatSession(ChatChannel: chatChannel):Observable<EstablishedchatConnection>{
-    console.log(ChatChannel)
-    const url = environment.chatAPIUrl + '/chat/';
-     return this.http.post<EstablishedchatConnection>(url,ChatChannel,{headers:this.headers})
-     .pipe(catchError(this.handleError));
-  }
+  // establishChatSession(ChatChannel: chatChannel):Observable<EstablishedchatConnection>{
+  //   console.log(ChatChannel)
+  //   const url = environment.chatAPIUrl + '/chat/';
+  //    return this.http.post<EstablishedchatConnection>(url,ChatChannel,{headers:this.headers})
+  //    .pipe(catchError(this.handleError));
+  // }
 
-  Sent(ChannelId:String,chatmessage:chatMessage):Observable<chatMessage>{
+  // Sent(ChannelId:String,chatmessage:chatMessage):Observable<chatMessage>{
   
-     console.log(chatmessage)
-    const url = environment.chatAPIUrl + '/chat/'+ChannelId;
-    return this.http.post<chatMessage>(url,chatmessage,{headers:this.headers})
-     .pipe(catchError(this.handleError));
-  }
-  getExistingChatSessionMessages(ChannelId:String):Observable<chatMessage[]>{
-    console.log(ChannelId)
-    const url = environment.chatAPIUrl + '/channel/'+ChannelId;
-    return this.http.post<chatMessage[]>(url,{headers:this.headers})
-     .pipe(catchError(this.handleError));
-  }
+  //    console.log(chatmessage)
+  //   const url = environment.chatAPIUrl + '/chat/'+ChannelId;
+  //   return this.http.post<chatMessage>(url,chatmessage,{headers:this.headers})
+  //    .pipe(catchError(this.handleError));
+  // }
+  // getExistingChatSessionMessages(ChannelId:String):Observable<chatMessage[]>{
+  //   console.log(ChannelId)
+  //   const url = environment.chatAPIUrl + '/channel/'+ChannelId;
+  //   return this.http.post<chatMessage[]>(url,{headers:this.headers})
+  //    .pipe(catchError(this.handleError));
+  // }
 
-  getFriendList(Id :String):Observable<User[]>{
-    const url = environment.chatAPIUrl + '/friend/'+Id;
-    return this.http.get<User[]>(url,{headers:this.headers})
-     .pipe(catchError(this.handleError));
-  }
+  // getFriendList(Id :String):Observable<User[]>{
+  //   const url = environment.chatAPIUrl + '/friend/'+Id;
+  //   return this.http.get<User[]>(url,{headers:this.headers})
+  //    .pipe(catchError(this.handleError));
+  // }
  
   getUserBeEmail(emailId:string):Observable<User>{
     const url =environment.userAPIUrl+"/user/"+emailId;

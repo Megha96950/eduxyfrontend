@@ -28,8 +28,8 @@ export class ChatpanelComponent implements OnInit, OnChanges {
    @ViewChild('drawer') drawer!: MatDrawer;
   private serverUrl = environment.wsAPIUrl;
   stompClient!:any
-  @Input()sentMessage?: Message 
-  @Output()selectedUsrEvt = new EventEmitter();
+  @Input()sentMessage!: Message 
+  @Output()selectedUsrEvt = new EventEmitter<OnlineUserDto>();
   @Output()messagesEvt = new EventEmitter();
   public messages: Message[] = [];
   public noOfUsersHavingNewMsgs!: number;
@@ -42,10 +42,12 @@ export class ChatpanelComponent implements OnInit, OnChanges {
   public isLogIn!: boolean;
   public loggedInUser!:User;
   ngOnChanges(): void{
+    console.log(this.sentMessage)
     if (this.sentMessage != undefined){
-      this.stompClient.send(`/app/chat`, {}, this.sentMessage);
+      console.log(this.sentMessage)
+      this.stompClient.send(`/app/chat/`, {}, JSON.stringify(this.sentMessage));
     }
-    this.sentMessage=undefined;
+ //   this.sentMessage=;
   
   }
   ngOnInit(): void {
@@ -110,9 +112,11 @@ export class ChatpanelComponent implements OnInit, OnChanges {
   }
 
   public openChatBox(user: OnlineUserDto): void{
+    console.log(user)
     this.selectedUser = user;
     this.selectedUsrEvt.emit(user);
     this.chatService.getChatMessages(user.emailId, this.currentUser.emailId).subscribe((mes: Message[]) => {
+      console.log(mes)
       this.messages = mes;
       this.messagesEvt.emit(mes);
     });

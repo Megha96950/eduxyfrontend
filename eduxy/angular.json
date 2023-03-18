@@ -30,6 +30,7 @@
               "src/styles.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/font-awesome/css/font-awesome.css"
+            
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
@@ -102,7 +103,14 @@
             ],
             "styles": [
               "src/styles.css",
-              "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "../node_modules/@angular/material/card/_card-theme.scss",
+              "../node_modules@angular/material/badge/_badge-theme.scss",
+              "../node_modules/@angular/material/sidenav/_sidenav-theme.scss",
+              "../node_modules/@angular/material/list/_list-theme.scss",
+              "../node_modules/@angular/material/icon/_icon-theme.scss",
+              "../node_modules/@angular/material/expansion/_expansion-theme.scss"
+             
             ],
             "scripts": [
               "../node_modules/jquery/dist/jquery.js",

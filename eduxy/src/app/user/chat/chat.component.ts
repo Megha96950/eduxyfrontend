@@ -304,6 +304,7 @@ constructor(){}
 
 ngOnInit(): void{
   console.log("uilgQDLJKG")
+  console.log(this.selectedUser)
   this.open = false;
   this.isCloseChatBox = true;
 }

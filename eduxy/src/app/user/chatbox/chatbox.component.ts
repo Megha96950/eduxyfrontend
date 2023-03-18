@@ -26,7 +26,7 @@ export class ChatboxComponent implements OnInit, OnChanges {
 
   @Input()selectedUser!: OnlineUserDto;
   @Output()isCloseChatBoxEvt = new EventEmitter();
-  @Output()sentMessageEvt = new EventEmitter();
+  @Output()sentMessageEvt = new EventEmitter<Message>();
   @Input()messages: Message[] = [];
   public text!: string;
   public currentUser!: OnlineUserDto;
@@ -77,7 +77,8 @@ export class ChatboxComponent implements OnInit, OnChanges {
   send(): void {
     const mes =  new Message(this.currentUser.emailId, this.currentUser.name, this.selectedUser.emailId, this.selectedUser.name, this.text);
     const converted = JSON.stringify(mes);
-    this.sentMessageEvt.emit(converted);
+   console.log(mes)
+    this.sentMessageEvt.emit(mes);
     this.messages.push(mes);
     this.text = '';
   }
@@ -91,7 +92,7 @@ export class ChatboxComponent implements OnInit, OnChanges {
     this.text = event.target.value;
     const mes = new Message(this.currentUser.emailId, this.currentUser.name, this.selectedUser.emailId, this.selectedUser.name, this.text);
     const converted = JSON.stringify(mes);
-    this.sentMessageEvt.emit(converted);
+    this.sentMessageEvt.emit(mes);
     this.messages.push(mes);
     this.text = '';
   }

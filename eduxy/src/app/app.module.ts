@@ -12,12 +12,15 @@ import { HomeComponent } from './user/home/home.component';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatCardModule } from '@angular/material/card';
-import { MatListModule } from '@angular/material/list';
+
+
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { MatBadgeModule } from '@angular/material/badge';
 import { ChatboxComponent } from './user/chatbox/chatbox.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+
 
 
 

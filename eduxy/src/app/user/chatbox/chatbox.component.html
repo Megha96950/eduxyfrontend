@@ -1,11 +1,16 @@
+
 <div class="fixed-container">
+  
     <mat-accordion hideToggle>
       <mat-expansion-panel [expanded]="false">
         <mat-expansion-panel-header>
           <mat-panel-title>
+            
             <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-between">
+             
               <div fxLayout="row" fxLayoutAlign="space-between">
-                <h3 class="m-0" style="color:white">
+               
+                <h3 class="m-0">
                   {{selectedUser.name}}
                   <span class="status green ml-2"*ngIf="selectedUser.status=='ONLINE'"></span>
                   <span class="status orange ml-2"*ngIf="selectedUser.status=='OFFLINE'"></span>
@@ -13,6 +18,7 @@
               </div>
   
               <mat-icon
+              
                 style="color:#FFFFFF; font-size: 20px;padding-top:3px; padding-left:20px;"
                 (click)="closeChatBox()">close</mat-icon>
             </div>

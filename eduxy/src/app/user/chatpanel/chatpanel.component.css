@@ -1,0 +1,108 @@
+.fixed-container{
+    position: absolute;
+    top:0;
+    right:0;
+    background-color: transparent;
+    width:100%;
+    height:100%;
+  
+  }
+  .chat-panel-wrapper{
+    height:50vh;
+    width:20%;
+    position: fixed;
+    margin-top:25px;
+    right:35px;
+    border-radius: 5px;
+    z-index: 50;
+  }
+  .btn-chat-toggle{
+    width:fit-content;
+    margin-left:auto
+  }
+  
+  
+  .chatpanel-container{
+    display:flex;
+    flex-direction: column;
+    background-color: transparent;
+  }
+  
+  .chat-sidenav{
+    border-radius:5px;
+    width: 100%;
+  }
+  
+  :host ::ng-deep .mat-card{
+    box-shadow:none !important;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .myprofile /deep/{
+    margin: auto;
+  }
+  
+  .status{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    display:inline-block;
+    margin-right:7px;
+  }
+  .green{
+    background-color:#58b666;
+  }
+  .orange{
+    background-color:#ff725d;
+  }
+  
+  :host ::ng-deep .mat-list-item:hover{
+    background-color:lightgray;
+    cursor: pointer;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 0px;
+    height: 2px;
+    background: transparent; /* make scrollbar transparent */
+  }
+  
+  :host ::ng-deep .mat-drawer-inner-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  :host ::ng-deep .mat-drawer-container{
+    z-index:-10;
+  }
+  @media only screen and (max-width: 1024px) {
+    .chat-panel-wrapper{
+      width: 25%;
+      height: 30vh
+    }
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .chat-panel-wrapper{
+      width: 40%;
+    }
+  }
+  
+  @media only screen and (max-width: 540px) {
+    .chat-panel-wrapper{
+      width: 50%;
+    }
+  }
+  
+  @media only screen and (max-width: 415px) {
+    .chat-panel-wrapper{
+      width: 70%;
+      height: 40vh
+    }
+  }
+  @media only screen and (max-width: 320px) {
+    .chat-panel-wrapper{
+      width: 70%;
+    }
+  }

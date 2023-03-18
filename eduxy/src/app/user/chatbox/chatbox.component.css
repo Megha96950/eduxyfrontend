@@ -1,0 +1,146 @@
+.fixed-container{
+    width:100%;
+    height:100%;
+    background-color: transparent;
+    position: absolute;
+    top:0;
+    right:0;
+  }
+  :host ::ng-deep .mat-accordion {
+    bottom: 0;
+    position:fixed;
+    right: 30px;
+    z-index:100;
+  }
+  
+  :host ::ng-deep .mat-expansion-panel-header{
+    background-color: #3F51B5 !important;
+    height: fit-content;
+    padding-top:4px;
+    padding-bottom: 4px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+  
+  :host ::ng-deep .mat-expansion-panel-body{
+    padding-right:10px;
+  }
+  .accordion-wrapper{
+    display:flex;
+    position: absolute;
+    bottom: 1px;
+  }
+  #chatbox-area{
+    width: 250px;
+    height: 300px;
+  }
+  
+  .chat-content{
+    overflow: auto;
+    height: 300px;
+    margin-top:15px;
+  }
+  
+  .chat-thumb{
+    float: left;
+    width: 20%;
+  }
+  
+  .chat-messages{
+    float: left;
+    width: 80%;
+    margin-bottom: 20px;
+  }
+  
+  .status{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    display:inline-block;
+    margin-right:7px;
+  }
+  .green{
+    background-color:#58b666;
+  }
+  .orange{
+    background-color:#ff725d;
+  }
+  
+  .chat-message-group .chat-thumb{
+    float: left;
+    width: 20%;
+  }
+  .chat-message-group .chat-messages{
+    float: left;
+    width: 80%;
+    margin-bottom: 20px;
+  }
+  .chat-message-group .message{
+    padding: 10px;
+    background: #ecf1f8;
+    font-size: 13px;
+    border-radius: 5px;
+    margin-bottom: 3px;
+    margin-right:16px;
+    text-align: left;
+    width:fit-content;
+  }
+  .chat-messages .from{
+    width: 100%;
+    font-size: 11px;
+    padding-right:20px;
+    text-align:left;
+  }
+  
+  .writer-user .chat-messages{
+    float: right;
+    width: 100%;
+  }
+  .writer-user .chat-messages .message{
+    float: right;
+    background: #683db8;
+    color: #FFF;
+  }
+  .writer-user .chat-messages .from{
+    float: left;
+    display: block;
+    width: 100%;
+    text-align: right;
+  }
+  .chatBox-textbox{
+    width: 100%;
+  }
+  
+  textarea{
+    width: 85%;
+    border-color: lightgray;
+    border-radius: 5px
+  }
+  textarea:focus{
+    outline: none;
+  }
+  
+  .emoji{
+    padding: 8px 0 0 8px
+  }
+  
+  .emoji:hover{
+    cursor: pointer
+  }
+  .emoji-send-wrapper{
+    display: flex;
+  }
+  
+  :host ::ng-deep .emoji-mart-preview{
+    display:none;
+  }
+  
+  :host ::ng-deep .emoji-mart{
+    position: absolute;
+    bottom:30px;
+    right:0
+  }
+  
+  :host ::ng-deep .emoji-mart .emoji-mart-dark{
+    width: 280px !important;
+  }

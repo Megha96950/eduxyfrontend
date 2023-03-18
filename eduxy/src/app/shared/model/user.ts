@@ -27,8 +27,8 @@ export class User {
 }
 
 export class OnlineUserDto {
-    constructor(userId: string,name: string){
-        this.emailId = userId;
+    constructor(emailId: string,name: string){
+        this.emailId = emailId;
         this.name = name;
         this.sessionId = undefined;
         this.noOfNewMessages = 0;
