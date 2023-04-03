@@ -22,7 +22,7 @@
             </ul>
           </div> -->
      
-          <div ngbDropdown class="dropdown">
+          <!-- <div ngbDropdown class="dropdown">
             <button ngbDropdownToggle class="btn btn-secondary" type="button" id="dropdownMenuButton1" aria-expanded="false">
                 {{loggedInUser.name}}
           </button>
@@ -31,7 +31,39 @@
               <li><a ngbDropdownItem href="http://localhost:4200/home/chat"> Message </a></li>
               <li><a ngbDropdownItem (click)="logout()"> logout</a></li>
             </ul>
-          </div>
+          </div> -->
+       
+    <div > 
+      <mat-accordion class="dropdown" >  
+      <mat-expansion-panel hideToggle [expanded]="isExpanded">
+        <mat-expansion-panel-header  >
+          <mat-panel-title>
+          {{loggedInUser.name}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div id="chatbox-area">
+            <div class="card-content chat-content">   
+              <div class="content">
+            <!-- <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+              <li><a ngbDropdownItem href="http://localhost:4200/home/view">My detail</a></li>
+              <li><a ngbDropdownItem href="http://localhost:4200/home/chat"> Message </a></li>
+              <li><a ngbDropdownItem (click)="logout()"> logout</a></li>
+            </ul> -->
+            <div class = link >  
+          <a style =" text-decoration: none" href="http://localhost:4200/home/view">My_detail</a>
+        </div>
+        <div  class = link ><a style =" text-decoration: none" href="http://localhost:4200/home/chat"> Message </a></div>
+          
+          <div class = link > <a style =" text-decoration: none"  (click)="logout()"> logout</a></div>
+         </div>
+         </div>
+        
+      </div>
+      </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+            
+
 </nav>
 
 </div>
@@ -102,15 +134,53 @@
         </ng-container>  
     </table>  
     
-</div>    
+</div>   
+<app-chat ></app-chat>
+<!-- <div class="fixed-container">
+  
+    <mat-accordion hideToggle>
+      <mat-expansion-panel [expanded]="false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            
+            <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-between">
+             
+              <div fxLayout="row" fxLayoutAlign="space-between">
+               
+                <h3 class="m-0">
+                  chat
+                  
+                </h3>
+              </div>
+  
+              <mat-icon
+              
+                style="color:#FFFFFF; font-size: 20px;padding-top:3px; padding-left:20px;"
+                >close</mat-icon>
+            </div>
+  
+  
+          </mat-panel-title>
+  
+    </mat-expansion-panel-header>
+     
+    
+  
+      </mat-expansion-panel>
+  
+    </mat-accordion>
+  
+  </div> -->
 
  
     
  
-      <div class="wrapper" *ngIf="!flag">
+    <div class="wrapper" *ngIf="!flag">
          
                 <router-outlet></router-outlet>
-        </div>
+     </div>
+
+
     </div>
 
    

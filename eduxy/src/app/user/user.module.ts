@@ -34,6 +34,8 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -70,7 +72,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PickerModule,
     MatBadgeModule,
     MatSnackBarModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSelectModule,
+    MatFormFieldModule
     
 
                     

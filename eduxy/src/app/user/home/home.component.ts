@@ -7,7 +7,7 @@ import { UserSharedService } from '../user-shared-service';
 import { Teacher } from 'src/app/shared/model/teacher';
 import { ChatComponent } from '../chat/chat.component';
 import { ChatService } from '../chat/chat.service';
-
+import { ItemModel, MenuEventArgs } from '@syncfusion/ej2-angular-splitbuttons';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -28,9 +28,28 @@ export class HomeComponent implements OnInit {
     friend!:User;
     chatComponent!:ChatComponent
     role!:string
-  
+    isExpanded=false
 
     public data: any;
+
+
+    public items: ItemModel[] = [
+      {
+          text: 'Dashboard',
+          iconCss: 'e-ddb-icons e-dashboard'
+      },
+      {
+          text: 'Notifications',
+          iconCss: 'e-ddb-icons e-notifications',
+      },
+      {
+          text: 'User Settings',
+          iconCss: 'e-ddb-icons e-settings',
+      },
+      {
+          text: 'Log Out',
+          iconCss: 'e-ddb-icons e-logout'
+      }];
   constructor(private router: Router, private chatService:ChatService, private route: ActivatedRoute, private homeService: HomeService, private userSharedService : UserSharedService) { }
 
   ngOnInit(): void {
@@ -44,7 +63,9 @@ export class HomeComponent implements OnInit {
     //   this.chatComponent=new ChatComponent(this.router,this.route,this.chatService)
   }
 
-  
+  handleDropdown(){
+this.isExpanded=!this.isExpanded
+  }
 
   logout() {
     sessionStorage.clear(); 

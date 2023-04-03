@@ -76,27 +76,42 @@
  No chat Available
 </div> -->
 
-<div class="navbar-container">
+<div class="fixed-container">
 
-
-  <mat-sidenav-container>
-    <mat-sidenav [opened]="open" [mode]="'side'" [fixedInViewport]="true" fixedTopGap="56">
-     
+  <mat-accordion >  
+    <div>
     
-     </mat-sidenav>
-
-    <mat-sidenav-content class="mat-drawer-content mat-sidenav-content sidenav-content">
-
-      <div class="maincontent">
-        
+      <button class= "mat-button" (click)="handleCloseChatPanel()">X</button>
+   
+   
+  
+    <mat-expansion-panel hideToggle [expanded]="isExpanded "  >
+      
+      <mat-expansion-panel-header >
+        <mat-panel-title >
+          <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-between">
+             
+            <div fxLayout="row" fxLayoutAlign="space-between">
+             
+             <p>Chat</p>
+               
+                
+           
+            </div>
+         
+        </div>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ng-template matExpansionPanelContent>
+      <div id="chatbox-area">
+        <div class="chat-content">   
+          <div class="content">
         <app-chatpanel
           (selectedUsrEvt)="handleSelectedUser($event)"
           (messagesEvt)="handleMessages($event)"
-          [sentMessage]="sentMessage">
+          [sentMessage]="sentMessage"   >
         </app-chatpanel>
-      </div>
-
-      <div class="bottom-spacer text-center">
+     
         <app-chatbox
         *ngIf="!isCloseChatBox"
           [selectedUser]="selectedUser"
@@ -105,7 +120,11 @@
           (sentMessageEvt)="handleSentMessage($event)">
         </app-chatbox>
       </div>
-    </mat-sidenav-content>
+      </div>
+    </div> 
+      </ng-template>
+  </mat-expansion-panel>
+</div>
+</mat-accordion>
 
-  </mat-sidenav-container>
 </div> 

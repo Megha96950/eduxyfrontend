@@ -299,11 +299,12 @@ public username!: string;
 public open!: boolean;
 public isCloseChatBox!: boolean;
 public messages: Message[] = [];
+public isExpanded= false;
 
 constructor(){}
 
 ngOnInit(): void{
-  console.log("uilgQDLJKG")
+  console.log(this.isExpanded)
   console.log(this.selectedUser)
   this.open = false;
   this.isCloseChatBox = true;
@@ -319,6 +320,7 @@ handleSelectedUser(event:any): void{
 }
 
 handleCloseChatBox(event:any): void{
+
   this.isCloseChatBox = event;
 }
 
@@ -330,6 +332,12 @@ handleSentMessage(event:any): void{
   this.sentMessage = event;
 }
 
+handleCloseChatPanel()
+{
+  console.log(this.isExpanded)
+  this.isExpanded=!this.isExpanded
+  // this.isExpanded=!this.isExpanded
+}
 whenWasItPublished(myTimeStamp: Date) {
   
   return myTimeStamp;

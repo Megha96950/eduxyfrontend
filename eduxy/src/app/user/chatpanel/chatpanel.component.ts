@@ -93,7 +93,7 @@ export class ChatpanelComponent implements OnInit, OnChanges {
     const ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     const that = this;
-    this.stompClient.connect({username: that.currentUser.name}, function(frame:any) {
+    this.stompClient.connect({username: that.currentUser.emailId}, function(frame:any) {
       that.stompClient.subscribe('/user/' + that.currentUser.name + '/queue/messages', (noti:any) => {
         const senderName = noti.body.split(',')[1].split(':')[1].replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '');
         if (that.selectedUser == null || senderName !== that.selectedUser.name) {
@@ -124,6 +124,7 @@ export class ChatpanelComponent implements OnInit, OnChanges {
 
   public openDrawer():void{
     if(this.loggedInUser!=null){
+      console.log("hjkafhjshoiaygihkdjojh")
      this.drawer.toggle();
     }
     else{

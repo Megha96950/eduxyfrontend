@@ -28,6 +28,7 @@
     "@material/snackbar": "^14.0.0",
     "@ng-bootstrap/ng-bootstrap": "^9.1.2",
     "@ng-select/ng-select": "^7.4.0",
+    "@syncfusion/ej2-angular-splitbuttons": "^21.1.35",
     "@types/sizzle": "^2.3.3",
     "angular-animations": "^0.11.0",
     "angular-material-expansion-panel": "^0.7.2",

@@ -1,53 +1,60 @@
 
 <div class="fixed-container">
-    <div class="chat-panel-wrapper">
-      <div class="btn-chat-toggle">
-       
-      </div>
-      <mat-drawer-container class="chatpanel-container" autosize>
+    <div class="chat-panel-wrapper chatpanel-container">
+     
+      <mat-drawer-container class="chatpannel" autosize>
         
        <!-- <mat-drawer class="chat-sidenav" #drawer opened = "false" mode="side" position="end"> -->
+        
           <div class="chat-sidenav">
-          <mat-card class="border-1 pb-0">
+            <!-- <div class ="header">
+          <mat-card >
             <ngx-avatar
               class="myprofile"
               name={{currentUser.name}}
-              size="40"
-              bgColor={{setColor(currentUser.name)}}
-            >
-            </ngx-avatar>
+              size="50"
+              bgColor={{setColor(currentUser.name)}}></ngx-avatar>
             <h2 style="text-align: center">{{currentUser.name | uppercase}}</h2>
           </mat-card>
+        </div> -->
+          <div class=" tile">
           <mat-card>
+          
             <mat-list>
-              <mat-list-item *ngFor="let user of onlUsers" class="mb-3 pt-1 pb-1" (click)="openChatBox(user)">
-                <div fxLayout fxLayoutAlign="space-between" style="width:100%">
-                  <div fxLayout>
+              
+              <mat-list-item *ngFor="let user of onlUsers"  (click)="openChatBox(user)">
+                <!-- <div fxLayout fxLayoutAlign="space-between" style="width:100%">-->
+                  <!-- <div fxLayout>  -->
+                  
                     <ngx-avatar
                       name={{user.name}}
                       [size]="35"
-                   
+                     
                       bgColor={{setColor(user.name)}}>
                     </ngx-avatar>
+             
                     <div fxLayout="column" class="ml-2">
-                      <h4 class="m-0">{{user.name}}</h4>
+                      <p  class="m-3"> {{user.name}}</p>
                       <h5 class="m-0" *ngIf="user.noOfNewMessages > 0">{{user.noOfNewMessages}} new messages</h5>
                     </div>
-                  </div>
+                 
                   <h5 *ngIf="user.status=='ONLINE'">
                     <span class="status green"></span>
-                    online
+                   
                   </h5>
                   <h5 *ngIf="user.status=='OFFLINE'">
                     <span class="status orange"></span>
-                    offline
+                    
                   </h5>
-                </div>
-  
+                <!-- </div> -->
+              
   
               </mat-list-item>
+             
             </mat-list>
+          
           </mat-card>
+        </div> 
         </div>
         <!-- </mat-drawer> -->
   
