@@ -1,5 +1,5 @@
 
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 import { Message } from 'src/app/shared/model/Message';
 import { OnlineUserDto, User } from 'src/app/shared/model/user';
 import { ColorConverter } from 'src/app/Utils/ColorConverter';
@@ -28,6 +28,7 @@ export class ChatboxComponent implements OnInit, OnChanges {
   @Output()isCloseChatBoxEvt = new EventEmitter();
   @Output()sentMessageEvt = new EventEmitter<Message>();
   @Input()messages: Message[] = [];
+
   public text!: string;
   public currentUser!: OnlineUserDto;
   public onlUsers: OnlineUserDto[] = [];
@@ -50,17 +51,28 @@ export class ChatboxComponent implements OnInit, OnChanges {
   }
   onBlur() {
   }
-  constructor() { }
+  constructor(private el: ElementRef) { }
 
   ngOnChanges(): void {}
-  ngOnInit(): void {
+  ngOnInit(){
     this.loggedInUser = JSON.parse(sessionStorage.getItem("user")|| '{}')
     this.currentUser = new OnlineUserDto(this.loggedInUser.emailId, this.loggedInUser.name);
     this.timeUtils = new TimeConverter();
     this.colorUtils = new ColorConverter();
     this.text = '';
+   
   }
-
+  ngAfterViewChecked(){
+   this.scrollDown();
+    
+  }
+  
+  scrollDown(){
+    if(this.messages[0]!=null){
+      var container = this.el.nativeElement.querySelector("#chatarea");
+      container.scrollTop = container.scrollHeight;
+    }
+  }
   public setColor(username: string): void{
     return this.colorUtils.setColor(username);
   }

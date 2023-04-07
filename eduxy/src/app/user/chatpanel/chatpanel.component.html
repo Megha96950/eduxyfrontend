@@ -35,7 +35,7 @@
              
                     <div fxLayout="column" class="ml-2">
                       <p  class="m-3"> {{user.name}}</p>
-                      <h5 class="m-0" *ngIf="user.noOfNewMessages > 0">{{user.noOfNewMessages}} new messages</h5>
+                     
                     </div>
                  
                   <h5 *ngIf="user.status=='ONLINE'">
@@ -46,8 +46,10 @@
                     <span class="status orange"></span>
                     
                   </h5>
-                <!-- </div> -->
-              
+                 <div class="badge">
+                  <p  *ngIf="user.noOfNewMessages > 0">{{user.noOfNewMessages}}</p>
+                 </div>
+               
   
               </mat-list-item>
              

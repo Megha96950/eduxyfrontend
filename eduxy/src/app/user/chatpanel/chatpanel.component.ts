@@ -70,13 +70,14 @@ export class ChatpanelComponent implements OnInit, OnChanges {
           users.forEach((u) => {
             // remove currentUser from online list and recheck non duplicate value from backend
             if (onlineUsrs.filter(o => o.name === u.name).length === 0 && u.name !== this.currentUser.name) {
+              console.log( u.noOfNewMessages)
               onlineUsrs.push(u);
             }
             if (u.noOfNewMessages > 0 && u.noOfNewMessages != null){
               this.noOfUsersHavingNewMsgs += 1;
             }
           });
-
+           console.log( this.noOfUsersHavingNewMsgs)
           that.onlUsers = onlineUsrs;
 
       this.initializeWebSocketConnection();

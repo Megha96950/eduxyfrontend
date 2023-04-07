@@ -9,12 +9,14 @@ import { ViewComponent } from './view/view.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { StudentDetailComponent } from './student-detail/student-detail.component';
 import { ChatComponent } from './chat/chat.component';
+import { MainpageComponent } from './mainpage/mainpage.component';
 
 const routes : Routes =[
   { path: 'eduxy', component: UserLandingPageComponent, children: [
     {path: '', redirectTo: 'login', pathMatch: 'full'},
     {path: 'login', component: LoginComponent},
-    {path: 'register', component: RegisterComponent}
+    {path: 'register', component: RegisterComponent},
+    {path: 'main', component: MainpageComponent}
   ] },
   { path: 'home', component: HomeComponent, children: [
     {path: '', redirectTo: 'view', pathMatch: 'full'},

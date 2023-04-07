@@ -4,32 +4,49 @@
     <mat-accordion hideToggle>
       <mat-expansion-panel [expanded]="false">
         <mat-expansion-panel-header>
-          <mat-panel-title>
+          <mat-panel-title class="chat_header" >
             
-            <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-between">
+            <!-- <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-between">
+              -->
              
-              <div fxLayout="row" fxLayoutAlign="space-between">
+                <div >
+                   {{selectedUser.name}} 
+                
+                    <span *ngIf="selectedUser.status=='ONLINE'" class="status green"></span>
+                    <span *ngIf="selectedUser.status=='OFFLINE'" class="status orange"></span>
+                    <mat-icon 
+              
+                    style="color:#FFFFFF; font-size: 20px;padding-top:3px; padding-left:20px; margin-left: 112px;"
+                    (click)="closeChatBox()">x</mat-icon>
+                </div>
+              
+             
+               <!-- <p>  {{selectedUser.name}} </p>
                
-                <h3 class="m-0">
+                <span *ngIf="selectedUser.status=='ONLINE'" class="status green"></span>
+                <span *ngIf="selectedUser.status=='OFFLINE'" class="status orange"></span>
+                <mat-icon
+              
+                style="color:#FFFFFF; font-size: 20px;padding-top:3px; padding-left:20px;"
+                (click)="closeChatBox()">X</mat-icon>  -->
+              
+                <!-- <h3 class="m-0">
                   {{selectedUser.name}}
                   <span class="status green ml-2"*ngIf="selectedUser.status=='ONLINE'"></span>
                   <span class="status orange ml-2"*ngIf="selectedUser.status=='OFFLINE'"></span>
-                </h3>
-              </div>
+                </h3> -->
+              <!-- </div> -->
   
-              <mat-icon
-              
-                style="color:#FFFFFF; font-size: 20px;padding-top:3px; padding-left:20px;"
-                (click)="closeChatBox()">close</mat-icon>
-            </div>
+             
+            <!-- </div> -->
   
   
           </mat-panel-title>
   
         </mat-expansion-panel-header>
         <div id="chatbox-area">
-          <div class="card-content chat-content">
-            <div class="content" *ngFor="let mes of messages">
+          <div id="chatarea" class="card-content chat-content">
+            <div  class="content" *ngFor="let mes of messages">
               <div class="chat-message-group" *ngIf="mes.senderName!=currentUser.name">
                 <div class="chat-thumb">
                   <ngx-avatar
@@ -40,7 +57,7 @@
                   </ngx-avatar>
                 </div>
   
-                <div class="chat-messages">
+                <div  class="chat-messages" >
                   <div class="message">
                     {{mes.content}}
                   </div>

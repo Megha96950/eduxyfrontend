@@ -310,6 +310,7 @@ ngOnInit(): void{
   this.isCloseChatBox = true;
 }
 
+ 
 handleToggleTopNavbar(event:any): void{
   this.open = event;
 }

@@ -37,6 +37,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
+import { MainpageComponent } from './mainpage/mainpage.component';
+import { AboutComponent } from './user-landing-page/About/about.component';
+import { ServiceComponent } from './user-landing-page/Service/service.component';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +53,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     StudentDetailComponent,
     ChatComponent,
     ChatpanelComponent,
-    ChatboxComponent
+    ChatboxComponent,
+    AboutComponent,
+    ServiceComponent,
+    MainpageComponent
    // MatExpansionModule,
    // MatSidenavModule
    
