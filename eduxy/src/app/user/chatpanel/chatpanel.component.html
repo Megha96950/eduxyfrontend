@@ -1,6 +1,6 @@
 
-<div class="fixed-container">
-    <div class="chat-panel-wrapper chatpanel-container">
+<div class="fixed-container" >
+    <div class="chat-panel-wrapper chatpanel-container"  *ngIf ="onlUsers!=null ">
      
       <mat-drawer-container class="chatpannel" autosize>
         
@@ -49,14 +49,15 @@
                  <div class="badge">
                   <p  *ngIf="user.noOfNewMessages > 0">{{user.noOfNewMessages}}</p>
                  </div>
-               
-  
-              </mat-list-item>
+                </mat-list-item>
              
             </mat-list>
           
           </mat-card>
         </div> 
+        </div>
+        <div  *ngIf ="onlUsers==null ">
+          chat not available
         </div>
         <!-- </mat-drawer> -->
   

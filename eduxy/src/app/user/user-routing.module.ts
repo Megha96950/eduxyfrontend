@@ -10,13 +10,17 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { StudentDetailComponent } from './student-detail/student-detail.component';
 import { ChatComponent } from './chat/chat.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
+import { ServiceComponent } from './user-landing-page/Service/service.component';
+import { AboutComponent } from './user-landing-page/About/about.component';
 
 const routes : Routes =[
   { path: 'eduxy', component: UserLandingPageComponent, children: [
     {path: '', redirectTo: 'login', pathMatch: 'full'},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
-    {path: 'main', component: MainpageComponent}
+    {path: 'main', component: MainpageComponent},
+    {path: 'service', component: ServiceComponent},
+    {path: 'about', component: AboutComponent}
   ] },
   { path: 'home', component: HomeComponent, children: [
     {path: '', redirectTo: 'view', pathMatch: 'full'},
